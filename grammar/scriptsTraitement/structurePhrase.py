@@ -1,8 +1,7 @@
 # hier cinéma aller moi 
 # hier je suis allé au cinéma 
 import json
-from dictionnaireUtilisable.autresMotsLSF import *
-from dictionnaireUtilisable.autresMotsFrançais import *
+from .. import dictionnaireUtilisable
 
 class StructurePhrase:
     def __init__(self): 
@@ -38,14 +37,14 @@ def rechercheSujet(phrase, pronomsLSF, pronomsFR) :
 
 def initStructurePhrase(phrase) :
 
-    with open('dictionnaireUtilisable/verbes.json') as json_data_verbe:
+    with open('../dictionnaireUtilisable/verbes.json') as json_data_verbe:
         data_dict_verbe = json.load(json_data_verbe)
 
-    with open('dictionnaireUtilisable/adverbes.json') as json_data_adverbe:
+    with open('../dictionnaireUtilisable/adverbes.json') as json_data_adverbe:
         data_dict_adverbe = json.load(json_data_adverbe)
 
-    pronomsLSF = PronomsLSF()
-    pronomsFR = PronomsFR()
+    pronomsLSF = dictionnaireUtilisable.autresMotsLSF.PronomsLSF()
+    pronomsFR = dictionnaireUtilisable.autresMotsFrançais.PronomsFR()
 
     rechercheVerbe(phrase, data_dict_verbe)
     phrase.remove(structurePhrase.verbe)

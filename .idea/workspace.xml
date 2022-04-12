@@ -2,10 +2,26 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d763bb38-b5c0-405d-a8e3-a6a33b5e04ec" name="Changes" comment="v1 structurerPhrase">
-      <change afterPath="$PROJECT_DIR$/testsUnitaires.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/grammar/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/grammar/dictionnaireInitial/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/grammar/dictionnaireUtilisable/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/grammar/scriptsTraitement/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/grammar/tests/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/grammar/tests/testsUnitaires.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/structurePhrase.py" beforeDir="false" afterPath="$PROJECT_DIR$/structurePhrase.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/test1.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dictionnaireInitial/adj.csv" beforeDir="false" afterPath="$PROJECT_DIR$/grammar/dictionnaireInitial/adj.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dictionnaireInitial/adv.csv" beforeDir="false" afterPath="$PROJECT_DIR$/grammar/dictionnaireInitial/adv.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dictionnaireInitial/noun.csv" beforeDir="false" afterPath="$PROJECT_DIR$/grammar/dictionnaireInitial/noun.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dictionnaireInitial/scriptNettoyerDonnees.py" beforeDir="false" afterPath="$PROJECT_DIR$/grammar/dictionnaireInitial/scriptNettoyerDonnees.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dictionnaireInitial/verb.csv" beforeDir="false" afterPath="$PROJECT_DIR$/grammar/dictionnaireInitial/verb.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dictionnaireUtilisable/adjectifs.json" beforeDir="false" afterPath="$PROJECT_DIR$/grammar/dictionnaireUtilisable/adjectifs.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dictionnaireUtilisable/adverbes.json" beforeDir="false" afterPath="$PROJECT_DIR$/grammar/dictionnaireUtilisable/adverbes.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dictionnaireUtilisable/autresMotsFrançais.py" beforeDir="false" afterPath="$PROJECT_DIR$/grammar/dictionnaireUtilisable/autresMotsFrançais.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dictionnaireUtilisable/autresMotsLSF.py" beforeDir="false" afterPath="$PROJECT_DIR$/grammar/dictionnaireUtilisable/autresMotsLSF.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dictionnaireUtilisable/noms.json" beforeDir="false" afterPath="$PROJECT_DIR$/grammar/dictionnaireUtilisable/noms.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dictionnaireUtilisable/verbes.json" beforeDir="false" afterPath="$PROJECT_DIR$/grammar/dictionnaireUtilisable/verbes.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/structurePhrase.py" beforeDir="false" afterPath="$PROJECT_DIR$/grammar/scriptsTraitement/structurePhrase.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testsUnitaires.py" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -42,7 +58,11 @@
       <recent name="$PROJECT_DIR$/dictionnaireUtilisable" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/grammar/tests" />
+      <recent name="$PROJECT_DIR$/grammar" />
+      <recent name="$PROJECT_DIR$/scriptsTraitement" />
       <recent name="$PROJECT_DIR$" />
+      <recent name="$PROJECT_DIR$/scritpsTraitement" />
     </key>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
@@ -53,7 +73,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1649744783540</updated>
-      <workItem from="1649744791526" duration="19893000" />
+      <workItem from="1649744791526" duration="23783000" />
     </task>
     <task id="LOCAL-00001" summary="import dico nettoye">
       <created>1649766089635</created>
