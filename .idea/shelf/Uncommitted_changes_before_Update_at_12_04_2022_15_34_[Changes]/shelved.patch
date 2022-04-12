@@ -1,0 +1,75 @@
+Index: dictionnaireUtilisable/testReadJson.py
+===================================================================
+diff --git a/dictionnaireUtilisable/testReadJson.py b/dictionnaireUtilisable/testReadJson.py
+deleted file mode 100644
+--- a/dictionnaireUtilisable/testReadJson.py	(revision 522800861be073bbabbac6e1f68f06d9f03334d9)
++++ /dev/null	(revision 522800861be073bbabbac6e1f68f06d9f03334d9)
+@@ -1,9 +0,0 @@
+-import json
+-
+-f = open('verbes.json')
+-
+-data = json.load(f)
+-
+-print(data[3])
+-
+-f.close()
+\ No newline at end of file
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<project version=\"4\">\n  <component name=\"ChangeListManager\">\n    <list default=\"true\" id=\"d763bb38-b5c0-405d-a8e3-a6a33b5e04ec\" name=\"Changes\" comment=\"import dico nettoye\">\n      <change afterPath=\"$PROJECT_DIR$/dictionnaireUtilisable/autresMotsFrançais.py\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/.idea/workspace.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/workspace.xml\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/dictionnaireUtilisable/autresMotsLSF.py\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/dictionnaireUtilisable/autresMotsLSF.py\" afterDir=\"false\" />\n    </list>\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\n  </component>\n  <component name=\"FileTemplateManagerImpl\">\n    <option name=\"RECENT_TEMPLATES\">\n      <list>\n        <option value=\"Python Script\" />\n      </list>\n    </option>\n  </component>\n  <component name=\"Git.Settings\">\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\n  </component>\n  <component name=\"MarkdownSettingsMigration\">\n    <option name=\"stateVersion\" value=\"1\" />\n  </component>\n  <component name=\"ProjectId\" id=\"27gbfiZ1MkuBHlVrSWaHothpf1E\" />\n  <component name=\"ProjectLevelVcsManager\" settingsEditedManually=\"true\" />\n  <component name=\"ProjectViewState\">\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\n    <option name=\"showLibraryContents\" value=\"true\" />\n  </component>\n  <component name=\"PropertiesComponent\">\n    <property name=\"RunOnceActivity.OpenProjectViewOnStart\" value=\"true\" />\n    <property name=\"RunOnceActivity.ShowReadmeOnStart\" value=\"true\" />\n    <property name=\"WebServerToolWindowFactoryState\" value=\"false\" />\n    <property name=\"last_opened_file_path\" value=\"$PROJECT_DIR$/dictionnaireUtilisable\" />\n  </component>\n  <component name=\"RecentsManager\">\n    <key name=\"CopyFile.RECENT_KEYS\">\n      <recent name=\"$PROJECT_DIR$/dictionnaireUtilisable\" />\n    </key>\n  </component>\n  <component name=\"SpellCheckerSettings\" RuntimeDictionaries=\"0\" Folders=\"0\" CustomDictionaries=\"0\" DefaultDictionary=\"application-level\" UseSingleDictionary=\"true\" transferred=\"true\" />\n  <component name=\"TaskManager\">\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\n      <changelist id=\"d763bb38-b5c0-405d-a8e3-a6a33b5e04ec\" name=\"Changes\" comment=\"\" />\n      <created>1649744783540</created>\n      <option name=\"number\" value=\"Default\" />\n      <option name=\"presentableId\" value=\"Default\" />\n      <updated>1649744783540</updated>\n      <workItem from=\"1649744791526\" duration=\"14096000\" />\n    </task>\n    <task id=\"LOCAL-00001\" summary=\"import dico nettoye\">\n      <created>1649766089635</created>\n      <option name=\"number\" value=\"00001\" />\n      <option name=\"presentableId\" value=\"LOCAL-00001\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1649766089635</updated>\n    </task>\n    <option name=\"localTasksCounter\" value=\"2\" />\n    <servers />\n  </component>\n  <component name=\"TypeScriptGeneratedFilesManager\">\n    <option name=\"version\" value=\"3\" />\n  </component>\n  <component name=\"Vcs.Log.Tabs.Properties\">\n    <option name=\"TAB_STATES\">\n      <map>\n        <entry key=\"MAIN\">\n          <value>\n            <State />\n          </value>\n        </entry>\n      </map>\n    </option>\n  </component>\n  <component name=\"VcsManagerConfiguration\">\n    <MESSAGE value=\"import dico nettoye\" />\n    <option name=\"LAST_COMMIT_MESSAGE\" value=\"import dico nettoye\" />\n  </component>\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+--- a/.idea/workspace.xml	(revision 522800861be073bbabbac6e1f68f06d9f03334d9)
++++ b/.idea/workspace.xml	(date 1649770227025)
+@@ -1,10 +1,9 @@
+ <?xml version="1.0" encoding="UTF-8"?>
+ <project version="4">
+   <component name="ChangeListManager">
+-    <list default="true" id="d763bb38-b5c0-405d-a8e3-a6a33b5e04ec" name="Changes" comment="import dico nettoye">
+-      <change afterPath="$PROJECT_DIR$/dictionnaireUtilisable/autresMotsFrançais.py" afterDir="false" />
++    <list default="true" id="d763bb38-b5c0-405d-a8e3-a6a33b5e04ec" name="Changes" comment="init autres mots">
+       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/dictionnaireUtilisable/autresMotsLSF.py" beforeDir="false" afterPath="$PROJECT_DIR$/dictionnaireUtilisable/autresMotsLSF.py" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/dictionnaireUtilisable/testReadJson.py" beforeDir="false" />
+     </list>
+     <option name="SHOW_DIALOG" value="false" />
+     <option name="HIGHLIGHT_CONFLICTS" value="true" />
+@@ -49,7 +48,7 @@
+       <option name="number" value="Default" />
+       <option name="presentableId" value="Default" />
+       <updated>1649744783540</updated>
+-      <workItem from="1649744791526" duration="14096000" />
++      <workItem from="1649744791526" duration="14648000" />
+     </task>
+     <task id="LOCAL-00001" summary="import dico nettoye">
+       <created>1649766089635</created>
+@@ -58,7 +57,14 @@
+       <option name="project" value="LOCAL" />
+       <updated>1649766089635</updated>
+     </task>
+-    <option name="localTasksCounter" value="2" />
++    <task id="LOCAL-00002" summary="init autres mots">
++      <created>1649767657729</created>
++      <option name="number" value="00002" />
++      <option name="presentableId" value="LOCAL-00002" />
++      <option name="project" value="LOCAL" />
++      <updated>1649767657729</updated>
++    </task>
++    <option name="localTasksCounter" value="3" />
+     <servers />
+   </component>
+   <component name="TypeScriptGeneratedFilesManager">
+@@ -77,6 +83,7 @@
+   </component>
+   <component name="VcsManagerConfiguration">
+     <MESSAGE value="import dico nettoye" />
+-    <option name="LAST_COMMIT_MESSAGE" value="import dico nettoye" />
++    <MESSAGE value="init autres mots" />
++    <option name="LAST_COMMIT_MESSAGE" value="init autres mots" />
+   </component>
+ </project>
+\ No newline at end of file

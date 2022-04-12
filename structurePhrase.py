@@ -4,33 +4,36 @@ import json
 from dictionnaireUtilisable.autresMotsLSF import *
 from dictionnaireUtilisable.autresMotsFrançais import *
 
-class structurePhrase:
+class StructurePhrase:
     def __init__(self): 
         self.adverbe = ""
         self.sujet = ""
         self.verbe = ""
         self.complement = ""
 
-phraseFinale = ["","","",""]
+    def __str__(self):
+        return "adverbe : " + self.adverbe + " | sujet : " + self.sujet + " | verbe : " + self.verbe + " | complement : " + self.complement
+
+structurePhrase = StructurePhrase()
 
 # si le mot est dans la liste des verbes; c'est un verbe
 def rechercheVerbe(phrase, data_dict_verbe) :
     for mot in phrase :
         if mot in data_dict_verbe:
-            phraseFinale[2] = mot
+            structurePhrase.verbe = mot
 
 #si le mot est dans la liste des adverbes, c'est un adverbe
 def rechercheAdverbe(phrase, data_dict_adverbe) :
     for mot in phrase :
         if mot in data_dict_adverbe:
-            phraseFinale[0] = mot
+            structurePhrase.adverbe = mot
 
 # si le mot est dans la liste des pronoms, on le met en sujet
 def rechercheSujet(phrase, pronomsLSF, pronomsFR) :
     for mot in phrase :
         if mot in pronomsLSF.personnels:
             #trouver le pronom correspondant
-            phraseFinale[1] = mot
+            structurePhrase.sujet = mot
             phrase.remove(mot)
 
 def initStructurePhrase(phrase) :
@@ -45,15 +48,15 @@ def initStructurePhrase(phrase) :
     pronomsFR = PronomsFR()
 
     rechercheVerbe(phrase, data_dict_verbe)
-    phrase.remove(phraseFinale[2])
+    phrase.remove(structurePhrase.verbe)
 
     rechercheAdverbe(phrase, data_dict_adverbe)
-    phrase.remove(phraseFinale[0])
+    phrase.remove(structurePhrase.adverbe)
 
     rechercheSujet(phrase, pronomsLSF, pronomsFR)
-    phraseFinale[3]=phrase[0] # complement (dernier terme restant)
+    structurePhrase.complement = phrase[0] # complement (dernier terme restant)
 
-    return(phraseFinale)
+    return(structurePhrase)
 
 print(initStructurePhrase(["hier","cinéma","moi","aller"]))
 
