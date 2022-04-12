@@ -4,79 +4,58 @@ import json
 from dictionnaireUtilisable.autresMotsLSF import *
 from dictionnaireUtilisable.autresMotsFrançais import *
 
-with open('dictionnaireUtilisable/verbes.json') as json_data_verbe:
-    data_dict_verbe = json.load(json_data_verbe)
-
-with open('dictionnaireUtilisable/adverbes.json') as json_data_adverbe:
-    data_dict_adverbe = json.load(json_data_adverbe)
-
-
-phrase = ["hier","cinéma","moi","aller"]
-phraseFinale = ["","","",""]
-
 class structurePhrase:
     def __init__(self): 
         self.adverbe = ""
         self.sujet = ""
         self.verbe = ""
-        self.complement = " "
+        self.complement = ""
 
+phraseFinale = ["","","",""]
 
-# trouver verbe 
-def rechercheVerbe(phrase) :
-    for mot in phrase : 
-        #si le mot est dans la liste de verbe, on l'ajoute dans la case corespondante 
-        for i in range(len(data_dict_verbe)) : 
-            if(mot == data_dict_verbe[i]):
-                phraseFinale[2] = mot
+# si le mot est dans la liste des verbes; c'est un verbe
+def rechercheVerbe(phrase, data_dict_verbe) :
+    for mot in phrase :
+        if mot in data_dict_verbe:
+            phraseFinale[2] = mot
 
-rechercheVerbe(phrase)
-print(phraseFinale[2])
-phrase.remove(phraseFinale[2])
+#si le mot est dans la liste des adverbes, c'est un adverbe
+def rechercheAdverbe(phrase, data_dict_adverbe) :
+    for mot in phrase :
+        if mot in data_dict_adverbe:
+            phraseFinale[0] = mot
 
-#trouver adverbe 
-def rechercheAdverbe(phrase) :
-    for mot in phrase : 
-        #si le mot est dans la liste de verbe, on l'ajoute dans la case corespondante 
-        for i in range(len(data_dict_adverbe)) : 
-            if(mot == data_dict_adverbe[i]):
-                phraseFinale[0] = mot
-                
+# si le mot est dans la liste des pronoms, on le met en sujet
+def rechercheSujet(phrase, pronomsLSF, pronomsFR) :
+    for mot in phrase :
+        if mot in pronomsLSF.personnels:
+            #trouver le pronom correspondant
+            phraseFinale[1] = mot
+            phrase.remove(mot)
 
+def initStructurePhrase(phrase) :
 
-rechercheAdverbe(phrase)
-print(phraseFinale[0])
-phrase.remove(phraseFinale[0])
+    with open('dictionnaireUtilisable/verbes.json') as json_data_verbe:
+        data_dict_verbe = json.load(json_data_verbe)
 
+    with open('dictionnaireUtilisable/adverbes.json') as json_data_adverbe:
+        data_dict_adverbe = json.load(json_data_adverbe)
 
-pronomsLSF = PronomsLSF()
-pronomsFR = PronomsFR()
-#print(pronomsLSF.personnels)
-#print(pronomsFR.personnels)
+    pronomsLSF = PronomsLSF()
+    pronomsFR = PronomsFR()
 
-mot_a_retirer = " "
-#trouver le pronom
-def recherchePronom(phrase) :
-    for mot in phrase : 
-        #si le mot est dans la liste de verbe, on l'ajoute dans la case corespondante 
-        for i in range(len(pronomsLSF.personnels)) : 
-            if(mot == pronomsLSF.personnels[i]):
-                #trouver le pronom correspondant
-                phraseFinale[1] = pronomsFR.personnels[i]
-                phrase.remove(mot)
+    rechercheVerbe(phrase, data_dict_verbe)
+    phrase.remove(phraseFinale[2])
 
-recherchePronom(phrase)
-print(phraseFinale[1])
+    rechercheAdverbe(phrase, data_dict_adverbe)
+    phrase.remove(phraseFinale[0])
 
-print(phrase)
-phraseFinale[3]=phrase[0]
+    rechercheSujet(phrase, pronomsLSF, pronomsFR)
+    phraseFinale[3]=phrase[0] # complement (dernier terme restant)
 
-print(phraseFinale)
+    return(phraseFinale)
 
-
-
-
-
+print(initStructurePhrase(["hier","cinéma","moi","aller"]))
 
 
 
