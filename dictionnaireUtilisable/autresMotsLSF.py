@@ -3,6 +3,6 @@ class PronomsLSF:
     self.personnels = ["moi", "toi", "lui", "nous", "vous", "eux"]
     self.possessifs = ["a-moi", "a-toi", "a-lui", "a-nous", "a-vous", "a-eux"]
 
-pronoms = PronomsLSF()
+#pronoms = PronomsLSF()
 
-print(pronoms.personnels)
+#print(pronoms.personnels)

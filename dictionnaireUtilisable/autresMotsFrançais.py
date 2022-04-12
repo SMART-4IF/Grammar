@@ -5,6 +5,6 @@ class PronomsFR:
     self.possessifsFeminin = ["ma", "ta", "sa", "notre", "votre", "leur"]
     self.possessifsPluriel = ["mes", "tes", "ses", "nos", "vos", "leurs"]
 
-pronoms = PronomsFR()
+#pronoms = PronomsFR()
 
-print(pronoms.personnels)
+#print(pronoms.personnels)
