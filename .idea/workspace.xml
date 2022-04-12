@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d763bb38-b5c0-405d-a8e3-a6a33b5e04ec" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/dictionnaireUtilisable/autresMotsLSF.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dictionnaireInitial/scriptNettoyerDonnees.py" beforeDir="false" afterPath="$PROJECT_DIR$/dictionnaireInitial/scriptNettoyerDonnees.py" afterDir="false" />
     </list>
@@ -43,7 +44,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1649744783540</updated>
-      <workItem from="1649744791526" duration="11173000" />
+      <workItem from="1649744791526" duration="12786000" />
     </task>
     <servers />
   </component>
