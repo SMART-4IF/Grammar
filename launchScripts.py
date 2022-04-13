@@ -1,7 +1,7 @@
 import scriptsTraitement
 
 # phrase sortie par l'IA de reconnaissance des signes
-phraseInitiale = ["lui", "son", "ami"]
+phraseInitiale = ["lui", "a-lui", "ami"]
 
 # création d'une phrase structuree
 structurePhrase = scriptsTraitement.StructurePhrase()

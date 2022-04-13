@@ -64,7 +64,31 @@ class StructurePhrase:
     # Recherche complement dans une sequence donnee de mots et init la val de self.complement avec
     # phrase : liste de mots dans laquelle il faut trouver le complement
     def identifierComplement(self, phrase):
-        # pour l'instant, ce qu'il reste dans la liste de mots devient le complement
-        self.complement = phrase[0]
-        phrase.remove(phrase[0])
+        with open('dictionnaireUtilisable/noms.json') as json_data_noms:
+            dictionnaireNoms = json.load(json_data_noms)
+        pronomsLSF = dictionnaireUtilisable.PronomsLSF()  # ensemble des pronoms de LSF
+        # si pronom possessif, mettre pornon + nom suivant dans le complement
+        testPossessif = False
+        listeMotsSupprimer = []
+
+        for mot in phrase:
+            if mot in pronomsLSF.possessifs:
+                # trouver le pronom correspondant
+                self.complement = mot
+                listeMotsSupprimer.append(mot)
+                testPossessif = True
+            elif testPossessif is True and mot in dictionnaireNoms:
+                self.complement += " "+mot
+                listeMotsSupprimer.append(mot)
+                break
+
+        for mot in listeMotsSupprimer:
+            if mot in phrase:
+                phrase.remove(mot)
+
+        if testPossessif == False:
+            # pour l'instant, ce qu'il reste dans la liste de mots devient le complement
+            self.complement = phrase[0]
+            phrase.remove(phrase[0])
+
         return phrase

@@ -7,11 +7,12 @@ class TestsUnitaires:
         self.nbTestsReussis = 0
         self.messagesEchecs = []
         self.resultatsAttendus = [
-            scriptsTraitement.StructurePhrase("", "", "aller", ""),     #testVerbe1
-            scriptsTraitement.StructurePhrase("", "", "être", ""),      #testVerbe2
-            scriptsTraitement.StructurePhrase("hier", "", "", ""),      #testAdverbe1
-            scriptsTraitement.StructurePhrase("", "moi", "", ""),       #testSujet1
-            scriptsTraitement.StructurePhrase("hier", "moi", "aller", "cinéma"),    #testStructPhrase1
+            scriptsTraitement.StructurePhrase("", "", "aller", ""),                     #testVerbe1
+            scriptsTraitement.StructurePhrase("", "", "être", ""),                      #testVerbe2
+            scriptsTraitement.StructurePhrase("hier", "", "", ""),                      #testAdverbe1
+            scriptsTraitement.StructurePhrase("", "moi", "", ""),                       #testSujet1
+            scriptsTraitement.StructurePhrase("", "", "", "a-lui ami"),                 #testComplement1
+            scriptsTraitement.StructurePhrase("hier", "moi", "aller", "cinéma"),        #testStructPhrase1
         ]
 
     def __str__(self):
@@ -30,7 +31,9 @@ class TestsUnitaires:
         self.testVerbe2()
         self.testAdverbe1()
         self.testSujet1()
+        self.testComplement1()
         self.testStructPhrase1()
+
 
     # verifie que l'on est bien capable d'identifier le verbe de la phrase
     def testVerbe1(self):
@@ -44,6 +47,7 @@ class TestsUnitaires:
             self.messagesEchecs.append("Test verbe 1 - Obtenu : '" + structurePhrase.verbe +"' | attendu : '" + self.resultatsAttendus[self.nbTests].verbe +"'")
 
         self.nbTests = self.nbTests + 1
+
 
     # verifie que l'on est bien capable d'identifier le verbe de la phrase
     def testVerbe2(self):
@@ -59,6 +63,7 @@ class TestsUnitaires:
                 self.resultatsAttendus[self.nbTests].verbe + "'")
 
         self.nbTests = self.nbTests + 1
+
 
     # verifie que l'on est bien capable d'identifier l'adverbe de la phrase
     def testAdverbe1(self):
@@ -86,6 +91,22 @@ class TestsUnitaires:
             self.messagesEchecs.append(
                 "Test sujet 1 - Obtenu : '" + structurePhrase.sujet + "' | attendu : '" + self.resultatsAttendus[
                     self.nbTests].sujet + "'")
+
+        self.nbTests = self.nbTests + 1
+
+
+    # verifie que l'on est bien capable d'identifier le sujet de la phrase
+    def testComplement1(self):
+        phrase = ["lui", "a-lui", "ami"]
+        structurePhrase = scriptsTraitement.StructurePhrase()
+        structurePhrase.identifierComplement(phrase)
+
+        if structurePhrase.complement == self.resultatsAttendus[self.nbTests].complement:
+            self.nbTestsReussis = self.nbTestsReussis + 1
+        else:
+            self.messagesEchecs.append(
+                "Test complement 1 - Obtenu : '" + structurePhrase.complement + "' | attendu : '" + self.resultatsAttendus[
+                    self.nbTests].complement + "'")
 
         self.nbTests = self.nbTests + 1
 
