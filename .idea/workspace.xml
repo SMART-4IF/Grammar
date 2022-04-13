@@ -2,29 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="82a20799-784e-4972-afdf-d928919d917b" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/launchScripts.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scriptsTraitement/structurePhrase.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_12_04_2022_15_34_[Changes]/shelved.patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_12_04_2022_15_34__Changes_.xml" beforeDir="false" />
+      <change afterPath="$PROJECT_DIR$/launchTests.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/grammar/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/grammar/dictionnaireInitial/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/grammar/dictionnaireInitial/adj.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/grammar/dictionnaireInitial/adv.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/grammar/dictionnaireInitial/noun.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/grammar/dictionnaireInitial/scriptNettoyerDonnees.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/grammar/dictionnaireInitial/verb.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/grammar/dictionnaireUtilisable/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/grammar/dictionnaireUtilisable/adjectifs.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/grammar/dictionnaireUtilisable/adverbes.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/grammar/dictionnaireUtilisable/autresMotsFrançais.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/grammar/dictionnaireUtilisable/autresMotsLSF.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/grammar/dictionnaireUtilisable/noms.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/grammar/dictionnaireUtilisable/verbes.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/grammar/scriptsTraitement/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/grammar/scriptsTraitement/structurePhrase.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/grammar/tests/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/grammar/tests/testsUnitaires.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/launchScripts.py" beforeDir="false" afterPath="$PROJECT_DIR$/launchScripts.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/testsUnitaires.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/testsUnitaires.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -61,6 +43,9 @@
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$" />
     </key>
@@ -73,7 +58,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1649828995483</updated>
-      <workItem from="1649828998743" duration="5669000" />
+      <workItem from="1649828998743" duration="8393000" />
     </task>
     <servers />
   </component>
