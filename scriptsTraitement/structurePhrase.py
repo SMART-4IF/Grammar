@@ -5,7 +5,7 @@ import dictionnaireUtilisable
 
 class StructurePhrase:
 
-    def __init__(self, adverbe = "", sujet = "", verbe = "", complement = ""):
+    def __init__(self, adverbe = "", sujet = "", verbe = "être", complement = ""):
         self.adverbe = adverbe
         self.sujet = sujet
         self.verbe = verbe
