@@ -5,14 +5,20 @@ import dictionnaireUtilisable
 
 class StructurePhrase:
 
-    def __init__(self):
-        self.adverbe = ""
-        self.sujet = ""
-        self.verbe = ""
-        self.complement = ""
+    def __init__(self, adverbe = "", sujet = "", verbe = "", complement = ""):
+        self.adverbe = adverbe
+        self.sujet = sujet
+        self.verbe = verbe
+        self.complement = complement
 
     def __str__(self):
+        return self.adverbe.capitalize() + " " + self.sujet + " " + self.verbe + " " + self.complement +"."
+
+    def toStringDebug(self):
         return "adverbe : " + self.adverbe + " | sujet : " + self.sujet + " | verbe : " + self.verbe + " | complement : " + self.complement
+
+    def __eq__(self, other):
+        return self.adverbe == other.adverbe and self.sujet == other.sujet and self.verbe == other.verbe and self.complement == other.complement
 
     # Recherche verbe dans une sequence donnee de mots et init la val de self.verbe avec
     # phrase : la phrase dans laquelle il faut trouver le verbe

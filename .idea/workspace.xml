@@ -2,10 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="82a20799-784e-4972-afdf-d928919d917b" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/launchTests.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/launchScripts.py" beforeDir="false" afterPath="$PROJECT_DIR$/launchScripts.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/launchTests.py" beforeDir="false" afterPath="$PROJECT_DIR$/launchTests.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scriptsTraitement/structurePhrase.py" beforeDir="false" afterPath="$PROJECT_DIR$/scriptsTraitement/structurePhrase.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tests/testsUnitaires.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/testsUnitaires.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -58,7 +58,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1649828995483</updated>
-      <workItem from="1649828998743" duration="8393000" />
+      <workItem from="1649828998743" duration="11795000" />
     </task>
     <servers />
   </component>

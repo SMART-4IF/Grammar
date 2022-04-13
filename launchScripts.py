@@ -13,4 +13,5 @@ phraseInitiale = structurePhrase.identifierSujet(phraseInitiale)
 phraseInitiale = structurePhrase.identifierComplement(phraseInitiale)
 
 # affichage du résultat
+print(structurePhrase.toStringDebug())
 print(structurePhrase)
