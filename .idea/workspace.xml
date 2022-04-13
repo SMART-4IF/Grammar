@@ -1,102 +1,80 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="d763bb38-b5c0-405d-a8e3-a6a33b5e04ec" name="Changes" comment="v1 structurerPhrase">
-      <change afterPath="$PROJECT_DIR$/grammar/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/grammar/dictionnaireInitial/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/grammar/dictionnaireUtilisable/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/grammar/scriptsTraitement/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/grammar/tests/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/grammar/tests/testsUnitaires.py" afterDir="false" />
+    <list default="true" id="82a20799-784e-4972-afdf-d928919d917b" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/launchScripts.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/scriptsTraitement/structurePhrase.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_12_04_2022_15_34_[Changes]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_12_04_2022_15_34__Changes_.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dictionnaireInitial/adj.csv" beforeDir="false" afterPath="$PROJECT_DIR$/grammar/dictionnaireInitial/adj.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dictionnaireInitial/adv.csv" beforeDir="false" afterPath="$PROJECT_DIR$/grammar/dictionnaireInitial/adv.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dictionnaireInitial/noun.csv" beforeDir="false" afterPath="$PROJECT_DIR$/grammar/dictionnaireInitial/noun.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dictionnaireInitial/scriptNettoyerDonnees.py" beforeDir="false" afterPath="$PROJECT_DIR$/grammar/dictionnaireInitial/scriptNettoyerDonnees.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dictionnaireInitial/verb.csv" beforeDir="false" afterPath="$PROJECT_DIR$/grammar/dictionnaireInitial/verb.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dictionnaireUtilisable/adjectifs.json" beforeDir="false" afterPath="$PROJECT_DIR$/grammar/dictionnaireUtilisable/adjectifs.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dictionnaireUtilisable/adverbes.json" beforeDir="false" afterPath="$PROJECT_DIR$/grammar/dictionnaireUtilisable/adverbes.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dictionnaireUtilisable/autresMotsFrançais.py" beforeDir="false" afterPath="$PROJECT_DIR$/grammar/dictionnaireUtilisable/autresMotsFrançais.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dictionnaireUtilisable/autresMotsLSF.py" beforeDir="false" afterPath="$PROJECT_DIR$/grammar/dictionnaireUtilisable/autresMotsLSF.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dictionnaireUtilisable/noms.json" beforeDir="false" afterPath="$PROJECT_DIR$/grammar/dictionnaireUtilisable/noms.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dictionnaireUtilisable/verbes.json" beforeDir="false" afterPath="$PROJECT_DIR$/grammar/dictionnaireUtilisable/verbes.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/structurePhrase.py" beforeDir="false" afterPath="$PROJECT_DIR$/grammar/scriptsTraitement/structurePhrase.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testsUnitaires.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/grammar/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/grammar/dictionnaireInitial/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/grammar/dictionnaireInitial/adj.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/grammar/dictionnaireInitial/adv.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/grammar/dictionnaireInitial/noun.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/grammar/dictionnaireInitial/scriptNettoyerDonnees.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/grammar/dictionnaireInitial/verb.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/grammar/dictionnaireUtilisable/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/grammar/dictionnaireUtilisable/adjectifs.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/grammar/dictionnaireUtilisable/adverbes.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/grammar/dictionnaireUtilisable/autresMotsFrançais.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/grammar/dictionnaireUtilisable/autresMotsLSF.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/grammar/dictionnaireUtilisable/noms.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/grammar/dictionnaireUtilisable/verbes.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/grammar/scriptsTraitement/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/grammar/scriptsTraitement/structurePhrase.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/grammar/tests/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/grammar/tests/testsUnitaires.py" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="FileTemplateManagerImpl">
-    <option name="RECENT_TEMPLATES">
-      <list>
-        <option value="Python Script" />
-      </list>
-    </option>
-  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitSEFilterConfiguration">
+    <file-type-list>
+      <filtered-out-file-type name="LOCAL_BRANCH" />
+      <filtered-out-file-type name="REMOTE_BRANCH" />
+      <filtered-out-file-type name="TAG" />
+      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
+    </file-type-list>
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
-  <component name="ProjectId" id="27gbfiZ1MkuBHlVrSWaHothpf1E" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectId" id="27jMMgZrcN9IngihuHDoxoR1UYj" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/dictionnaireUtilisable" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/dictionnaireUtilisable" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/grammar/tests" />
-      <recent name="$PROJECT_DIR$/grammar" />
-      <recent name="$PROJECT_DIR$/scriptsTraitement" />
       <recent name="$PROJECT_DIR$" />
-      <recent name="$PROJECT_DIR$/scritpsTraitement" />
     </key>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="d763bb38-b5c0-405d-a8e3-a6a33b5e04ec" name="Changes" comment="" />
-      <created>1649744783540</created>
+      <changelist id="82a20799-784e-4972-afdf-d928919d917b" name="Changes" comment="" />
+      <created>1649828995483</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1649744783540</updated>
-      <workItem from="1649744791526" duration="23783000" />
+      <updated>1649828995483</updated>
+      <workItem from="1649828998743" duration="5669000" />
     </task>
-    <task id="LOCAL-00001" summary="import dico nettoye">
-      <created>1649766089635</created>
-      <option name="number" value="00001" />
-      <option name="presentableId" value="LOCAL-00001" />
-      <option name="project" value="LOCAL" />
-      <updated>1649766089635</updated>
-    </task>
-    <task id="LOCAL-00002" summary="init autres mots">
-      <created>1649767657729</created>
-      <option name="number" value="00002" />
-      <option name="presentableId" value="LOCAL-00002" />
-      <option name="project" value="LOCAL" />
-      <updated>1649767657729</updated>
-    </task>
-    <task id="LOCAL-00003" summary="v1 structurerPhrase">
-      <created>1649772032166</created>
-      <option name="number" value="00003" />
-      <option name="presentableId" value="LOCAL-00003" />
-      <option name="project" value="LOCAL" />
-      <updated>1649772032166</updated>
-    </task>
-    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -114,9 +92,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="import dico nettoye" />
-    <MESSAGE value="init autres mots" />
-    <MESSAGE value="v1 structurerPhrase" />
-    <option name="LAST_COMMIT_MESSAGE" value="v1 structurerPhrase" />
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
   </component>
 </project>

@@ -18,6 +18,12 @@ def nettoyerVerbes():
             if "'infinitive'" in row[2]:
                 listeVerbes.append(row[1])
 
+        # dans les données, il y a des mots qui ne sont pas des verbes. Il faut les identifier et les retirer
+        listeFauxVerbes = ["hier"]
+        for nom in listeFauxVerbes:
+            if nom in listeVerbes:
+                listeVerbes.remove(nom)
+
         # sauvegarde des resultats tries dans un json
         listeVerbes.sort()
         jsonString = json.dumps(listeVerbes)
@@ -125,4 +131,4 @@ def nettoyerAdjectifs():
         print(f' {len(listeAdj)} adjectifs extraits.')
 
 # lancement du nettoyage desire
-nettoyerAdverbes()
+nettoyerVerbes()

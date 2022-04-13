@@ -1,0 +1,2 @@
+from dictionnaireUtilisable.autresMotsLSF import PronomsLSF
+from dictionnaireUtilisable.autresMotsFrançais import PronomsFR
