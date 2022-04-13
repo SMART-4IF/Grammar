@@ -12,7 +12,7 @@ class StructurePhrase:
         self.complement = complement
 
     def __str__(self):
-        phrase = "";
+        phrase = ""
         if self.adverbe != "": phrase += self.adverbe
         if self.adverbe != "" and self.sujet != "": phrase += " "
 
@@ -66,42 +66,57 @@ class StructurePhrase:
     def identifierSujet(self, phrase):
         pronomsLSF = dictionnaireUtilisable.PronomsLSF()    # ensemble des pronoms de LSF
         # s'il y a un pronom dans la phrase, il devient le sujet
+        i = 0
+        tmp = []
         for mot in phrase:
             if mot in pronomsLSF.personnels:
                 # trouver le pronom correspondant
-                self.sujet = mot
-                phrase.remove(mot)
-                break
+                tmp.append(mot)
+                i += 1
+                #self.sujet = mot
+                #phrase.remove(mot)
+        if(len(tmp)==2):
+            if(tmp[0]==tmp[1]): 
+                self.sujet = tmp[0]
+                phrase.remove(tmp[0])
+                phrase.remove(tmp[1])
+            else:
+                self.sujet = tmp[1]
+                self.complement = tmp[0]
+        else:
+            self.sujet = tmp[0]
+            phrase.remove(tmp[0])
         return phrase
 
     # Recherche complement dans une sequence donnee de mots et init la val de self.complement avec
     # phrase : liste de mots dans laquelle il faut trouver le complement
     def identifierComplement(self, phrase):
-        with open('dictionnaireUtilisable/noms.json') as json_data_noms:
-            dictionnaireNoms = json.load(json_data_noms)
-        pronomsLSF = dictionnaireUtilisable.PronomsLSF()  # ensemble des pronoms de LSF
-        # si pronom possessif, mettre pornon + nom suivant dans le complement
-        testPossessif = False
-        listeMotsSupprimer = []
+        if len(phrase) !=0 : 
+            with open('dictionnaireUtilisable/noms.json') as json_data_noms:
+                dictionnaireNoms = json.load(json_data_noms)
+            pronomsLSF = dictionnaireUtilisable.PronomsLSF()  # ensemble des pronoms de LSF
+            # si pronom possessif, mettre pornon + nom suivant dans le complement
+            testPossessif = False
+            listeMotsSupprimer = []
 
-        for mot in phrase:
-            if mot in pronomsLSF.possessifs:
-                # trouver le pronom correspondant
-                self.complement = mot
-                listeMotsSupprimer.append(mot)
-                testPossessif = True
-            elif testPossessif is True and mot in dictionnaireNoms:
-                self.complement += " "+mot
-                listeMotsSupprimer.append(mot)
-                break
+            for mot in phrase:
+                if mot in pronomsLSF.possessifs:
+                    # trouver le pronom correspondant
+                    self.complement = mot
+                    listeMotsSupprimer.append(mot)
+                    testPossessif = True
+                elif testPossessif is True and mot in dictionnaireNoms:
+                    self.complement += " "+mot
+                    listeMotsSupprimer.append(mot)
+                    break
 
-        for mot in listeMotsSupprimer:
-            if mot in phrase:
-                phrase.remove(mot)
+            for mot in listeMotsSupprimer:
+                if mot in phrase:
+                    phrase.remove(mot)
 
-        if testPossessif == False:
-            # pour l'instant, ce qu'il reste dans la liste de mots devient le complement
-            self.complement = phrase[0]
-            phrase.remove(phrase[0])
+            if testPossessif == False:
+                # pour l'instant, ce qu'il reste dans la liste de mots devient le complement
+                self.complement = phrase[0]
+                phrase.remove(phrase[0])
 
-        return phrase
+            return phrase

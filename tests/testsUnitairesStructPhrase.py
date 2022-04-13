@@ -11,9 +11,13 @@ class TestsUnitaires:
             scriptsTraitement.StructurePhrase("", "", "être", ""),                      #testVerbe2
             scriptsTraitement.StructurePhrase("hier", "", "", ""),                      #testAdverbe1
             scriptsTraitement.StructurePhrase("", "moi", "", ""),                       #testSujet1
+            scriptsTraitement.StructurePhrase("", "moi", "", ""),                       #testSujet2
             scriptsTraitement.StructurePhrase("", "", "", "a-lui ami"),                 #testComplement1
             scriptsTraitement.StructurePhrase("hier", "moi", "aller", "cinéma"),        #testStructPhrase1
             scriptsTraitement.StructurePhrase("", "lui", "être", "a-lui ami"),        #testStructPhrase2
+            scriptsTraitement.StructurePhrase("", "moi", "connaitre", "lui"),        #testStructPhrase3
+            scriptsTraitement.StructurePhrase("récemment", "lui", "partir", ""),        #testStructPhrase4
+
         ]
 
     def __str__(self):
@@ -32,9 +36,14 @@ class TestsUnitaires:
         self.testVerbe2()
         self.testAdverbe1()
         self.testSujet1()
+        self.testSujet2()
         self.testComplement1()
         self.testStructPhrase1()
         self.testStructPhrase2()
+        self.testStructPhrase3()
+        self.testStructPhrase4()
+
+
 
 
     # verifie que l'on est bien capable d'identifier le verbe de la phrase
@@ -96,8 +105,23 @@ class TestsUnitaires:
 
         self.nbTests = self.nbTests + 1
 
+    # verifie que l'on est bien capable d'identifier le sujet de la phrase quand deux pronoms
+    def testSujet2(self):
+        phrase = ["lui", "connaitre", "moi"]
+        structurePhrase = scriptsTraitement.StructurePhrase()
+        structurePhrase.identifierSujet(phrase)
 
-    # verifie que l'on est bien capable d'identifier le sujet de la phrase
+        if structurePhrase.sujet == self.resultatsAttendus[self.nbTests].sujet:
+            self.nbTestsReussis = self.nbTestsReussis + 1
+        else:
+            self.messagesEchecs.append(
+                "Test sujet 2 - Obtenu : '" + structurePhrase.sujet + "' | attendu : '" + self.resultatsAttendus[
+                    self.nbTests].sujet + "'")
+
+        self.nbTests = self.nbTests + 1
+
+
+    # verifie que l'on est bien capable d'identifier le complément de la phrase
     def testComplement1(self):
         phrase = ["lui", "a-lui", "ami"]
         structurePhrase = scriptsTraitement.StructurePhrase()
@@ -146,6 +170,44 @@ class TestsUnitaires:
         else:
             self.messagesEchecs.append(
                 "Test struct phrase 2 - Obtenu : '" + str(structurePhrase) + "' | attendu : '" +
+                str(self.resultatsAttendus[self.nbTests]) + "'")
+
+        self.nbTests = self.nbTests + 1
+
+
+            # verifie que tous les termes sont bien reconnus dans une phrase simple avec complement
+    # compose d'un possessif et d'un nom
+    def testStructPhrase3(self):
+        phrase = ["lui", "connaitre", "moi"]
+        structurePhrase = scriptsTraitement.StructurePhrase()
+        phrase = structurePhrase.identifierVerbe(phrase)
+        phrase = structurePhrase.identifierAdverbe(phrase)
+        phrase = structurePhrase.identifierSujet(phrase)
+        phrase = structurePhrase.identifierComplement(phrase)
+
+        if structurePhrase == self.resultatsAttendus[self.nbTests]:
+            self.nbTestsReussis = self.nbTestsReussis + 1
+        else:
+            self.messagesEchecs.append(
+                "Test struct phrase 3 - Obtenu : '" + str(structurePhrase) + "' | attendu : '" +
+                str(self.resultatsAttendus[self.nbTests]) + "'")
+
+        self.nbTests = self.nbTests + 1
+
+
+    # verifie que l'on supprime les double pronom
+    def testStructPhrase4(self):
+        phrase = ["lui", "partir", "récemment","lui"]
+        structurePhrase = scriptsTraitement.StructurePhrase()
+        phrase = structurePhrase.identifierVerbe(phrase)
+        phrase = structurePhrase.identifierAdverbe(phrase)
+        phrase = structurePhrase.identifierSujet(phrase)
+        phrase = structurePhrase.identifierComplement(phrase)
+        if structurePhrase == self.resultatsAttendus[self.nbTests]:
+            self.nbTestsReussis = self.nbTestsReussis + 1
+        else:
+            self.messagesEchecs.append(
+                "Test struct phrase 4 - Obtenu : '" + str(structurePhrase) + "' | attendu : '" +
                 str(self.resultatsAttendus[self.nbTests]) + "'")
 
         self.nbTests = self.nbTests + 1
