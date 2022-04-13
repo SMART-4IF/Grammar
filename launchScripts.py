@@ -1,7 +1,7 @@
 import scriptsTraitement
 
 # phrase sortie par l'IA de reconnaissance des signes
-phraseInitiale = ["lui", "a-lui", "ami"]
+phraseInitiale = ["hier", "cinéma", "aller", "moi"]
 
 # création d'une phrase structuree
 structurePhrase = scriptsTraitement.StructurePhrase()
@@ -11,6 +11,7 @@ phraseInitiale = structurePhrase.identifierVerbe(phraseInitiale)
 phraseInitiale = structurePhrase.identifierAdverbe(phraseInitiale)
 phraseInitiale = structurePhrase.identifierSujet(phraseInitiale)
 phraseInitiale = structurePhrase.identifierComplement(phraseInitiale)
+structurePhrase.identifierTempsConjug()
 
 # affichage du résultat
 print(structurePhrase.toStringDebug())

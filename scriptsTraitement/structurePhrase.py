@@ -5,11 +5,12 @@ import dictionnaireUtilisable
 
 class StructurePhrase:
 
-    def __init__(self, adverbe = "", sujet = "", verbe = "être", complement = ""):
+    def __init__(self, adverbe = "", sujet = "", verbe = "être", complement = "", tempsConjug = "présent"):
         self.adverbe = adverbe
         self.sujet = sujet
         self.verbe = verbe
         self.complement = complement
+        self.tempsConjug = tempsConjug
 
     def __str__(self):
         phrase = "";
@@ -28,10 +29,12 @@ class StructurePhrase:
         return phrase.capitalize()
 
     def toStringDebug(self):
-        return "adverbe : " + self.adverbe + " | sujet : " + self.sujet + " | verbe : " + self.verbe + " | complement : " + self.complement
+        return "adverbe : " + self.adverbe + " | sujet : " + self.sujet + " | verbe : " + self.verbe +\
+               " | complement : " + self.complement + " | temps : " + self.tempsConjug
 
     def __eq__(self, other):
-        return self.adverbe == other.adverbe and self.sujet == other.sujet and self.verbe == other.verbe and self.complement == other.complement
+        return self.adverbe == other.adverbe and self.sujet == other.sujet and self.verbe == other.verbe \
+               and self.complement == other.complement and self.tempsConjug == other.tempsConjug
 
     # Recherche verbe dans une sequence donnee de mots et init la val de self.verbe avec
     # phrase : la phrase dans laquelle il faut trouver le verbe
@@ -105,3 +108,13 @@ class StructurePhrase:
             phrase.remove(phrase[0])
 
         return phrase
+
+    # identifie le temps de la phrase en cherchant dans l'adverbe un marqueur temporel
+    def identifierTempsConjug(self):
+        marqueursTemporels = dictionnaireUtilisable.MarqueursTemporels()
+        for element in marqueursTemporels.liste:
+            if element.marqueur == self.adverbe:
+                self.tempsConjug = element.tempsAssocie
+                if element.isIndispanesable is False:
+                    self.adverbe = ""
+                break

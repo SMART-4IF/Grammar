@@ -12,8 +12,8 @@ class TestsUnitaires:
             scriptsTraitement.StructurePhrase("hier", "", "", ""),                      #testAdverbe1
             scriptsTraitement.StructurePhrase("", "moi", "", ""),                       #testSujet1
             scriptsTraitement.StructurePhrase("", "", "", "a-lui ami"),                 #testComplement1
-            scriptsTraitement.StructurePhrase("hier", "moi", "aller", "cinéma"),        #testStructPhrase1
-            scriptsTraitement.StructurePhrase("", "lui", "être", "a-lui ami"),        #testStructPhrase2
+            scriptsTraitement.StructurePhrase("hier", "moi", "aller", "cinéma", "passé composé"),        #testStructPhrase1
+            scriptsTraitement.StructurePhrase("", "lui", "être", "a-lui ami", "présent"),        #testStructPhrase2
         ]
 
     def __str__(self):
@@ -113,7 +113,7 @@ class TestsUnitaires:
         self.nbTests = self.nbTests + 1
 
 
-    # verifie que tous les termes sont bien reconnus dans une phrase simple
+    # verifie que tous les termes et le temps sont bien reconnus dans une phrase simple
     def testStructPhrase1(self):
         phrase = ["hier", "cinéma", "moi", "aller"]
         structurePhrase = scriptsTraitement.StructurePhrase()
@@ -121,7 +121,7 @@ class TestsUnitaires:
         phrase = structurePhrase.identifierAdverbe(phrase)
         phrase = structurePhrase.identifierSujet(phrase)
         phrase = structurePhrase.identifierComplement(phrase)
-
+        structurePhrase.identifierTempsConjug()
         if structurePhrase == self.resultatsAttendus[self.nbTests]:
             self.nbTestsReussis = self.nbTestsReussis + 1
         else:
@@ -131,7 +131,7 @@ class TestsUnitaires:
 
         self.nbTests = self.nbTests + 1
 
-    # verifie que tous les termes sont bien reconnus dans une phrase simple avec complement
+    # verifie que tous les termes et le temps sont bien reconnus dans une phrase simple avec complement
     # compose d'un possessif et d'un nom
     def testStructPhrase2(self):
         phrase = ["lui", "a-lui", "ami"]
@@ -140,6 +140,7 @@ class TestsUnitaires:
         phrase = structurePhrase.identifierAdverbe(phrase)
         phrase = structurePhrase.identifierSujet(phrase)
         phrase = structurePhrase.identifierComplement(phrase)
+        structurePhrase.identifierTempsConjug()
 
         if structurePhrase == self.resultatsAttendus[self.nbTests]:
             self.nbTestsReussis = self.nbTestsReussis + 1

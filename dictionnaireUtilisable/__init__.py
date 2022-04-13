@@ -1,2 +1,3 @@
 from dictionnaireUtilisable.autresMotsLSF import PronomsLSF
+from dictionnaireUtilisable.autresMotsLSF import MarqueursTemporels
 from dictionnaireUtilisable.autresMotsFrançais import PronomsFR
