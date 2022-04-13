@@ -12,7 +12,20 @@ class StructurePhrase:
         self.complement = complement
 
     def __str__(self):
-        return self.adverbe.capitalize() + " " + self.sujet + " " + self.verbe + " " + self.complement +"."
+        phrase = "";
+        if self.adverbe != "": phrase += self.adverbe
+        if self.adverbe != "" and self.sujet != "": phrase += " "
+
+        if self.sujet != "": phrase += self.sujet
+        if self.sujet != "" and self.verbe != "": phrase += " "
+
+        if self.verbe != "": phrase += self.verbe
+        if self.verbe != "" and self.complement != "": phrase += " "
+
+        if self.complement != "": phrase += self.complement
+        if phrase != "": phrase += "."
+
+        return phrase.capitalize()
 
     def toStringDebug(self):
         return "adverbe : " + self.adverbe + " | sujet : " + self.sujet + " | verbe : " + self.verbe + " | complement : " + self.complement
