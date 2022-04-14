@@ -5,17 +5,19 @@ import dictionnaireUtilisable
 
 class StructurePhrase:
 
-    def __init__(self, adverbe = "", sujet = "", verbe = "être", complement = "", tempsConjug = "présent"):
-        self.adverbe = adverbe
+    def __init__(self, sujet = "", verbe = "être", complement = "", marqueurTemporel = "", adverbe = "", tempsConjug = "présent"):
         self.sujet = sujet
         self.verbe = verbe
         self.complement = complement
+        self.marqueurTemporel = marqueurTemporel
+        self.adverbe = adverbe
         self.tempsConjug = tempsConjug
 
     def __str__(self):
         phrase = ""
-        if self.adverbe != "": phrase += self.adverbe
-        if self.adverbe != "" and self.sujet != "": phrase += " "
+
+        if self.marqueurTemporel != "": phrase += self.marqueurTemporel
+        if self.marqueurTemporel != "" and self.sujet != "": phrase += ", "
 
         if self.sujet != "": phrase += self.sujet
         if self.sujet != "" and self.verbe != "": phrase += " "
@@ -24,17 +26,20 @@ class StructurePhrase:
         if self.verbe != "" and self.complement != "": phrase += " "
 
         if self.complement != "": phrase += self.complement
+        if self.complement != "" and self.adverbe != "": phrase += " "
+
+        if self.adverbe != "": phrase += self.adverbe
         if phrase != "": phrase += "."
 
         return phrase.capitalize()
 
     def toStringDebug(self):
-        return "adverbe : " + self.adverbe + " | sujet : " + self.sujet + " | verbe : " + self.verbe +\
-               " | complement : " + self.complement + " | temps : " + self.tempsConjug
+        return "marqueurTemporel : " + self.marqueurTemporel + " | sujet : " + self.sujet + " | verbe : " + self.verbe +\
+               " | complement : " + self.complement + " | adverbe : " + self.adverbe + " | temps : " + self.tempsConjug
 
     def __eq__(self, other):
-        return self.adverbe == other.adverbe and self.sujet == other.sujet and self.verbe == other.verbe \
-               and self.complement == other.complement and self.tempsConjug == other.tempsConjug
+        return self.marqueurTemporel == other.marqueurTemporel and self.sujet == other.sujet and self.verbe == other.verbe \
+               and self.complement == other.complement and self.adverbe == other.adverbe and self.tempsConjug == other.tempsConjug
 
     # Recherche verbe dans une sequence donnee de mots et init la val de self.verbe avec
     # phrase : la phrase dans laquelle il faut trouver le verbe
@@ -56,12 +61,38 @@ class StructurePhrase:
         # ouverture du dictionnaire des adverbes francais
         with open('dictionnaireUtilisable/adverbes.json') as json_data_adverbe:
             dictionnaireAdverbes = json.load(json_data_adverbe)
+        marqueursTemporelsLSF = dictionnaireUtilisable.MarqueursTemporels()
+
         # si mot est dans dictionnaire des adverbes : c'est un adverbes
+        testMarqueurTemporel = False
         for mot in phrase:
-            if mot in dictionnaireAdverbes:
+            for marqueur in marqueursTemporelsLSF.liste:
+                if mot == marqueur.mot:
+                    testMarqueurTemporel = True
+                    break
+
+            if testMarqueurTemporel is False and mot in dictionnaireAdverbes:
                 self.adverbe = mot
                 phrase.remove(mot)
                 break
+
+        return phrase
+
+    # Recherche marqueur temporel dans une sequence donnee de mots et init la val de self.marqueurTemporel avec
+    # Si marqueur trouvé, détermine le temps de la phrase
+    # phrase : liste de mots dans laquelle il faut trouver le marqueur temporel
+    def identifierMarqueurTemporel(self, phrase):
+        # recuperation de la liste des marqueurs temporels de la LSF
+        marqueursTemporelsLSF = dictionnaireUtilisable.MarqueursTemporels()
+        # si mot est dans dictionnaire des adverbes : c'est un adverbes
+        for mot in phrase:
+            for marqueur in marqueursTemporelsLSF.liste:
+                if mot == marqueur.mot:
+                    self.tempsConjug = marqueur.tempsAssocie
+                    if marqueur.isIndispanesable:
+                        self.marqueurTemporel = mot
+                    phrase.remove(mot)
+                    break
         return phrase
 
     # Recherche sujet dans une sequence donnee de mots et init la val de self.sujet avec
@@ -123,14 +154,3 @@ class StructurePhrase:
                 phrase.remove(phrase[0])
 
             return phrase
-
-
-    # identifie le temps de la phrase en cherchant dans l'adverbe un marqueur temporel
-    def identifierTempsConjug(self):
-        marqueursTemporels = dictionnaireUtilisable.MarqueursTemporels()
-        for element in marqueursTemporels.liste:
-            if element.marqueur == self.adverbe:
-                self.tempsConjug = element.tempsAssocie
-                if element.isIndispanesable is False:
-                    self.adverbe = ""
-                break

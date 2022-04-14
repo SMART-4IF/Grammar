@@ -4,8 +4,8 @@ class PronomsLSF:
     self.possessifs = ["a-moi", "a-toi", "a-lui", "a-nous", "a-vous", "a-eux"]
 
 class MarqueurTemporel:
-  def __init__(self, marqueur, isIndispensable, tempsAssocie):
-    self.marqueur = marqueur
+  def __init__(self, mot, isIndispensable, tempsAssocie):
+    self.mot = mot
     self.isIndispanesable = isIndispensable
     self.tempsAssocie = tempsAssocie
 
