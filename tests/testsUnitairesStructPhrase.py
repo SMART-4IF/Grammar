@@ -13,10 +13,12 @@ class TestsUnitaires:
             scriptsTraitement.StructurePhrase("", "moi", "", ""),                       #testSujet1
             scriptsTraitement.StructurePhrase("", "moi", "", ""),                       #testSujet2
             scriptsTraitement.StructurePhrase("", "", "", "a-lui ami"),                 #testComplement1
-            scriptsTraitement.StructurePhrase("hier", "moi", "aller", "cinéma", "passé composé"),        #testStructPhrase1
-            scriptsTraitement.StructurePhrase("", "lui", "être", "a-lui ami", "présent"),        #testStructPhrase2
-            scriptsTraitement.StructurePhrase("", "moi", "connaitre", "lui", "présent"),        #testStructPhrase3
-            scriptsTraitement.StructurePhrase("récemment", "lui", "partir", "", "passé composé"),        #testStructPhrase4
+            scriptsTraitement.StructurePhrase("hier", "moi", "aller", "cinéma"),        #testStructPhrase1
+            scriptsTraitement.StructurePhrase("", "lui", "être", "a-lui ami"),          #testStructPhrase2
+            scriptsTraitement.StructurePhrase("", "moi", "connaitre", "lui"),           #testStructPhrase3
+            scriptsTraitement.StructurePhrase("récemment", "lui", "partir", ""),        #testStructPhrase4
+            scriptsTraitement.StructurePhrase("récemment", "", "", "", "passé composé"),   #testTemps1
+            # scriptsTraitement.StructurePhrase("fini", "", "", "", "passé composé"),   #testTemps1
         ]
 
     def __str__(self):
@@ -41,8 +43,8 @@ class TestsUnitaires:
         self.testStructPhrase2()
         self.testStructPhrase3()
         self.testStructPhrase4()
-
-
+        self.testTemps1()
+        # self.testTemps2()
 
 
     # verifie que l'on est bien capable d'identifier le verbe de la phrase
@@ -144,7 +146,6 @@ class TestsUnitaires:
         phrase = structurePhrase.identifierAdverbe(phrase)
         phrase = structurePhrase.identifierSujet(phrase)
         phrase = structurePhrase.identifierComplement(phrase)
-        structurePhrase.identifierTempsConjug()
         if structurePhrase == self.resultatsAttendus[self.nbTests]:
             self.nbTestsReussis = self.nbTestsReussis + 1
         else:
@@ -163,7 +164,6 @@ class TestsUnitaires:
         phrase = structurePhrase.identifierAdverbe(phrase)
         phrase = structurePhrase.identifierSujet(phrase)
         phrase = structurePhrase.identifierComplement(phrase)
-        structurePhrase.identifierTempsConjug()
 
         if structurePhrase == self.resultatsAttendus[self.nbTests]:
             self.nbTestsReussis = self.nbTestsReussis + 1
@@ -184,7 +184,6 @@ class TestsUnitaires:
         phrase = structurePhrase.identifierAdverbe(phrase)
         phrase = structurePhrase.identifierSujet(phrase)
         phrase = structurePhrase.identifierComplement(phrase)
-        structurePhrase.identifierTempsConjug()
 
         if structurePhrase == self.resultatsAttendus[self.nbTests]:
             self.nbTestsReussis = self.nbTestsReussis + 1
@@ -204,7 +203,6 @@ class TestsUnitaires:
         phrase = structurePhrase.identifierAdverbe(phrase)
         phrase = structurePhrase.identifierSujet(phrase)
         phrase = structurePhrase.identifierComplement(phrase)
-        structurePhrase.identifierTempsConjug()
 
         if structurePhrase == self.resultatsAttendus[self.nbTests]:
             self.nbTestsReussis = self.nbTestsReussis + 1
@@ -214,3 +212,36 @@ class TestsUnitaires:
                 str(self.resultatsAttendus[self.nbTests]) + "'")
 
         self.nbTests = self.nbTests + 1
+
+
+    # verifie que l'on identifie bien le temps de cette phrase (et on laisse le marqueur car indispensable)
+    def testTemps1(self):
+        phrase = ["lui", "partir", "récemment", "lui"]
+        structurePhrase = scriptsTraitement.StructurePhrase()
+        phrase = structurePhrase.identifierAdverbe(phrase)
+        structurePhrase.identifierTempsConjug()
+
+        if structurePhrase.tempsConjug == self.resultatsAttendus[self.nbTests].tempsConjug:
+            self.nbTestsReussis = self.nbTestsReussis + 1
+        else:
+            self.messagesEchecs.append(
+                "Test temps 1 - Obtenu : '" + structurePhrase.tempsConjug + "' | attendu : '" +
+                self.resultatsAttendus[self.nbTests].tempsConjug + "'")
+
+        self.nbTests = self.nbTests + 1# verifie que l'on identifie bien le temps de cette phrase (et on laisse le marqueur car indispensable)
+
+    # verifie que l'on identifie bien le temps de cette phrase (et on retire le marqueur car dispensable)
+    #def testTemps2(self):
+    #    phrase = ["moi", "voiture", "acheter", "fini"]
+    #    structurePhrase = scriptsTraitement.StructurePhrase()
+    #    phrase = structurePhrase.identifierAdverbe(phrase)
+    #    structurePhrase.identifierTempsConjug()
+    #    print(structurePhrase.toStringDebug())
+    #    if structurePhrase.tempsConjug == self.resultatsAttendus[self.nbTests].tempsConjug:
+    #       self.nbTestsReussis = self.nbTestsReussis + 1
+    #    else:
+    #        self.messagesEchecs.append(
+    #            "Test temps 2 - Obtenu : '" + structurePhrase.tempsConjug + "' | attendu : '" +
+    #            self.resultatsAttendus[self.nbTests].tempsConjug + "'")
+#
+    #    self.nbTests = self.nbTests + 1
