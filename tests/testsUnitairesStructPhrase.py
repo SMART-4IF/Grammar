@@ -12,7 +12,7 @@ class TestsUnitaires:
             scriptsTraitement.StructurePhrase("", "", "", "", "lentement"),                         #testAdverbe1
             scriptsTraitement.StructurePhrase("moi"),                                               #testSujet1
             scriptsTraitement.StructurePhrase("moi"),                                               #testSujet2
-            scriptsTraitement.StructurePhrase("", "", "a-lui ami"),                                 #testComplement1
+            scriptsTraitement.StructurePhrase("", "", "a-lui ami"),                                 #testAction1
             scriptsTraitement.StructurePhrase("", "", "", "récemment", "", "passé composé"),        # testTemps1
             scriptsTraitement.StructurePhrase("", "", "", "", "", "passé composé"),             # testTemps2
             scriptsTraitement.StructurePhrase("moi", "aller", "cinéma", "hier", "", "passé composé"),   #testStructPhrase1
@@ -38,7 +38,7 @@ class TestsUnitaires:
         self.testAdverbe1()
         self.testSujet1()
         self.testSujet2()
-        self.testComplement1()
+        self.testAction1()
         self.testTemps1()
         self.testTemps2()
         self.testStructPhrase1()
@@ -123,17 +123,17 @@ class TestsUnitaires:
 
 
     # verifie que l'on est bien capable d'identifier le complément de la phrase
-    def testComplement1(self):
+    def testAction1(self):
         phrase = ["lui", "a-lui", "ami"]
         structurePhrase = scriptsTraitement.StructurePhrase()
-        structurePhrase.identifierComplement(phrase)
+        structurePhrase.identifierAction(phrase)
 
-        if structurePhrase.complement == self.resultatsAttendus[self.nbTests].complement:
+        if structurePhrase.action == self.resultatsAttendus[self.nbTests].action:
             self.nbTestsReussis = self.nbTestsReussis + 1
         else:
             self.messagesEchecs.append(
-                "Test complement 1 - Obtenu : '" + structurePhrase.complement + "' | attendu : '" + self.resultatsAttendus[
-                    self.nbTests].complement + "'")
+                "Test action 1 - Obtenu : '" + structurePhrase.action + "' | attendu : '" + self.resultatsAttendus[
+                    self.nbTests].action + "'")
 
         self.nbTests = self.nbTests + 1
 
@@ -184,7 +184,7 @@ class TestsUnitaires:
         phrase = structurePhrase.identifierMarqueurTemporel(phrase)
         phrase = structurePhrase.identifierAdverbe(phrase)
         phrase = structurePhrase.identifierSujet(phrase)
-        phrase = structurePhrase.identifierComplement(phrase)
+        phrase = structurePhrase.identifierAction(phrase)
 
         if structurePhrase == self.resultatsAttendus[self.nbTests]:
             self.nbTestsReussis = self.nbTestsReussis + 1
@@ -196,7 +196,7 @@ class TestsUnitaires:
         self.nbTests = self.nbTests + 1
 
 
-    # verifie que tous les termes et le temps sont bien reconnus dans une phrase simple avec complement
+    # verifie que tous les termes et le temps sont bien reconnus dans une phrase simple avec action
     # compose d'un possessif et d'un nom
     def testStructPhrase2(self):
         phrase = ["lui", "a-lui", "ami"]
@@ -205,7 +205,7 @@ class TestsUnitaires:
         phrase = structurePhrase.identifierMarqueurTemporel(phrase)
         phrase = structurePhrase.identifierAdverbe(phrase)
         phrase = structurePhrase.identifierSujet(phrase)
-        phrase = structurePhrase.identifierComplement(phrase)
+        phrase = structurePhrase.identifierAction(phrase)
 
         if structurePhrase == self.resultatsAttendus[self.nbTests]:
             self.nbTestsReussis = self.nbTestsReussis + 1
@@ -217,7 +217,7 @@ class TestsUnitaires:
         self.nbTests = self.nbTests + 1
 
 
-    # verifie que tous les termes sont bien reconnus dans une phrase simple avec complement
+    # verifie que tous les termes sont bien reconnus dans une phrase simple avec action
     # compose d'un possessif et d'un nom
     def testStructPhrase3(self):
         phrase = ["lui", "connaitre", "moi"]
@@ -226,7 +226,7 @@ class TestsUnitaires:
         phrase = structurePhrase.identifierMarqueurTemporel(phrase)
         phrase = structurePhrase.identifierAdverbe(phrase)
         phrase = structurePhrase.identifierSujet(phrase)
-        phrase = structurePhrase.identifierComplement(phrase)
+        phrase = structurePhrase.identifierAction(phrase)
 
         if structurePhrase == self.resultatsAttendus[self.nbTests]:
             self.nbTestsReussis = self.nbTestsReussis + 1
@@ -246,7 +246,7 @@ class TestsUnitaires:
         phrase = structurePhrase.identifierMarqueurTemporel(phrase)
         phrase = structurePhrase.identifierAdverbe(phrase)
         phrase = structurePhrase.identifierSujet(phrase)
-        phrase = structurePhrase.identifierComplement(phrase)
+        phrase = structurePhrase.identifierAction(phrase)
 
         if structurePhrase == self.resultatsAttendus[self.nbTests]:
             self.nbTestsReussis = self.nbTestsReussis + 1
