@@ -19,6 +19,7 @@ class TestsUnitaires:
             scriptsTraitement.StructurePhrase("lui", "être", "a-lui ami"),                          #testStructPhrase2
             scriptsTraitement.StructurePhrase("moi", "connaitre", "lui"),                           #testStructPhrase3
             scriptsTraitement.StructurePhrase("lui", "partir", "", "récemment", "", "passé composé"),   #testStructPhrase4
+            scriptsTraitement.StructurePhrase("moi", "aller", "", "", "", "", 1),                    #testIdentificationPersConj1
         ]
 
     def __str__(self):
@@ -45,6 +46,7 @@ class TestsUnitaires:
         self.testStructPhrase2()
         self.testStructPhrase3()
         self.testStructPhrase4()
+        self.testIdentificationPersConj1()
 
 
     # verifie que l'on est bien capable d'identifier le verbe de la phrase
@@ -256,6 +258,22 @@ class TestsUnitaires:
                 str(self.resultatsAttendus[self.nbTests]) + "'")
 
         self.nbTests = self.nbTests + 1
+
+    def testIdentificationPersConj1(self):
+        phrase = ["hier", "cinéma", "moi", "aller"]
+        structurePhrase = scriptsTraitement.StructurePhrase()
+        phrase = structurePhrase.identifierSujet(phrase)
+        structurePhrase.identifierPersConjug()
+
+        if structurePhrase.persConjug == self.resultatsAttendus[self.nbTests].persConjug:
+            self.nbTestsReussis = self.nbTestsReussis + 1
+        else:
+            self.messagesEchecs.append(
+                "Test identif pers conj 1 - Obtenu : '" + str(structurePhrase.persConjug) + "' | attendu : '" +
+                str(self.resultatsAttendus[self.nbTests].persConjug) + "'")
+
+        self.nbTests = self.nbTests + 1
+
 
 
     # trace

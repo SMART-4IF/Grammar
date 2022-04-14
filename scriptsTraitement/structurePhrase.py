@@ -36,11 +36,13 @@ class StructurePhrase:
 
     def toStringDebug(self):
         return "marqueurTemporel : " + self.marqueurTemporel + " | sujet : " + self.sujet + " | verbe : " + self.verbe +\
-               " | action : " + self.action + " | adverbe : " + self.adverbe + " | temps : " + self.tempsConjug
+               " | action : " + self.action + " | adverbe : " + self.adverbe + " | temps : " + self.tempsConjug + \
+               " | pers conjug: " + str(self.persConjug)
 
     def __eq__(self, other):
         return self.marqueurTemporel == other.marqueurTemporel and self.sujet == other.sujet and self.verbe == other.verbe \
-               and self.action == other.action and self.adverbe == other.adverbe and self.tempsConjug == other.tempsConjug
+               and self.action == other.action and self.adverbe == other.adverbe and self.tempsConjug == other.tempsConjug and \
+               self.persConjug == other.persConjug
 
     # Recherche verbe dans une sequence donnee de mots et init la val de self.verbe avec
     # phrase : la phrase dans laquelle il faut trouver le verbe
@@ -160,7 +162,10 @@ class StructurePhrase:
     # identifie la personne à laquelle il faut conjuguer le verbe
     def identifierPersConjug(self):
         pronomsLSF = dictionnaireUtilisable.PronomsLSF()
-        pronomsFR = dictionnaireUtilisable.PronomsFR
-        if self.sujet in pronomsLSF.personnels:
-            self.sujet = self.sujet
-        return "ok"
+        pronomsFR = dictionnaireUtilisable.PronomsFR()
+        index = 0
+        for pronom in pronomsLSF.personnels:
+            if pronom == self.sujet:
+                self.sujet = pronomsFR.personnels[index]
+                self.persConjug = index +1
+            index+=1
