@@ -2,11 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="82a20799-784e-4972-afdf-d928919d917b" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/tests/testsUnitaires.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dictionnaireUtilisable/autresMotsLSF.py" beforeDir="false" afterPath="$PROJECT_DIR$/dictionnaireUtilisable/autresMotsLSF.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/launchScripts.py" beforeDir="false" afterPath="$PROJECT_DIR$/launchScripts.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/launchTests.py" beforeDir="false" afterPath="$PROJECT_DIR$/launchTests.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/scriptsTraitement/structurePhrase.py" beforeDir="false" afterPath="$PROJECT_DIR$/scriptsTraitement/structurePhrase.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/testsUnitairesStructPhrase.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/testsUnitairesStructPhrase.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/testsUnitairesStructPhrase.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/testsTraductions.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -40,14 +42,16 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/tests" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/tests" />
       <recent name="$PROJECT_DIR$" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$" />
+      <recent name="$PROJECT_DIR$/scriptsTraitement" />
     </key>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
@@ -59,7 +63,7 @@
       <option name="presentableId" value="Default" />
       <updated>1649828995483</updated>
       <workItem from="1649828998743" duration="22602000" />
-      <workItem from="1649916530840" duration="11449000" />
+      <workItem from="1649916530840" duration="15494000" />
     </task>
     <servers />
   </component>

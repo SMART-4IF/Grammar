@@ -19,18 +19,28 @@ class StructurePhrase:
         phrase = ""
 
         if self.marqueurTemporel != "": phrase += self.marqueurTemporel
-        if self.marqueurTemporel != "" and self.sujet != "": phrase += ", "
+        if self.marqueurTemporel != "" and self.sujet != "": phrase += ","
 
-        if self.sujet != "": phrase += self.sujet
-        if self.sujet != "" and self.verbe != "": phrase += " "
+        if self.sujet != "":
+            if len(phrase) > 1:
+                phrase += " "
+            phrase += self.sujet
 
-        if self.verbe != "": phrase += self.verbe
-        if self.verbe != "" and self.action != "": phrase += " "
+        if self.verbe != "":
+            if len(phrase) > 1:
+                phrase += " "
+            phrase += self.verbe
 
-        if self.action != "": phrase += self.action
-        if self.action != "" and self.adverbe != "": phrase += " "
+        if self.action != "":
+            if len(phrase) > 1:
+                phrase += " "
+            phrase += self.action
 
-        if self.adverbe != "": phrase += self.adverbe
+        if self.adverbe != "":
+            if len(phrase) > 1:
+                phrase += " "
+            phrase += self.adverbe
+
         if phrase != "": phrase += "."
 
         return phrase.capitalize()
@@ -44,6 +54,17 @@ class StructurePhrase:
         return self.marqueurTemporel == other.marqueurTemporel and self.sujet == other.sujet and self.verbe == other.verbe \
                and self.action == other.action and self.adverbe == other.adverbe and self.tempsConjug == other.tempsConjug and \
                self.persConjug == other.persConjug
+
+    # execute l'ensemble du process de traduction
+    def traduire(self, phraseInitiale):
+        phraseInitiale = self.identifierVerbe(phraseInitiale)
+        phraseInitiale = self.identifierMarqueurTemporel(phraseInitiale)
+        phraseInitiale = self.identifierAdverbe(phraseInitiale)
+        phraseInitiale = self.identifierSujet(phraseInitiale)
+        phraseInitiale = self.identifierAction(phraseInitiale)
+        self.identifierPersConjug()
+        self.conjuguerVerbe()
+        return self
 
     # Recherche verbe dans une sequence donnee de mots et init la val de self.verbe avec
     # phrase : la phrase dans laquelle il faut trouver le verbe

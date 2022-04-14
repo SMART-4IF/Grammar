@@ -1,25 +1,11 @@
-import scriptsTraitement
-# from verbecc import Conjugator
-
-# cg = Conjugator(lang='fr')
-# conjugation = cg.conjugate('manger')
-# print(conjugation['moods']['indicatif']['présent'][0])
+from scriptsTraitement import StructurePhrase
 
 # phrase sortie par l'IA de reconnaissance des signes
 phraseInitiale = ["hier", "cinéma", "aller", "moi"]
+structurePhrase = structurePhrase = StructurePhrase()
+structurePhrase = structurePhrase.traduire(phraseInitiale)
 
-# creation d'une phrase structuree
-structurePhrase = scriptsTraitement.StructurePhrase()
-
-# detection des elements structurels de la phrase (verbe, adverbe, nom, complement)
-phraseInitiale = structurePhrase.identifierVerbe(phraseInitiale)
-phraseInitiale = structurePhrase.identifierMarqueurTemporel(phraseInitiale)
-phraseInitiale = structurePhrase.identifierAdverbe(phraseInitiale)
-phraseInitiale = structurePhrase.identifierSujet(phraseInitiale)
-phraseInitiale = structurePhrase.identifierAction(phraseInitiale)
-structurePhrase.identifierPersConjug()
-structurePhrase.conjuguerVerbe()
-
-# affichage du resultat
+# debug
+print("")
 print(structurePhrase.toStringDebug())
 print(structurePhrase)

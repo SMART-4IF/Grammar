@@ -1,1 +1,2 @@
-from tests.testsUnitairesStructPhrase import TestsUnitaires
+from tests.testsUnitaires import TestsUnitaires
+from tests.testsTraductions import TestsTraductions
