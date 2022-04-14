@@ -2,6 +2,7 @@
 # hier je suis allé au cinéma 
 import json
 import dictionnaireUtilisable
+from verbecc import Conjugator
 
 class StructurePhrase:
 
@@ -169,3 +170,14 @@ class StructurePhrase:
                 self.sujet = pronomsFR.personnels[index]
                 self.persConjug = index +1
             index+=1
+
+    # conjugue le verbe selon le temps et la personne identifies
+    def conjuguerVerbe(self):
+        cg = Conjugator(lang='fr')
+        conjugaisonsDuVerbe = cg.conjugate(self.verbe)
+        verbeConjugue = conjugaisonsDuVerbe['moods']['indicatif'][self.tempsConjug][self.persConjug-1]
+
+        # conjugaison ML sort le pronom + le verbe conjugue (il faut supprimer le pronom)
+        verbeConjugue = verbeConjugue.split()
+        verbeConjugue = verbeConjugue[1:]
+        self.verbe = " ".join(verbeConjugue)

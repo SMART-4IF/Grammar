@@ -13,13 +13,15 @@ class TestsUnitaires:
             scriptsTraitement.StructurePhrase("moi"),                                               #testSujet1
             scriptsTraitement.StructurePhrase("moi"),                                               #testSujet2
             scriptsTraitement.StructurePhrase("", "", "a-lui ami"),                                 #testAction1
-            scriptsTraitement.StructurePhrase("", "", "", "récemment", "", "passé composé"),        # testTemps1
-            scriptsTraitement.StructurePhrase("", "", "", "", "", "passé composé"),             # testTemps2
-            scriptsTraitement.StructurePhrase("moi", "aller", "cinéma", "hier", "", "passé composé"),   #testStructPhrase1
+            scriptsTraitement.StructurePhrase("", "", "", "récemment", "", "passé-composé"),        # testTemps1
+            scriptsTraitement.StructurePhrase("", "", "", "", "", "passé-composé"),             # testTemps2
+            scriptsTraitement.StructurePhrase("moi", "aller", "cinéma", "hier", "", "passé-composé"),   #testStructPhrase1
             scriptsTraitement.StructurePhrase("lui", "être", "a-lui ami"),                          #testStructPhrase2
             scriptsTraitement.StructurePhrase("moi", "connaitre", "lui"),                           #testStructPhrase3
-            scriptsTraitement.StructurePhrase("lui", "partir", "", "récemment", "", "passé composé"),   #testStructPhrase4
-            scriptsTraitement.StructurePhrase("moi", "aller", "", "", "", "", 1),                    #testIdentificationPersConj1
+            scriptsTraitement.StructurePhrase("lui", "partir", "", "récemment", "", "passé-composé"),   #testStructPhrase4
+            scriptsTraitement.StructurePhrase("", "", "", "", "", "", 1),                           #testIdentificationPersConj1
+            scriptsTraitement.StructurePhrase("", "vais"),                                          #testConj1
+            scriptsTraitement.StructurePhrase("", "suis allé"),                                     #testConj2
         ]
 
     def __str__(self):
@@ -47,6 +49,8 @@ class TestsUnitaires:
         self.testStructPhrase3()
         self.testStructPhrase4()
         self.testIdentificationPersConj1()
+        self.testConj1()
+        self.testConj2()
 
 
     # verifie que l'on est bien capable d'identifier le verbe de la phrase
@@ -259,6 +263,7 @@ class TestsUnitaires:
 
         self.nbTests = self.nbTests + 1
 
+    # verifie que l'on identifie lq premiere personne pour la conj
     def testIdentificationPersConj1(self):
         phrase = ["hier", "cinéma", "moi", "aller"]
         structurePhrase = scriptsTraitement.StructurePhrase()
@@ -274,7 +279,43 @@ class TestsUnitaires:
 
         self.nbTests = self.nbTests + 1
 
+    # verifie si l'on est capable de conjuguer verbe au present 1p sg
+    def testConj1(self):
+        phrase = ["cinéma", "moi", "aller"]
+        structurePhrase = scriptsTraitement.StructurePhrase()
+        phrase = structurePhrase.identifierSujet(phrase)
+        phrase = structurePhrase.identifierVerbe(phrase)
+        phrase = structurePhrase.identifierMarqueurTemporel(phrase)
+        structurePhrase.identifierPersConjug()
+        structurePhrase.conjuguerVerbe()
 
+        if structurePhrase.verbe == self.resultatsAttendus[self.nbTests].verbe:
+            self.nbTestsReussis = self.nbTestsReussis + 1
+        else:
+            self.messagesEchecs.append(
+                "Test conj 1 - Obtenu : '" + str(structurePhrase.verbe) + "' | attendu : '" +
+                str(self.resultatsAttendus[self.nbTests].verbe) + "'")
+
+        self.nbTests = self.nbTests + 1
+
+    # verifie si l'on est capable de conjuguer verbe au passé composé 1p sg
+    def testConj2(self):
+        phrase = ["hier", "cinéma", "moi", "aller"]
+        structurePhrase = scriptsTraitement.StructurePhrase()
+        phrase = structurePhrase.identifierSujet(phrase)
+        phrase = structurePhrase.identifierVerbe(phrase)
+        phrase = structurePhrase.identifierMarqueurTemporel(phrase)
+        structurePhrase.identifierPersConjug()
+        structurePhrase.conjuguerVerbe()
+
+        if structurePhrase.verbe == self.resultatsAttendus[self.nbTests].verbe:
+            self.nbTestsReussis = self.nbTestsReussis + 1
+        else:
+            self.messagesEchecs.append(
+                "Test conj 2 - Obtenu : '" + str(structurePhrase.verbe) + "' | attendu : '" +
+                str(self.resultatsAttendus[self.nbTests].verbe) + "'")
+
+        self.nbTests = self.nbTests + 1
 
     # trace
     # print(structurePhrase.toStringDebug())

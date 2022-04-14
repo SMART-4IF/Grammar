@@ -18,6 +18,7 @@ phraseInitiale = structurePhrase.identifierAdverbe(phraseInitiale)
 phraseInitiale = structurePhrase.identifierSujet(phraseInitiale)
 phraseInitiale = structurePhrase.identifierAction(phraseInitiale)
 structurePhrase.identifierPersConjug()
+structurePhrase.conjuguerVerbe()
 
 # affichage du resultat
 print(structurePhrase.toStringDebug())
