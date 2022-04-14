@@ -1,4 +1,9 @@
 import scriptsTraitement
+from verbecc import Conjugator
+
+cg = Conjugator(lang='fr')
+conjugation = cg.conjugate('manger')
+print(conjugation['moods']['indicatif']['présent'][0])
 
 # phrase sortie par l'IA de reconnaissance des signes
 phraseInitiale = ["hier", "cinéma", "aller", "moi"]

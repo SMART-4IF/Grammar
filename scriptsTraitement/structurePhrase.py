@@ -5,13 +5,14 @@ import dictionnaireUtilisable
 
 class StructurePhrase:
 
-    def __init__(self, sujet = "", verbe = "être", action = "", marqueurTemporel = "", adverbe = "", tempsConjug = "présent"):
+    def __init__(self, sujet = "", verbe = "être", action = "", marqueurTemporel = "", adverbe = "", tempsConjug = "présent", persConjug = ""):
         self.sujet = sujet
         self.verbe = verbe
         self.action = action
         self.marqueurTemporel = marqueurTemporel
         self.adverbe = adverbe
         self.tempsConjug = tempsConjug
+        self.persConjug = persConjug
 
     def __str__(self):
         phrase = ""
@@ -120,6 +121,7 @@ class StructurePhrase:
         else:
             self.sujet = tmp[0]
             phrase.remove(tmp[0])
+
         return phrase
 
     # Recherche action dans une sequence donnee de mots et init la val de self.action avec
@@ -154,3 +156,11 @@ class StructurePhrase:
                 phrase.remove(phrase[0])
 
             return phrase
+
+    # identifie la personne à laquelle il faut conjuguer le verbe
+    def identifierPersConjug(self):
+        pronomsLSF = dictionnaireUtilisable.PronomsLSF()
+        pronomsFR = dictionnaireUtilisable.PronomsFR
+        if self.sujet in pronomsLSF.personnels:
+            self.sujet = self.sujet
+        return "ok"
