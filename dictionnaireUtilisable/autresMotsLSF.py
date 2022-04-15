@@ -16,7 +16,7 @@ class MarqueursTemporels:
   def __init__(self):
     self.liste = [
       MarqueurTemporel("hier", True, "passé-composé"),
-      MarqueurTemporel("demain", True, "futur"),
+      MarqueurTemporel("demain", True, "futur-simple"),
       MarqueurTemporel("fini", False, "passé-composé"),
       MarqueurTemporel("récemment", True, "passé-composé")
     ]

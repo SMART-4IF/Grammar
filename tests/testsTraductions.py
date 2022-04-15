@@ -15,7 +15,7 @@ class TestsTraductions:
             "Tu signes lentement.",                 #testTrad5
             "Je ne suis pas d’accord.",             #testTrad6
             "Il ne fait rien.",                     #testTrad7
-            #"J’irai demain.",                       #testTrad8
+            "Demain, j'irai.",                      #testTrad8
         ]
 
     def __str__(self):
@@ -48,7 +48,7 @@ class TestsTraductions:
         self.testTraduction5()
         self.testTraduction6()
         self.testTraduction7()
-        # self.testTraduction8()
+        self.testTraduction8()
 
 
     def testTraduction1(self):
@@ -62,7 +62,7 @@ class TestsTraductions:
         else:
             self.messagesEchecs.append(
                 "Test trad 1 - Obtenu : '" + str(structurePhrase) + "' | attendu : '" +
-                str(self.resultatsAttendus[self.nbTests]) + "'")
+                self.resultatsAttendus[self.nbTests] + "'")
 
         self.nbTests = self.nbTests + 1
 
@@ -78,7 +78,7 @@ class TestsTraductions:
         else:
             self.messagesEchecs.append(
                 "Test trad 2 - Obtenu : '" + str(structurePhrase) + "' | attendu : '" +
-                str(self.resultatsAttendus[self.nbTests]) + "'")
+                self.resultatsAttendus[self.nbTests] + "'")
 
         self.nbTests = self.nbTests + 1
 
@@ -94,7 +94,7 @@ class TestsTraductions:
         else:
             self.messagesEchecs.append(
                 "Test trad 3 - Obtenu : '" + str(structurePhrase) + "' | attendu : '" +
-                str(self.resultatsAttendus[self.nbTests]) + "'")
+                self.resultatsAttendus[self.nbTests] + "'")
 
         self.nbTests = self.nbTests + 1
 
@@ -110,7 +110,7 @@ class TestsTraductions:
         else:
             self.messagesEchecs.append(
                 "Test trad 4 - Obtenu : '" + str(structurePhrase) + "' | attendu : '" +
-                str(self.resultatsAttendus[self.nbTests]) + "'")
+                self.resultatsAttendus[self.nbTests] + "'")
 
         self.nbTests = self.nbTests + 1
 
@@ -126,7 +126,7 @@ class TestsTraductions:
         else:
             self.messagesEchecs.append(
                 "Test trad 5 - Obtenu : '" + str(structurePhrase) + "' | attendu : '" +
-                str(self.resultatsAttendus[self.nbTests]) + "'")
+                self.resultatsAttendus[self.nbTests] + "'")
 
         self.nbTests = self.nbTests + 1
 
@@ -142,7 +142,7 @@ class TestsTraductions:
         else:
             self.messagesEchecs.append(
                 "Test trad 6 - Obtenu : '" + str(structurePhrase) + "' | attendu : '" +
-                str(self.resultatsAttendus[self.nbTests]) + "'")
+                self.resultatsAttendus[self.nbTests] + "'")
 
         self.nbTests = self.nbTests + 1
 
@@ -158,11 +158,26 @@ class TestsTraductions:
         else:
             self.messagesEchecs.append(
                 "Test trad 7 - Obtenu : '" + str(structurePhrase) + "' | attendu : '" +
-                str(self.resultatsAttendus[self.nbTests]) + "'")
+                self.resultatsAttendus[self.nbTests] + "'")
+
+        self.nbTests = self.nbTests + 1
+
+
+    def testTraduction8(self):
+        phrase = ["demain", "aller", "moi"]
+        structurePhrase = scriptsTraitement.StructurePhrase()
+        structurePhrase.traduire(phrase)
+
+        if str(structurePhrase) == self.resultatsAttendus[self.nbTests]:
+            self.messagesSucces.append("Demain aller moi. = " + str(structurePhrase))
+            self.nbTestsReussis = self.nbTestsReussis + 1
+        else:
+            self.messagesEchecs.append(
+                "Test trad 8 - Obtenu : '" + str(structurePhrase) + "' | attendu : '" +
+                self.resultatsAttendus[self.nbTests] + "'")
 
         self.nbTests = self.nbTests + 1
 
 
     # trace
     # print(structurePhrase.toStringDebug())
-    # print(self.resultatsAttendus[self.nbTests].toStringDebug())
