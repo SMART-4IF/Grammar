@@ -7,21 +7,21 @@ class TestsUnitaires:
         self.nbTestsReussis = 0
         self.messagesEchecs = []
         self.resultatsAttendus = [
-            scriptsTraitement.StructurePhrase("", "aller"),                                         #testVerbe1
-            scriptsTraitement.StructurePhrase("", "être"),                                          #testVerbe2
-            scriptsTraitement.StructurePhrase("", "", "", "", "lentement"),                         #testAdverbe1
-            scriptsTraitement.StructurePhrase("moi"),                                               #testSujet1
-            scriptsTraitement.StructurePhrase("moi"),                                               #testSujet2
-            scriptsTraitement.StructurePhrase("", "", "a-lui ami"),                                 #testAction1
-            scriptsTraitement.StructurePhrase("", "", "", "récemment", "", "passé-composé"),        # testTemps1
-            scriptsTraitement.StructurePhrase("", "", "", "", "", "passé-composé"),             # testTemps2
-            scriptsTraitement.StructurePhrase("moi", "aller", "cinéma", "hier", "", "passé-composé"),   #testStructPhrase1
-            scriptsTraitement.StructurePhrase("lui", "être", "a-lui ami"),                          #testStructPhrase2
-            scriptsTraitement.StructurePhrase("moi", "connaitre", "lui"),                           #testStructPhrase3
-            scriptsTraitement.StructurePhrase("lui", "partir", "", "récemment", "", "passé-composé"),   #testStructPhrase4
-            scriptsTraitement.StructurePhrase("", "", "", "", "", "", 1),                           #testIdentificationPersConj1
-            scriptsTraitement.StructurePhrase("", "vais"),                                          #testConj1
-            scriptsTraitement.StructurePhrase("", "suis allé"),                                     #testConj2
+            scriptsTraitement.StructurePhrase("", "", "aller"),                                         #testVerbe1
+            scriptsTraitement.StructurePhrase("", "", "être"),                                          #testVerbe2
+            scriptsTraitement.StructurePhrase("", "", "", "", "", "lentement"),                         #testAdverbe1
+            scriptsTraitement.StructurePhrase("moi", ""),                                               #testSujet1
+            scriptsTraitement.StructurePhrase("moi", ""),                                               #testSujet2
+            scriptsTraitement.StructurePhrase("", "",  "", "a-lui ami"),                                 #testAction1
+            scriptsTraitement.StructurePhrase("", "", "", "", "récemment", "", "passé-composé"),        # testTemps1
+            scriptsTraitement.StructurePhrase("", "",  "", "", "", "", "passé-composé"),             # testTemps2
+            scriptsTraitement.StructurePhrase("moi","",  "aller", "cinéma", "hier", "", "passé-composé"),   #testStructPhrase1
+            scriptsTraitement.StructurePhrase("lui","",  "être", "a-lui ami"),                          #testStructPhrase2
+            scriptsTraitement.StructurePhrase("moi", "le",  "connaitre", ""),                           #testStructPhrase3
+            scriptsTraitement.StructurePhrase("lui","",  "partir", "", "récemment", "", "passé-composé"),   #testStructPhrase4
+            scriptsTraitement.StructurePhrase("", "",  "", "", "", "", "", 1),                           #testIdentificationPersConj1
+            scriptsTraitement.StructurePhrase("", "", "vais"),                                          #testConj1
+            scriptsTraitement.StructurePhrase("", "", "suis allé"),                                     #testConj2
         ]
 
     def __str__(self):
