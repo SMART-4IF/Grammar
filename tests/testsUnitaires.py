@@ -7,21 +7,23 @@ class TestsUnitaires:
         self.nbTestsReussis = 0
         self.messagesEchecs = []
         self.resultatsAttendus = [
-            scriptsTraitement.StructurePhrase("", "aller"),                                         #testVerbe1
-            scriptsTraitement.StructurePhrase("", "être"),                                          #testVerbe2
-            scriptsTraitement.StructurePhrase("", "", "", "", "lentement"),                         #testAdverbe1
-            scriptsTraitement.StructurePhrase("moi"),                                               #testSujet1
-            scriptsTraitement.StructurePhrase("moi"),                                               #testSujet2
-            scriptsTraitement.StructurePhrase("", "", "a-lui ami"),                                 #testAction1
-            scriptsTraitement.StructurePhrase("", "", "", "récemment", "", "passé-composé"),        # testTemps1
-            scriptsTraitement.StructurePhrase("", "", "", "", "", "passé-composé"),             # testTemps2
-            scriptsTraitement.StructurePhrase("moi", "aller", "cinéma", "hier", "", "passé-composé"),   #testStructPhrase1
-            scriptsTraitement.StructurePhrase("lui", "être", "a-lui ami"),                          #testStructPhrase2
-            scriptsTraitement.StructurePhrase("moi", "connaitre", "lui"),                           #testStructPhrase3
-            scriptsTraitement.StructurePhrase("lui", "partir", "", "récemment", "", "passé-composé"),   #testStructPhrase4
-            scriptsTraitement.StructurePhrase("", "", "", "", "", "", 1),                           #testIdentificationPersConj1
-            scriptsTraitement.StructurePhrase("", "vais"),                                          #testConj1
-            scriptsTraitement.StructurePhrase("", "suis allé"),                                     #testConj2
+            scriptsTraitement.StructurePhrase("", "", "aller"),                                         #testVerbe1
+            scriptsTraitement.StructurePhrase("", "", "être"),                                          #testVerbe2
+            scriptsTraitement.StructurePhrase("", "", "", "", "", "lentement"),                         #testAdverbe1
+            scriptsTraitement.StructurePhrase("moi", ""),                                               #testSujet1
+            scriptsTraitement.StructurePhrase("moi", ""),                                               #testSujet2
+            scriptsTraitement.StructurePhrase("", "",  "", "a-lui ami"),                                 #testAction1
+            scriptsTraitement.StructurePhrase("", "", "", "", "récemment", "", "passé-composé"),        # testTemps1
+            scriptsTraitement.StructurePhrase("", "",  "", "", "", "", "passé-composé"),             # testTemps2
+            scriptsTraitement.StructurePhrase("moi","",  "aller", "cinéma", "hier", "", "passé-composé"),   #testStructPhrase1
+            scriptsTraitement.StructurePhrase("lui","",  "être", "a-lui ami"),                          #testStructPhrase2
+            scriptsTraitement.StructurePhrase("moi", "le",  "connaitre", ""),                           #testStructPhrase3
+            scriptsTraitement.StructurePhrase("lui","",  "partir", "", "récemment", "", "passé-composé"),   #testStructPhrase4
+            scriptsTraitement.StructurePhrase("", "",  "", "", "", "", "", 1),                          #testIdentificationPersConj1
+            scriptsTraitement.StructurePhrase("", "", "vais"),                                          #testConj1
+            scriptsTraitement.StructurePhrase("", "", "suis allé"),                                     #testConj2
+            scriptsTraitement.StructurePhrase("", "",  "", "", "", "", "", 1, "ne", "rien"),            #testNegation1
+            scriptsTraitement.StructurePhrase("", "",  "", "", "", "", "", 1, "ne", "pas"),             #testNegation2
         ]
 
     def __str__(self):
@@ -51,6 +53,8 @@ class TestsUnitaires:
         self.testIdentificationPersConj1()
         self.testConj1()
         self.testConj2()
+        self.testNegation1()
+        self.testNegation2()
 
 
     # verifie que l'on est bien capable d'identifier le verbe de la phrase
@@ -314,6 +318,42 @@ class TestsUnitaires:
             self.messagesEchecs.append(
                 "Test conj 2 - Obtenu : '" + str(structurePhrase.verbe) + "' | attendu : '" +
                 str(self.resultatsAttendus[self.nbTests].verbe) + "'")
+
+        self.nbTests = self.nbTests + 1
+
+
+    # test si la negation est bien identifiee (negation avec seulement ne devant verbe)
+    def testNegation1(self):
+        phrase = ["lui", "faire", "rien"]
+        structurePhrase = scriptsTraitement.StructurePhrase()
+        structurePhrase.identifierMarqueursNegation(phrase)
+
+        if structurePhrase.marqueurNegation1 == self.resultatsAttendus[self.nbTests].marqueurNegation1 and \
+                structurePhrase.marqueurNegation2 == self.resultatsAttendus[self.nbTests].marqueurNegation2:
+            self.nbTestsReussis = self.nbTestsReussis + 1
+        else:
+            self.messagesEchecs.append(
+                "Test negation 1 - Obtenu : '" + structurePhrase.marqueurNegation1 + " " + structurePhrase.marqueurNegation2
+                + "' | attendu : '" + self.resultatsAttendus[self.nbTests].marqueurNegation1 + " "
+                + self.resultatsAttendus[self.nbTests].marqueurNegation2 + "'")
+
+        self.nbTests = self.nbTests + 1
+
+
+    # test si la negation est bien identifiee (ne + pas)
+    def testNegation2(self):
+        phrase = ["moi", "d’accord", "non"]
+        structurePhrase = scriptsTraitement.StructurePhrase()
+        structurePhrase.identifierMarqueursNegation(phrase)
+
+        if structurePhrase.marqueurNegation1 == self.resultatsAttendus[self.nbTests].marqueurNegation1 and \
+                structurePhrase.marqueurNegation2 == self.resultatsAttendus[self.nbTests].marqueurNegation2:
+            self.nbTestsReussis = self.nbTestsReussis + 1
+        else:
+            self.messagesEchecs.append(
+                "Test negation 2 - Obtenu : '" + structurePhrase.marqueurNegation1 + " " + structurePhrase.marqueurNegation2
+                + "' | attendu : '" + self.resultatsAttendus[self.nbTests].marqueurNegation1 + " "
+                + self.resultatsAttendus[self.nbTests].marqueurNegation2 + "'")
 
         self.nbTests = self.nbTests + 1
 

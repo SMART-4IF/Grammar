@@ -1,14 +1,16 @@
 # hier cinéma aller moi 
 # hier je suis allé au cinéma 
+from contextlib import nullcontext
 import json
 import dictionnaireUtilisable
 from verbecc import Conjugator
 
 class StructurePhrase:
 
-    def __init__(self, sujet = "", verbe = "être", action = "", marqueurTemporel = "", adverbe = "", tempsConjug = "présent",
+    def __init__(self, sujet = "", pronom_devant_verbe = "", verbe = "être", action = "", marqueurTemporel = "", adverbe = "", tempsConjug = "présent",
                  persConjug = 1, marqueurNegation1 = "", marqueurNegation2 = ""):
         self.sujet = sujet
+        self.pronom_devant_verbe = pronom_devant_verbe
         self.verbe = verbe
         self.action = action
         self.marqueurTemporel = marqueurTemporel
@@ -28,6 +30,11 @@ class StructurePhrase:
             if len(phrase) > 1:
                 phrase += " "
             phrase += self.sujet
+
+        if self.pronom_devant_verbe != "":
+            if len(phrase) > 1:
+                phrase += " "
+            phrase += self.pronom_devant_verbe
 
         if self.verbe != "":
             if len(phrase) > 1 and "'" not in self.sujet:
@@ -54,8 +61,8 @@ class StructurePhrase:
                " | pers conjug: " + str(self.persConjug)
 
     def __eq__(self, other):
-        return self.marqueurTemporel == other.marqueurTemporel and self.sujet == other.sujet and self.verbe == other.verbe \
-               and self.action == other.action and self.adverbe == other.adverbe and self.tempsConjug == other.tempsConjug and \
+        return self.sujet == other.sujet and self.pronom_devant_verbe == other.pronom_devant_verbe and self.verbe == other.verbe \
+               and self.action == other.action and self.marqueurTemporel == other.marqueurTemporel and self.adverbe == other.adverbe and self.tempsConjug == other.tempsConjug and \
                self.persConjug == other.persConjug
 
     # execute l'ensemble du process de traduction
@@ -151,6 +158,21 @@ class StructurePhrase:
 
         return phrase
 
+
+    # identifie les marqueurs de negation
+    def identifierMarqueursNegation(self, phrase):
+        marqueursNegation = dictionnaireUtilisable.MarqueursNegation()
+
+        for mot in phrase:
+            if mot in marqueursNegation.simple:
+                self.marqueurNegation1 = "ne"
+                self.marqueurNegation2 = mot
+                phrase.remove(mot)
+            if mot in marqueursNegation.double:
+                self.marqueurNegation1 = "ne"
+                self.marqueurNegation2 = "pas"
+                phrase.remove(mot)
+
     # Recherche action dans une sequence donnee de mots et init la val de self.action avec
     # phrase : liste de mots dans laquelle il faut trouver le action
     def identifierAction(self, phrase):
@@ -158,6 +180,7 @@ class StructurePhrase:
             with open('dictionnaireUtilisable/noms.json') as json_data_noms:
                 dictionnaireNoms = json.load(json_data_noms)
             pronomsLSF = dictionnaireUtilisable.PronomsLSF()  # ensemble des pronoms de LSF
+            pronomsFR = dictionnaireUtilisable.PronomsFR()
             # si pronom possessif, mettre pornon + nom suivant dans le action
             testPossessif = False
             listeMotsSupprimer = []
@@ -179,7 +202,14 @@ class StructurePhrase:
 
             if testPossessif == False:
                 # pour l'instant, ce qu'il reste dans la liste de mots devient le action
-                self.action = phrase[0]
+                if phrase[0] in pronomsLSF.personnels:
+                    index = 0
+                    for pronom in pronomsLSF.personnels:
+                        if pronom == phrase[0]:
+                            self.pronom_devant_verbe = pronomsFR.pronoms_devant_verbe[index]
+                        index+=1
+                else : 
+                    self.action = phrase[0]
                 phrase.remove(phrase[0])
 
             return phrase
@@ -210,3 +240,13 @@ class StructurePhrase:
             verbeConjugue = verbeConjugue.split()
             verbeConjugue = verbeConjugue[1:]
             self.verbe = " ".join(verbeConjugue)
+
+
+    # Recherche complement dans une sequence donnee de mots et init la val de self.complement avec
+    # phrase : liste de mots dans laquelle il faut trouver le complement
+    def identifierComplement(self, phrase):
+        # pour l'instant, ce qu'il reste dans la liste de mots devient le complement
+        if len(phrase) != 0:
+            self.complement = phrase[0]
+            phrase.remove(phrase[0])
+            return phrase
