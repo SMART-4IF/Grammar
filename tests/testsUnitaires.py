@@ -24,6 +24,7 @@ class TestsUnitaires:
             scriptsTraitement.StructurePhrase("", "", "suis allé"),                                     #testConj2
             scriptsTraitement.StructurePhrase("", "",  "", "", "", "", "", 1, "ne", "rien"),            #testNegation1
             scriptsTraitement.StructurePhrase("", "",  "", "", "", "", "", 1, "ne", "pas"),             #testNegation2
+            scriptsTraitement.StructurePhrase("", "t'", "appelle"),                                     #testPronomDevantVerbe
         ]
 
     def __str__(self):
@@ -55,6 +56,7 @@ class TestsUnitaires:
         self.testConj2()
         self.testNegation1()
         self.testNegation2()
+        self.testPronomDevantVerbe()
 
 
     # verifie que l'on est bien capable d'identifier le verbe de la phrase
@@ -356,6 +358,26 @@ class TestsUnitaires:
                 + self.resultatsAttendus[self.nbTests].marqueurNegation2 + "'")
 
         self.nbTests = self.nbTests + 1
+
+
+    def testPronomDevantVerbe(self):
+        phrase = ["toi", "appeler", "moi"]
+        structurePhrase = scriptsTraitement.StructurePhrase()
+        phrase = structurePhrase.identifierSujet(phrase)
+        phrase = structurePhrase.identifierVerbe(phrase)
+        phrase = structurePhrase.identifierAction(phrase)
+        structurePhrase.identifierPersConjug()
+        structurePhrase.conjuguerVerbe()
+
+        if structurePhrase.verbe == self.resultatsAttendus[self.nbTests].verbe:
+            self.nbTestsReussis = self.nbTestsReussis + 1
+        else:
+            self.messagesEchecs.append(
+                "Test pronom devant verbe - Obtenu : '" + str(structurePhrase.verbe) + "' | attendu : '" +
+                str(self.resultatsAttendus[self.nbTests].verbe) + "'")
+
+        self.nbTests = self.nbTests + 1
+
 
     # trace
     # print(structurePhrase.toStringDebug())
