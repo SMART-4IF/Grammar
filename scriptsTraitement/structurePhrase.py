@@ -206,6 +206,12 @@ class StructurePhrase:
             for mot in phrase:
                 if mot in pronomsLSF.possessifs:
                     # trouver le pronom correspondant
+                    index = 0
+                    #a-lui devient son !!! toujours au masculin
+                    for pronom in pronomsLSF.possessifs:
+                        if pronom == mot:
+                            mot = pronomsFR.possessifsMasculin[index]
+                        index+=1
                     self.action = mot
                     listeMotsSupprimer.append(mot)
                     testPossessif = True
