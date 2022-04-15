@@ -22,7 +22,7 @@ class TestsTraductions:
             "Il est son ami.",                                  #testTrad12
             "J'ai acheté une voiture.",                         #testTrad13
             "Hier, je suis allé au cinéma.",                    #testTrad14
-            "Jeudi prochain, il partira en vacances.",          #testTrad15
+            "Jeudi prochain, il ira au camping.",          #testTrad15
         ]
 
     def __str__(self):
@@ -289,12 +289,12 @@ class TestsTraductions:
 
 
     def testTraduction15(self):
-        phrase = ["jeudi", "prochain", "lui", "partir", "vacances"]
+        phrase = ["jeudi", "prochain", "lui", "aller", "camping"]
         structurePhrase = scriptsTraitement.StructurePhrase()
         structurePhrase.traduire(phrase)
 
         if str(structurePhrase) == self.resultatsAttendus[self.nbTests]:
-            self.messagesSucces.append("Jeudi prochain lui partir vacances. = " + str(structurePhrase))
+            self.messagesSucces.append("Jeudi prochain lui aller camping. = " + str(structurePhrase))
             self.nbTestsReussis = self.nbTestsReussis + 1
         else:
             self.messagesEchecs.append(

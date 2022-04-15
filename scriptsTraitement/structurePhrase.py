@@ -116,7 +116,7 @@ class StructurePhrase:
         # si mot est dans dictionnaire des adverbes : c'est un adverbes
         testMarqueurTemporel = False
         for mot in phrase:
-            for marqueur in marqueursTemporelsLSF.liste:
+            for marqueur in marqueursTemporelsLSF.marqueursSimples:
                 if mot == marqueur.mot:
                     testMarqueurTemporel = True
                     break
@@ -134,15 +134,18 @@ class StructurePhrase:
     def identifierMarqueurTemporel(self, phrase):
         # recuperation de la liste des marqueurs temporels de la LSF
         marqueursTemporelsLSF = dictionnaireUtilisable.MarqueursTemporels()
-        # si mot est dans dictionnaire des adverbes : c'est un adverbes
         for mot in phrase:
-            for marqueur in marqueursTemporelsLSF.liste:
+            # si mot est dans dictionnaire des marqueurs temporels simbles : c'est un marqueur temporel
+            for marqueur in marqueursTemporelsLSF.marqueursSimples:
                 if mot == marqueur.mot:
                     self.tempsConjug = marqueur.tempsAssocie
                     if marqueur.isIndispanesable:
                         self.marqueurTemporel = mot
                     phrase.remove(mot)
                     break
+
+        #for x in range(0, len(phrase))
+
         return phrase
 
     # Recherche sujet dans une sequence donnee de mots et init la val de self.sujet avec

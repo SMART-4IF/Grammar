@@ -3,6 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="82a20799-784e-4972-afdf-d928919d917b" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dictionnaireUtilisable/autresMotsLSF.py" beforeDir="false" afterPath="$PROJECT_DIR$/dictionnaireUtilisable/autresMotsLSF.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scriptsTraitement/structurePhrase.py" beforeDir="false" afterPath="$PROJECT_DIR$/scriptsTraitement/structurePhrase.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tests/testsTraductions.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/testsTraductions.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -59,7 +61,7 @@
       <updated>1649828995483</updated>
       <workItem from="1649828998743" duration="22602000" />
       <workItem from="1649916530840" duration="15722000" />
-      <workItem from="1649956701643" duration="9967000" />
+      <workItem from="1649956701643" duration="11529000" />
     </task>
     <servers />
   </component>

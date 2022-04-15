@@ -9,7 +9,7 @@ class MarqueursNegation:
     self.double = ["non"]               # nécessite ne devant le verbe et pas après et est supprimé
 
 class MarqueurTemporel:
-  def __init__(self, mot, isIndispensable, tempsAssocie):
+  def __init__(self, mot, tempsAssocie, isIndispensable = True):
     self.mot = mot
     self.isIndispanesable = isIndispensable
     self.tempsAssocie = tempsAssocie
@@ -19,11 +19,28 @@ class MarqueurTemporel:
 
 class MarqueursTemporels:
   def __init__(self):
-    self.liste = [
-      MarqueurTemporel("hier", True, "passé-composé"),
-      MarqueurTemporel("demain", True, "futur-simple"),
-      MarqueurTemporel("fini", False, "passé-composé"),
-      MarqueurTemporel("récemment", True, "passé-composé")
+    self.marqueursSimples = [
+      MarqueurTemporel("hier", "passé-composé"),
+      MarqueurTemporel("demain", "futur-simple"),
+      MarqueurTemporel("fini", "passé-composé", False),
+      MarqueurTemporel("récemment", "passé-composé")
+    ]
+
+    self.marqueursDoubles = [
+      MarqueurTemporel("lundi prochain", "futur-simple"),
+      MarqueurTemporel("mardi prochain", "futur-simple"),
+      MarqueurTemporel("mercredi prochain", "futur-simple"),
+      MarqueurTemporel("jeudi prochain", "futur-simple"),
+      MarqueurTemporel("vendredi prochain", "futur-simple"),
+      MarqueurTemporel("samedi prochain", "futur-simple"),
+      MarqueurTemporel("dimanche prochain", "futur-simple"),
+      MarqueurTemporel("lundi dernier", "passé-composé"),
+      MarqueurTemporel("mardi dernier", "passé-composé"),
+      MarqueurTemporel("mercredi dernier", "passé-composé"),
+      MarqueurTemporel("jeudi dernier", "passé-composé"),
+      MarqueurTemporel("vendredi dernier", "passé-composé"),
+      MarqueurTemporel("samedi dernier", "passé-composé"),
+      MarqueurTemporel("dimanche dernier", "passé-composé"),
     ]
 
   def __str__(self):
