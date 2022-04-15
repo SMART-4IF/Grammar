@@ -3,6 +3,11 @@ class PronomsLSF:
     self.personnels = ["moi", "toi", "lui", "nous", "vous", "eux"]
     self.possessifs = ["a-moi", "a-toi", "a-lui", "a-nous", "a-vous", "a-eux"]
 
+class MarqueursNegation:
+  def __init__(self):
+    self.simple = ["rien", "plus"]      # nécessite seulement un "ne" devant le verbe
+    self.double = ["non"]               # nécessite ne devant le verbe et pas après et est supprimé
+
 class MarqueurTemporel:
   def __init__(self, mot, isIndispensable, tempsAssocie):
     self.mot = mot

@@ -6,7 +6,8 @@ from verbecc import Conjugator
 
 class StructurePhrase:
 
-    def __init__(self, sujet = "", verbe = "être", action = "", marqueurTemporel = "", adverbe = "", tempsConjug = "présent", persConjug = ""):
+    def __init__(self, sujet = "", verbe = "être", action = "", marqueurTemporel = "", adverbe = "", tempsConjug = "présent",
+                 persConjug = 1, marqueurNegation1 = "", marqueurNegation2 = ""):
         self.sujet = sujet
         self.verbe = verbe
         self.action = action
@@ -14,6 +15,8 @@ class StructurePhrase:
         self.adverbe = adverbe
         self.tempsConjug = tempsConjug
         self.persConjug = persConjug
+        self.marqueurNegation1 = marqueurNegation1
+        self.marqueurNegation2 = marqueurNegation2
 
     def __str__(self):
         phrase = ""
