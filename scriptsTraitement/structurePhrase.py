@@ -31,6 +31,11 @@ class StructurePhrase:
                 phrase += " "
             phrase += self.sujet
 
+        if self.marqueurNegation1 != "":
+            if len(phrase) > 1:
+                phrase += " "
+            phrase += self.marqueurNegation1
+
         if self.pronom_devant_verbe != "":
             if len(phrase) > 1:
                 phrase += " "
@@ -40,6 +45,11 @@ class StructurePhrase:
             if len(phrase) > 1 and "'" not in self.sujet:
                 phrase += " "
             phrase += self.verbe
+
+        if self.marqueurNegation2 != "":
+            if len(phrase) > 1:
+                phrase += " "
+            phrase += self.marqueurNegation2
 
         if self.action != "":
             if len(phrase) > 1:
@@ -56,18 +66,23 @@ class StructurePhrase:
         return phrase.capitalize()
 
     def toStringDebug(self):
-        return "marqueurTemporel : " + self.marqueurTemporel + " | sujet : " + self.sujet + " | verbe : " + self.verbe +\
+        return "marqueurTemporel : " + self.marqueurTemporel + " | sujet : " + self.sujet + \
+               " | marqueur neg 1 : " + self.marqueurNegation1 + " | pronom devant verbe : " + self.pronom_devant_verbe + \
+               " | verbe : " + self.verbe + " | marqueur neg 2 : " + self.marqueurNegation2 + \
                " | action : " + self.action + " | adverbe : " + self.adverbe + " | temps : " + self.tempsConjug + \
                " | pers conjug: " + str(self.persConjug)
 
     def __eq__(self, other):
-        return self.sujet == other.sujet and self.pronom_devant_verbe == other.pronom_devant_verbe and self.verbe == other.verbe \
-               and self.action == other.action and self.marqueurTemporel == other.marqueurTemporel and self.adverbe == other.adverbe and self.tempsConjug == other.tempsConjug and \
+        return self.marqueurTemporel == other.marqueurTemporel and self.sujet == other.sujet and \
+               self.marqueurNegation1 == other.marqueurNegation1 and self.pronom_devant_verbe == other.pronom_devant_verbe and \
+               self.verbe == other.verbe and self.marqueurNegation2 == other.marqueurNegation2 \
+               and self.action == other.action and self.adverbe == other.adverbe and self.tempsConjug == other.tempsConjug and \
                self.persConjug == other.persConjug
 
     # execute l'ensemble du process de traduction
     def traduire(self, phraseInitiale):
         phraseInitiale = self.identifierVerbe(phraseInitiale)
+        phraseInitiale = self.identifierMarqueursNegation(phraseInitiale)
         phraseInitiale = self.identifierMarqueurTemporel(phraseInitiale)
         phraseInitiale = self.identifierAdverbe(phraseInitiale)
         phraseInitiale = self.identifierSujet(phraseInitiale)
@@ -172,6 +187,9 @@ class StructurePhrase:
                 self.marqueurNegation1 = "ne"
                 self.marqueurNegation2 = "pas"
                 phrase.remove(mot)
+
+        return phrase
+
 
     # Recherche action dans une sequence donnee de mots et init la val de self.action avec
     # phrase : liste de mots dans laquelle il faut trouver le action
