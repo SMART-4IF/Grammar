@@ -5,6 +5,7 @@ class PronomsFR:
     self.possessifsFeminin = ["ma", "ta", "sa", "notre", "votre", "leur"]
     self.possessifsPluriel = ["mes", "tes", "ses", "nos", "vos", "leurs"]
     self.pronoms_devant_verbe = ["me", "te", "le","nous", "vous","les" ]
+    self.pronoms_devant_verbe_voyelle = ["m'", "t'", "l'","nous", "vous","les" ]
 
 #pronoms = PronomsFR()
 

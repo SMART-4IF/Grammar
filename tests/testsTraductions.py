@@ -16,6 +16,7 @@ class TestsTraductions:
             "Je ne suis pas d’accord.",             #testTrad6
             "Il ne fait rien.",                     #testTrad7
             "Demain, j'irai.",                      #testTrad8
+            "Je l'appelle."                            #testTrad9
         ]
 
     def __str__(self):
@@ -49,6 +50,7 @@ class TestsTraductions:
         self.testTraduction6()
         self.testTraduction7()
         self.testTraduction8()
+        self.testTraduction9()
 
 
     def testTraduction1(self):
@@ -178,6 +180,20 @@ class TestsTraductions:
 
         self.nbTests = self.nbTests + 1
 
+    def testTraduction9(self):
+        phrase = ["lui", "appeler", "moi"]
+        structurePhrase = scriptsTraitement.StructurePhrase()
+        structurePhrase.traduire(phrase)
+
+        if str(structurePhrase) == self.resultatsAttendus[self.nbTests]:
+            self.messagesSucces.append("Lui appeler moi. = " + str(structurePhrase))
+            self.nbTestsReussis = self.nbTestsReussis + 1
+        else:
+            self.messagesEchecs.append(
+                "Test trad 9 - Obtenu : '" + str(structurePhrase) + "' | attendu : '" +
+                self.resultatsAttendus[self.nbTests] + "'")
+
+        self.nbTests = self.nbTests + 1
 
     # trace
     # print(structurePhrase.toStringDebug())

@@ -185,10 +185,18 @@ class StructurePhrase:
             if testPossessif == False:
                 # pour l'instant, ce qu'il reste dans la liste de mots devient le action
                 if phrase[0] in pronomsLSF.personnels:
+                    #test verbe pour savoir si commence par une voyelle 
+                    voyelle = ["a","e","i","o","u"]
+                    verbe_voyelle = False
+                    if self.verbe[0] in voyelle : 
+                        verbe_voyelle = True
                     index = 0
                     for pronom in pronomsLSF.personnels:
                         if pronom == phrase[0]:
-                            self.pronom_devant_verbe = pronomsFR.pronoms_devant_verbe[index]
+                            if verbe_voyelle == False :
+                                self.pronom_devant_verbe = pronomsFR.pronoms_devant_verbe[index]
+                            else : 
+                                self.pronom_devant_verbe = pronomsFR.pronoms_devant_verbe_voyelle[index]
                         index+=1
                 else : 
                     self.action = phrase[0]
