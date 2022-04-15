@@ -12,11 +12,11 @@ class TestsUnitaires:
             scriptsTraitement.StructurePhrase("", "", "", "", "", "lentement"),                         #testAdverbe1
             scriptsTraitement.StructurePhrase("moi", ""),                                               #testSujet1
             scriptsTraitement.StructurePhrase("moi", ""),                                               #testSujet2
-            scriptsTraitement.StructurePhrase("", "",  "", "a-lui ami"),                                 #testAction1
+            scriptsTraitement.StructurePhrase("", "",  "", "son ami"),                                 #testAction1
             scriptsTraitement.StructurePhrase("", "", "", "", "récemment", "", "passé-composé"),        # testTemps1
             scriptsTraitement.StructurePhrase("", "",  "", "", "", "", "passé-composé"),             # testTemps2
             scriptsTraitement.StructurePhrase("moi","",  "aller", "cinéma", "hier", "", "passé-composé"),   #testStructPhrase1
-            scriptsTraitement.StructurePhrase("lui","",  "être", "a-lui ami"),                          #testStructPhrase2
+            scriptsTraitement.StructurePhrase("lui","",  "être", "son ami"),                          #testStructPhrase2
             scriptsTraitement.StructurePhrase("moi", "le",  "connaitre", ""),                           #testStructPhrase3
             scriptsTraitement.StructurePhrase("lui","",  "partir", "", "récemment", "", "passé-composé"),   #testStructPhrase4
             scriptsTraitement.StructurePhrase("", "",  "", "", "", "", "", 1),                          #testIdentificationPersConj1
