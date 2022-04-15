@@ -1,5 +1,6 @@
 # hier cinéma aller moi 
 # hier je suis allé au cinéma 
+from contextlib import nullcontext
 import json
 import dictionnaireUtilisable
 from verbecc import Conjugator
@@ -221,3 +222,11 @@ class StructurePhrase:
             verbeConjugue = verbeConjugue.split()
             verbeConjugue = verbeConjugue[1:]
             self.verbe = " ".join(verbeConjugue)
+    # Recherche complement dans une sequence donnee de mots et init la val de self.complement avec
+    # phrase : liste de mots dans laquelle il faut trouver le complement
+    def identifierComplement(self, phrase):
+        # pour l'instant, ce qu'il reste dans la liste de mots devient le complement
+        if len(phrase) != 0:
+            self.complement = phrase[0]
+            phrase.remove(phrase[0])
+            return phrase
