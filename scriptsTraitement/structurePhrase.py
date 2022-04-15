@@ -33,7 +33,7 @@ class StructurePhrase:
             phrase += self.pronom_devant_verbe
 
         if self.verbe != "":
-            if len(phrase) > 1:
+            if len(phrase) > 1 and "'" not in self.sujet:
                 phrase += " "
             phrase += self.verbe
 
@@ -212,7 +212,12 @@ class StructurePhrase:
         conjugaisonsDuVerbe = cg.conjugate(self.verbe)
         verbeConjugue = conjugaisonsDuVerbe['moods']['indicatif'][self.tempsConjug][self.persConjug-1]
 
-        # conjugaison ML sort le pronom + le verbe conjugue (il faut supprimer le pronom)
-        verbeConjugue = verbeConjugue.split()
-        verbeConjugue = verbeConjugue[1:]
-        self.verbe = " ".join(verbeConjugue)
+        # si pronom j', le split ne marche pas.
+        if "'" in verbeConjugue:
+            if self.sujet == "je":
+                self.sujet = "j'"
+            self.verbe = verbeConjugue[2:]
+        else:
+            verbeConjugue = verbeConjugue.split()
+            verbeConjugue = verbeConjugue[1:]
+            self.verbe = " ".join(verbeConjugue)
