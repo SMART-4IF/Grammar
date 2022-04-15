@@ -7,7 +7,8 @@ from verbecc import Conjugator
 
 class StructurePhrase:
 
-    def __init__(self, sujet = "", pronom_devant_verbe = "", verbe = "être", action = "", marqueurTemporel = "", adverbe = "", tempsConjug = "présent", persConjug = ""):
+    def __init__(self, sujet = "", pronom_devant_verbe = "", verbe = "être", action = "", marqueurTemporel = "", adverbe = "", tempsConjug = "présent",
+                 persConjug = 1, marqueurNegation1 = "", marqueurNegation2 = ""):
         self.sujet = sujet
         self.pronom_devant_verbe = pronom_devant_verbe
         self.verbe = verbe
@@ -16,6 +17,8 @@ class StructurePhrase:
         self.adverbe = adverbe
         self.tempsConjug = tempsConjug
         self.persConjug = persConjug
+        self.marqueurNegation1 = marqueurNegation1
+        self.marqueurNegation2 = marqueurNegation2
 
     def __str__(self):
         phrase = ""
@@ -58,8 +61,8 @@ class StructurePhrase:
                " | pers conjug: " + str(self.persConjug)
 
     def __eq__(self, other):
-        return self.marqueurTemporel == other.marqueurTemporel and self.sujet == other.sujet and self.pronom_devant_verbe == other.pronom_devant_verbe and self.verbe == other.verbe \
-               and self.action == other.action and self.adverbe == other.adverbe and self.tempsConjug == other.tempsConjug and \
+        return self.sujet == other.sujet and self.pronom_devant_verbe == other.pronom_devant_verbe and self.verbe == other.verbe \
+               and self.action == other.action and self.marqueurTemporel == other.marqueurTemporel and self.adverbe == other.adverbe and self.tempsConjug == other.tempsConjug and \
                self.persConjug == other.persConjug
 
     # execute l'ensemble du process de traduction
@@ -155,6 +158,21 @@ class StructurePhrase:
 
         return phrase
 
+
+    # identifie les marqueurs de negation
+    def identifierMarqueursNegation(self, phrase):
+        marqueursNegation = dictionnaireUtilisable.MarqueursNegation()
+
+        for mot in phrase:
+            if mot in marqueursNegation.simple:
+                self.marqueurNegation1 = "ne"
+                self.marqueurNegation2 = mot
+                phrase.remove(mot)
+            if mot in marqueursNegation.double:
+                self.marqueurNegation1 = "ne"
+                self.marqueurNegation2 = "pas"
+                phrase.remove(mot)
+
     # Recherche action dans une sequence donnee de mots et init la val de self.action avec
     # phrase : liste de mots dans laquelle il faut trouver le action
     def identifierAction(self, phrase):
@@ -231,6 +249,8 @@ class StructurePhrase:
             verbeConjugue = verbeConjugue.split()
             verbeConjugue = verbeConjugue[1:]
             self.verbe = " ".join(verbeConjugue)
+
+
     # Recherche complement dans une sequence donnee de mots et init la val de self.complement avec
     # phrase : liste de mots dans laquelle il faut trouver le complement
     def identifierComplement(self, phrase):
