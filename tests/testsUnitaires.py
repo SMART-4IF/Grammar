@@ -22,6 +22,7 @@ class TestsUnitaires:
             scriptsTraitement.StructurePhrase("", "",  "", "", "", "", "", 1),                           #testIdentificationPersConj1
             scriptsTraitement.StructurePhrase("", "", "vais"),                                          #testConj1
             scriptsTraitement.StructurePhrase("", "", "suis allé"),                                     #testConj2
+            scriptsTraitement.StructurePhrase("", "t'", "appelle"),                                     #testPronomDevantVerbe
         ]
 
     def __str__(self):
@@ -51,6 +52,7 @@ class TestsUnitaires:
         self.testIdentificationPersConj1()
         self.testConj1()
         self.testConj2()
+        self.testPronomDevantVerbe()
 
 
     # verifie que l'on est bien capable d'identifier le verbe de la phrase
@@ -313,6 +315,25 @@ class TestsUnitaires:
         else:
             self.messagesEchecs.append(
                 "Test conj 2 - Obtenu : '" + str(structurePhrase.verbe) + "' | attendu : '" +
+                str(self.resultatsAttendus[self.nbTests].verbe) + "'")
+
+        self.nbTests = self.nbTests + 1
+
+
+    def testPronomDevantVerbe(self):
+        phrase = ["toi", "appeler", "moi"]
+        structurePhrase = scriptsTraitement.StructurePhrase()
+        phrase = structurePhrase.identifierSujet(phrase)
+        phrase = structurePhrase.identifierVerbe(phrase)
+        phrase = structurePhrase.identifierAction(phrase)
+        structurePhrase.identifierPersConjug()
+        structurePhrase.conjuguerVerbe()
+
+        if structurePhrase.verbe == self.resultatsAttendus[self.nbTests].verbe:
+            self.nbTestsReussis = self.nbTestsReussis + 1
+        else:
+            self.messagesEchecs.append(
+                "Test pronom devant verbe - Obtenu : '" + str(structurePhrase.verbe) + "' | attendu : '" +
                 str(self.resultatsAttendus[self.nbTests].verbe) + "'")
 
         self.nbTests = self.nbTests + 1
