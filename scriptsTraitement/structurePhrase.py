@@ -42,7 +42,7 @@ class StructurePhrase:
             phrase += self.pronom_devant_verbe
 
         if self.verbe != "":
-            if len(phrase) > 1 and "'" not in self.sujet:
+            if len(phrase) > 1 and "'" != phrase [-1]:
                 phrase += " "
             phrase += self.verbe
 
@@ -259,8 +259,9 @@ class StructurePhrase:
 
         # si pronom j', le split ne marche pas.
         if "'" in verbeConjugue:
-            if self.sujet == "je":
-                self.sujet = "j'"
+            if self.pronom_devant_verbe == "": 
+                if self.sujet == "je":
+                    self.sujet = "j'"
             self.verbe = verbeConjugue[2:]
         else:
             verbeConjugue = verbeConjugue.split()

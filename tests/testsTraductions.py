@@ -195,5 +195,6 @@ class TestsTraductions:
 
         self.nbTests = self.nbTests + 1
 
+
     # trace
     # print(structurePhrase.toStringDebug())
