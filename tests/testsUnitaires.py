@@ -12,11 +12,12 @@ class TestsUnitaires:
             scriptsTraitement.StructurePhrase("", "", "", "", "", "lentement"),                         #testAdverbe1
             scriptsTraitement.StructurePhrase("moi", ""),                                               #testSujet1
             scriptsTraitement.StructurePhrase("moi", ""),                                               #testSujet2
-            scriptsTraitement.StructurePhrase("", "",  "", "son ami"),                                 #testAction1
+            scriptsTraitement.StructurePhrase("", "",  "", "son ami"),                                  #testAction1
             scriptsTraitement.StructurePhrase("", "", "", "", "récemment", "", "passé-composé"),        # testTemps1
-            scriptsTraitement.StructurePhrase("", "",  "", "", "", "", "passé-composé"),             # testTemps2
+            scriptsTraitement.StructurePhrase("", "",  "", "", "", "", "passé-composé"),                # testTemps2
+            scriptsTraitement.StructurePhrase("", "",  "", "", "jeudi dernier", "", "passé-composé"),   # testTemps3
             scriptsTraitement.StructurePhrase("moi","",  "aller", "cinéma", "hier", "", "passé-composé"),   #testStructPhrase1
-            scriptsTraitement.StructurePhrase("lui","",  "être", "son ami"),                          #testStructPhrase2
+            scriptsTraitement.StructurePhrase("lui","",  "être", "son ami"),                            #testStructPhrase2
             scriptsTraitement.StructurePhrase("moi", "le",  "connaitre", ""),                           #testStructPhrase3
             scriptsTraitement.StructurePhrase("lui","",  "partir", "", "récemment", "", "passé-composé"),   #testStructPhrase4
             scriptsTraitement.StructurePhrase("", "",  "", "", "", "", "", 1),                          #testIdentificationPersConj1
@@ -47,6 +48,7 @@ class TestsUnitaires:
         self.testAction1()
         self.testTemps1()
         self.testTemps2()
+        self.testTemps3()
         self.testStructPhrase1()
         self.testStructPhrase2()
         self.testStructPhrase3()
@@ -181,6 +183,25 @@ class TestsUnitaires:
         else:
             self.messagesEchecs.append(
                 "Test temps 2 - Obtenu : '" + structurePhrase.marqueurTemporel + " "
+                + structurePhrase.tempsConjug + "' | attendu : '" + self.resultatsAttendus[
+                    self.nbTests].marqueurTemporel + " "
+                + self.resultatsAttendus[self.nbTests].tempsConjug + "'")
+
+        self.nbTests = self.nbTests + 1
+
+
+    # verifie que l'on identifie bien le temps de cette phrase (marqueur temporel double)
+    def testTemps3(self):
+        phrase = ["moi", "voiture", "acheter", "jeudi", "dernier"]
+        structurePhrase = scriptsTraitement.StructurePhrase()
+        phrase = structurePhrase.identifierMarqueurTemporel(phrase)
+
+        if structurePhrase.marqueurTemporel == self.resultatsAttendus[self.nbTests].marqueurTemporel \
+                and structurePhrase.tempsConjug == self.resultatsAttendus[self.nbTests].tempsConjug:
+            self.nbTestsReussis = self.nbTestsReussis + 1
+        else:
+            self.messagesEchecs.append(
+                "Test temps 3 - Obtenu : '" + structurePhrase.marqueurTemporel + " "
                 + structurePhrase.tempsConjug + "' | attendu : '" + self.resultatsAttendus[
                     self.nbTests].marqueurTemporel + " "
                 + self.resultatsAttendus[self.nbTests].tempsConjug + "'")
