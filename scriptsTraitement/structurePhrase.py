@@ -106,6 +106,7 @@ class StructurePhrase:
         return phrase
 
     # Recherche adverbe dans une sequence donnee de mots et init la val de self.adverbe avec
+    # IMPORATNT ! Doit etre appele après identifierMarqueurTemporel
     # phrase : liste de mots dans laquelle il faut trouver l'adverbe
     def identifierAdverbe(self, phrase):
         # ouverture du dictionnaire des adverbes francais
@@ -116,11 +117,6 @@ class StructurePhrase:
         # si mot est dans dictionnaire des adverbes : c'est un adverbes
         testMarqueurTemporel = False
         for mot in phrase:
-            for marqueur in marqueursTemporelsLSF.marqueursSimples:
-                if mot == marqueur.mot:
-                    testMarqueurTemporel = True
-                    break
-
             if testMarqueurTemporel is False and mot in dictionnaireAdverbes:
                 self.adverbe = mot
                 phrase.remove(mot)
@@ -134,6 +130,9 @@ class StructurePhrase:
     def identifierMarqueurTemporel(self, phrase):
         # recuperation de la liste des marqueurs temporels de la LSF
         marqueursTemporelsLSF = dictionnaireUtilisable.MarqueursTemporels()
+
+        marqueurTrouve = False
+        motPrecedent = ""
         for mot in phrase:
             # si mot est dans dictionnaire des marqueurs temporels simbles : c'est un marqueur temporel
             for marqueur in marqueursTemporelsLSF.marqueursSimples:
@@ -142,9 +141,26 @@ class StructurePhrase:
                     if marqueur.isIndispanesable:
                         self.marqueurTemporel = mot
                     phrase.remove(mot)
+                    marqueurTrouve = True
                     break
 
-        #for x in range(0, len(phrase))
+            if marqueurTrouve:
+                break
+
+            # si mot precedent + mot est dans dictionnaire des marqueurs temporels doubles : c'est un marqueur temporel
+            for marqueur in marqueursTemporelsLSF.marqueursDoubles:
+                if motPrecedent != "" and (motPrecedent + " " + mot) == marqueur.mot:
+                    self.tempsConjug = marqueur.tempsAssocie
+                    self.marqueurTemporel = motPrecedent + " " + mot
+                    phrase.remove(motPrecedent)
+                    phrase.remove(mot)
+                    marqueurTrouve = True
+                    break
+
+            if marqueurTrouve:
+                break
+
+            motPrecedent = mot
 
         return phrase
 
