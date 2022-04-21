@@ -211,7 +211,7 @@ class StructurePhrase:
 
 
     # Recherche action dans une sequence donnee de mots et init la val de self.action avec
-    # phrase : liste de mots dans laquelle il faut trouver le action
+    # phrase : liste de mots dans laquelle il faut trouver l'action
     def identifierAction(self, phrase):
         if len(phrase) !=0 : 
             with open('dictionnaireUtilisable/noms.json') as json_data_noms:
@@ -234,10 +234,12 @@ class StructurePhrase:
                     self.action = mot
                     listeMotsSupprimer.append(mot)
                     testPossessif = True
-                elif testPossessif is True and mot in dictionnaireNoms:
-                    self.action += " "+mot
-                    listeMotsSupprimer.append(mot)
-                    break
+                elif testPossessif:
+                    for element in dictionnaireNoms:
+                        if mot == element[0]:
+                            self.action += " "+mot
+                            listeMotsSupprimer.append(mot)
+                            break
 
             for mot in listeMotsSupprimer:
                 if mot in phrase:

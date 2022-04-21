@@ -44,30 +44,42 @@ def nettoyerNoms():
        # initialisation des variables
         csv_reader = csv.reader(csv_noms, delimiter=',')
         listeNoms = []
-        listeNomsASupprimer = []
+        listeNomsOfficielle = []
 
         for row in csv_reader:
             # recuperation de tous les noms qui ne possedent pas d'espaces, qui ne sont pas tagues et dont la taille est superieure a 1 caractere
-            if " " not in row[1] and 'plural' not in row[2] and 'feminine' not in row[2] and len(row[1]) > 1:
-                listeNoms.append(row[1])
-            # recuperation de tous les noms tagues
-            if " " not in row[1] and ('plural' in row[2] or 'feminine' in row[2]) and len(row[1]) > 1:
-                listeNomsASupprimer.append(row[1])
+            if " " not in row[1] and len(row[1]) > 1:
+                attribut = "m"
+                if row[1][0].isupper():
+                    attribut = "np"
+                elif "plural" in row[2] or row[1].endswith('s') or row[1].endswith('x'):
+                    attribut = "pl"
+                elif "feminine" in row[2] or row[1].endswith('tion') or row[1].endswith('ance') or row[1].endswith('ade')\
+                        or row[1].endswith('ence') or row[1].endswith('esse') or row[1].endswith('ette')\
+                        or row[1].endswith('euse') or row[1].endswith('té') or row[1].endswith('ude')\
+                        or row[1].endswith('ée') or row[1].endswith('ie') or row[1].endswith('ine')\
+                        or row[1].endswith('sion') or row[1].endswith('ure') or row[1].endswith('ance')\
+                        or row[1].endswith('ite'):
+                    attribut = "f"
 
-        # soustraction des mots tagues au jeu de donnees a conserver pour garder que les formes sg, et masculin
-        for nom in listeNomsASupprimer:
-            if nom in listeNoms:
-                listeNoms.remove(nom)
+                nom = [row[1], attribut]
+
+                if nom not in listeNoms:
+                    listeNoms.append(nom)
+
+        for element in listeNoms:
+            if element[1] != "pl" and element[1] != "np":
+                listeNomsOfficielle.append(element)
 
         # sauvegarde des resultats tries dans un json
-        listeNoms.sort()
-        jsonString = json.dumps(listeNoms)
+        listeNomsOfficielle.sort()
+        jsonString = json.dumps(listeNomsOfficielle)
         jsonFile = open("../dictionnaireUtilisable/noms.json", "w")
         jsonFile.write(jsonString)
         jsonFile.close()
 
         # affichage du resultat
-        print(f' {len(listeNoms)} noms extraits.')
+        print(f' {len(listeNomsOfficielle)} noms extraits.')
 
 
 # extrait et sauvegarde les adverbes
@@ -131,4 +143,4 @@ def nettoyerAdjectifs():
         print(f' {len(listeAdj)} adjectifs extraits.')
 
 # lancement du nettoyage desire
-nettoyerVerbes()
+nettoyerNoms()
