@@ -26,6 +26,10 @@ class TestsUnitaires:
             scriptsTraitement.StructurePhrase("", "",  "", "", "", "", "", 1, "ne", "rien"),            #testNegation1
             scriptsTraitement.StructurePhrase("", "",  "", "", "", "", "", 1, "ne", "pas"),             #testNegation2
             scriptsTraitement.StructurePhrase("", "t'", "appelle"),                                     #testPronomDevantVerbe
+            scriptsTraitement.StructurePhrase("", "", "", "une voiture"),                               #testChoixDeterminant1
+            scriptsTraitement.StructurePhrase("", "", "", "au cinéma"),                                 #testChoixDeterminant2
+            scriptsTraitement.StructurePhrase("", "", "", "son ami"),                                   #testChoixDeterminant2
+            scriptsTraitement.StructurePhrase("", "", "", "entendant"),                                 #testChoixDeterminant2
         ]
 
     def __str__(self):
@@ -59,6 +63,10 @@ class TestsUnitaires:
         self.testNegation1()
         self.testNegation2()
         self.testPronomDevantVerbe()
+        self.testChoixDeterminant1()
+        self.testChoixDeterminant2()
+        self.testChoixDeterminant3()
+        self.testChoixDeterminant4()
 
 
     # verifie que l'on est bien capable d'identifier le verbe de la phrase
@@ -399,6 +407,83 @@ class TestsUnitaires:
 
         self.nbTests = self.nbTests + 1
 
+
+    # test choix determinant simple (mettre une dvant voiture)
+    def testChoixDeterminant1(self):
+        phrase = ["moi", "voiture", "acheter", "fini"]
+        structurePhrase = scriptsTraitement.StructurePhrase()
+        phrase = structurePhrase.identifierSujet(phrase)
+        phrase = structurePhrase.identifierVerbe(phrase)
+        phrase = structurePhrase.identifierMarqueurTemporel(phrase)
+        phrase = structurePhrase.identifierAction(phrase)
+        structurePhrase.choisirDeterminantAction()
+
+        if structurePhrase.action == self.resultatsAttendus[self.nbTests].action:
+            self.nbTestsReussis = self.nbTestsReussis + 1
+        else:
+            self.messagesEchecs.append(
+                "Test choix determinant 1 - Obtenu : '" + str(structurePhrase.action) + "' | attendu : '" +
+                str(self.resultatsAttendus[self.nbTests].action) + "'")
+
+        self.nbTests = self.nbTests + 1
+
+
+    # test choix determinant "à un = au"
+    def testChoixDeterminant2(self):
+        phrase = ["hier", "cinéma", "aller", "moi"]
+        structurePhrase = scriptsTraitement.StructurePhrase()
+        phrase = structurePhrase.identifierSujet(phrase)
+        phrase = structurePhrase.identifierVerbe(phrase)
+        phrase = structurePhrase.identifierMarqueurTemporel(phrase)
+        phrase = structurePhrase.identifierAction(phrase)
+        structurePhrase.choisirDeterminantAction()
+
+        if structurePhrase.action == self.resultatsAttendus[self.nbTests].action:
+            self.nbTestsReussis = self.nbTestsReussis + 1
+        else:
+            self.messagesEchecs.append(
+                "Test choix determinant 2 - Obtenu : '" + str(structurePhrase.action) + "' | attendu : '" +
+                str(self.resultatsAttendus[self.nbTests].action) + "'")
+
+        self.nbTests = self.nbTests + 1
+
+    # test choix determinant si pronom possessif
+    def testChoixDeterminant3(self):
+        phrase = ["lui", "a-lui", "ami"]
+        structurePhrase = scriptsTraitement.StructurePhrase()
+        phrase = structurePhrase.identifierSujet(phrase)
+        phrase = structurePhrase.identifierVerbe(phrase)
+        phrase = structurePhrase.identifierAction(phrase)
+        structurePhrase.choisirDeterminantAction()
+
+        if structurePhrase.action == self.resultatsAttendus[self.nbTests].action:
+            self.nbTestsReussis = self.nbTestsReussis + 1
+        else:
+            self.messagesEchecs.append(
+                "Test choix determinant 3 - Obtenu : '" + str(structurePhrase.action) + "' | attendu : '" +
+                str(self.resultatsAttendus[self.nbTests].action) + "'")
+
+        self.nbTests = self.nbTests + 1
+
+
+    # test choix determinant si "il est entendant" (pas d'ajout de determinant meme si entendant peut etre un nom)
+    def testChoixDeterminant4(self):
+        phrase = ["lui", "entendant", "lui"]
+        structurePhrase = scriptsTraitement.StructurePhrase()
+        phrase = structurePhrase.identifierSujet(phrase)
+        phrase = structurePhrase.identifierVerbe(phrase)
+        phrase = structurePhrase.identifierAction(phrase)
+        structurePhrase.identifierPersConjug()
+        structurePhrase.choisirDeterminantAction()
+
+        if structurePhrase.action == self.resultatsAttendus[self.nbTests].action:
+            self.nbTestsReussis = self.nbTestsReussis + 1
+        else:
+            self.messagesEchecs.append(
+                "Test choix determinant 4 - Obtenu : '" + str(structurePhrase.action) + "' | attendu : '" +
+                str(self.resultatsAttendus[self.nbTests].action) + "'")
+
+        self.nbTests = self.nbTests + 1
 
     # trace
     # print(structurePhrase.toStringDebug())
