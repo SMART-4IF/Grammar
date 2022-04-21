@@ -88,6 +88,7 @@ class StructurePhrase:
         phraseInitiale = self.identifierSujet(phraseInitiale)
         phraseInitiale = self.identifierAction(phraseInitiale)
         self.identifierPersConjug()
+        self.choisirDeterminantAction()
         self.conjuguerVerbe()
         return self
 
@@ -246,7 +247,7 @@ class StructurePhrase:
                     phrase.remove(mot)
 
             if testPossessif == False:
-                # pour l'instant, ce qu'il reste dans la liste de mots devient le action
+                # pour l'instant, ce qu'il reste dans la liste de mots devient l'action
                 if phrase[0] in pronomsLSF.personnels:
                     #test verbe pour savoir si commence par une voyelle 
                     voyelle = ["a","e","i","o","u"]
@@ -267,6 +268,7 @@ class StructurePhrase:
 
             return phrase
 
+
     # identifie la personne à laquelle il faut conjuguer le verbe
     def identifierPersConjug(self):
         pronomsLSF = dictionnaireUtilisable.PronomsLSF()
@@ -278,15 +280,49 @@ class StructurePhrase:
                 self.persConjug = index +1
             index+=1
 
+
+    # choisir le determinent du complement
+    # si le complement possede un nom commun, il faut placer un déterminant adapté
+    def choisirDeterminantAction(self):
+        with open('dictionnaireUtilisable/noms.json') as json_data_noms:
+            dictionnaireNoms = json.load(json_data_noms)
+        pronomsFR = dictionnaireUtilisable.PronomsFR()
+        voyelles = ["a", "e", "i", "o", "u"]
+
+        # si on est dans une phrase avec pronom personnel + etre au present: pas de determinant
+        if (self.sujet in pronomsFR.personnels and self.verbe == "être" and self.tempsConjug == "présent") is False:
+
+            for mot in self.action.split():
+
+                # s'il y a un pronom possessif, pas besoin de determinant
+                if mot in pronomsFR.possessifsMasculin or mot in pronomsFR.possessifsFeminin or mot in pronomsFR.possessifsPluriel:
+                    break
+
+                for element in dictionnaireNoms:
+                    if mot == element[0]:
+                        if element[1] == "m" and self.verbe == "aller" and element[0] in voyelles:
+                            self.action = "à l'"+self.action
+                        elif element[1] == "m" and self.verbe == "aller" and element[0] not in voyelles:
+                            self.action = "au "+self.action
+                        elif element[1] == "f" and self.verbe == "aller" and element[0] in voyelles:
+                            self.action = "à l'"+self.action
+                        elif element[1] == "f" and self.verbe == "aller" and element[0] not in voyelles:
+                            self.action = "à la "+self.action
+                        elif element[1] == "f":
+                            self.action = "une " + self.action
+                        else:
+                            self.action = "un " + self.action
+
+
     # conjugue le verbe selon le temps et la personne identifies
     def conjuguerVerbe(self):
         cg = Conjugator(lang='fr')
         conjugaisonsDuVerbe = cg.conjugate(self.verbe)
-        verbeConjugue = conjugaisonsDuVerbe['moods']['indicatif'][self.tempsConjug][self.persConjug-1]
+        verbeConjugue = conjugaisonsDuVerbe['moods']['indicatif'][self.tempsConjug][self.persConjug - 1]
 
         # si pronom j', le split ne marche pas.
         if "'" in verbeConjugue:
-            if self.pronom_devant_verbe == "": 
+            if self.pronom_devant_verbe == "":
                 if self.sujet == "je":
                     self.sujet = "j'"
             self.verbe = verbeConjugue[2:]
@@ -294,13 +330,3 @@ class StructurePhrase:
             verbeConjugue = verbeConjugue.split()
             verbeConjugue = verbeConjugue[1:]
             self.verbe = " ".join(verbeConjugue)
-
-
-    # Recherche complement dans une sequence donnee de mots et init la val de self.complement avec
-    # phrase : liste de mots dans laquelle il faut trouver le complement
-    def identifierComplement(self, phrase):
-        # pour l'instant, ce qu'il reste dans la liste de mots devient le complement
-        if len(phrase) != 0:
-            self.complement = phrase[0]
-            phrase.remove(phrase[0])
-            return phrase
