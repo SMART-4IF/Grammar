@@ -61,7 +61,15 @@ class StructurePhrase:
                 phrase += " "
             phrase += self.adverbe
 
-        if phrase != "": phrase += "."
+        # determiner ponctuation
+        motsPonctuations = dictionnaireUtilisable.Ponctuations()
+        ponctuation = ".";
+        for mot in phrase.split():
+            if mot in motsPonctuations.interrogatifs:
+                ponctuation = "?"
+                break
+
+        phrase += ponctuation
 
         return phrase.capitalize()
 

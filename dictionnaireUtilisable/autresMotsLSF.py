@@ -3,6 +3,10 @@ class PronomsLSF:
     self.personnels = ["moi", "toi", "lui", "nous", "vous", "eux"]
     self.possessifs = ["a-moi", "a-toi", "a-lui", "a-nous", "a-vous", "a-eux"]
 
+class Ponctuations:
+  def __init__(self):
+    self.interrogatifs = ["quoi", "et-moi", "et-toi", "et-lui", "et-nous", "et-vous", "et-eux"]
+
 class MarqueursNegation:
   def __init__(self):
     self.simple = ["rien", "plus"]      # nécessite seulement un "ne" devant le verbe
