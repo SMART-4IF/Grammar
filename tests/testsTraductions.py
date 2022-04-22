@@ -27,7 +27,15 @@ class TestsTraductions:
             # "Ce n'est pas grave.",                              #testTrad17
             # "C’est mon père.",                                  #testTrad18
             "Je t'aime.",                                       #testTrad19
-            # "J'ai trois pantalons.",                            #testTrad20
+            # "J'ai trois pantalons.",                          #testTrad20
+            # "Bonjour.",                                         #testTrad21
+            # "Ça va.",                                           #testTrad22
+            # "Et vous?",                                         #testTrad23
+            "Vous faites quoi?",                                #testTrad24
+            # "Hier j'ai travaillé dessus.",                      #testTrad25
+            # "Demain je travaillerai mon rapport.",              #testTrad26
+            # "Je travaille avec Bob.",                           #testTrad27
+            # "Non.",                                             #testTrad28
         ]
 
     def __str__(self):
@@ -73,6 +81,14 @@ class TestsTraductions:
         # self.testTraduction18()
         self.testTraduction19()
         # self.testTraduction20()
+        # self.testTraduction21()
+        # self.testTraduction22()
+        # self.testTraduction23()
+        self.testTraduction24()
+        # self.testTraduction25()
+        # self.testTraduction26()
+        # self.testTraduction27()
+        # self.testTraduction28()
 
 
     def testTraduction1(self):
@@ -393,6 +409,133 @@ class TestsTraductions:
 
         self.nbTests = self.nbTests + 1
 
+
+    def testTraduction21(self):
+        phrase = ["bonjour"]
+        structurePhrase = scriptsTraitement.StructurePhrase()
+        structurePhrase.traduire(phrase)
+
+        if str(structurePhrase) == self.resultatsAttendus[self.nbTests]:
+            self.messagesSucces.append("Bonjour. = " + str(structurePhrase))
+            self.nbTestsReussis = self.nbTestsReussis + 1
+        else:
+            self.messagesEchecs.append(
+                "Test trad 21 - Obtenu : '" + str(structurePhrase) + "' | attendu : '" +
+                self.resultatsAttendus[self.nbTests] + "'")
+
+        self.nbTests = self.nbTests + 1
+
+
+    def testTraduction22(self):
+        phrase = ["ça-va"]
+        structurePhrase = scriptsTraitement.StructurePhrase()
+        structurePhrase.traduire(phrase)
+
+        if str(structurePhrase) == self.resultatsAttendus[self.nbTests]:
+            self.messagesSucces.append("Ça-va. = " + str(structurePhrase))
+            self.nbTestsReussis = self.nbTestsReussis + 1
+        else:
+            self.messagesEchecs.append(
+                "Test trad 22 - Obtenu : '" + str(structurePhrase) + "' | attendu : '" +
+                self.resultatsAttendus[self.nbTests] + "'")
+
+        self.nbTests = self.nbTests + 1
+
+
+    def testTraduction23(self):
+        phrase = ["et-vous"]
+        structurePhrase = scriptsTraitement.StructurePhrase()
+        structurePhrase.traduire(phrase)
+
+        if str(structurePhrase) == self.resultatsAttendus[self.nbTests]:
+            self.messagesSucces.append("Et-vous. = " + str(structurePhrase))
+            self.nbTestsReussis = self.nbTestsReussis + 1
+        else:
+            self.messagesEchecs.append(
+                "Test trad 23 - Obtenu : '" + str(structurePhrase) + "' | attendu : '" +
+                self.resultatsAttendus[self.nbTests] + "'")
+
+        self.nbTests = self.nbTests + 1
+
+
+    def testTraduction24(self):
+        phrase = ["faire", "quoi", "vous"]
+        structurePhrase = scriptsTraitement.StructurePhrase()
+        structurePhrase.traduire(phrase)
+
+        if str(structurePhrase) == self.resultatsAttendus[self.nbTests]:
+            self.messagesSucces.append("Faire quoi vous. = " + str(structurePhrase))
+            self.nbTestsReussis = self.nbTestsReussis + 1
+        else:
+            self.messagesEchecs.append(
+                "Test trad 24 - Obtenu : '" + str(structurePhrase) + "' | attendu : '" +
+                self.resultatsAttendus[self.nbTests] + "'")
+
+        self.nbTests = self.nbTests + 1
+
+
+    def testTraduction25(self):
+        phrase = ["hier", "dessus", "travailler"]
+        structurePhrase = scriptsTraitement.StructurePhrase()
+        structurePhrase.traduire(phrase)
+
+        if str(structurePhrase) == self.resultatsAttendus[self.nbTests]:
+            self.messagesSucces.append("Hier dessus travailler. = " + str(structurePhrase))
+            self.nbTestsReussis = self.nbTestsReussis + 1
+        else:
+            self.messagesEchecs.append(
+                "Test trad 25 - Obtenu : '" + str(structurePhrase) + "' | attendu : '" +
+                self.resultatsAttendus[self.nbTests] + "'")
+
+        self.nbTests = self.nbTests + 1
+
+
+    def testTraduction26(self):
+        phrase = ["demain", "mon", "rapport", "travailler"]
+        structurePhrase = scriptsTraitement.StructurePhrase()
+        structurePhrase.traduire(phrase)
+
+        if str(structurePhrase) == self.resultatsAttendus[self.nbTests]:
+            self.messagesSucces.append("Demain mon rapport travailler. = " + str(structurePhrase))
+            self.nbTestsReussis = self.nbTestsReussis + 1
+        else:
+            self.messagesEchecs.append(
+                "Test trad 26 - Obtenu : '" + str(structurePhrase) + "' | attendu : '" +
+                self.resultatsAttendus[self.nbTests] + "'")
+
+        self.nbTests = self.nbTests + 1
+
+
+    def testTraduction27(self):
+        phrase = ["avec", "Bob", "travailler"]
+        structurePhrase = scriptsTraitement.StructurePhrase()
+        structurePhrase.traduire(phrase)
+
+        if str(structurePhrase) == self.resultatsAttendus[self.nbTests]:
+            self.messagesSucces.append("Avec Bob travailler. = " + str(structurePhrase))
+            self.nbTestsReussis = self.nbTestsReussis + 1
+        else:
+            self.messagesEchecs.append(
+                "Test trad 27 - Obtenu : '" + str(structurePhrase) + "' | attendu : '" +
+                self.resultatsAttendus[self.nbTests] + "'")
+
+        self.nbTests = self.nbTests + 1
+
+
+    def testTraduction28(self):
+        phrase = ["non"]
+        structurePhrase = scriptsTraitement.StructurePhrase()
+        structurePhrase.traduire(phrase)
+
+        if str(structurePhrase) == self.resultatsAttendus[self.nbTests]:
+            self.messagesSucces.append("Non. = " + str(structurePhrase))
+            self.nbTestsReussis = self.nbTestsReussis + 1
+        else:
+            self.messagesEchecs.append(
+                "Test trad 28 - Obtenu : '" + str(structurePhrase) + "' | attendu : '" +
+                self.resultatsAttendus[self.nbTests] + "'")
+
+        self.nbTests = self.nbTests + 1
 
     # trace
     # print(structurePhrase.toStringDebug())
