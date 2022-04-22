@@ -7,7 +7,7 @@ from verbecc import Conjugator
 
 class StructurePhrase:
 
-    def __init__(self, sujet = "", pronom_devant_verbe = "", verbe = "être", action = "", marqueurTemporel = "", adverbe = "", tempsConjug = "présent",
+    def __init__(self, sujet = "je", pronom_devant_verbe = "", verbe = "être", action = "", marqueurTemporel = "", adverbe = "", tempsConjug = "présent",
                  persConjug = 1, marqueurNegation1 = "", marqueurNegation2 = ""):
         self.sujet = sujet
         self.pronom_devant_verbe = pronom_devant_verbe
@@ -177,9 +177,8 @@ class StructurePhrase:
                 # trouver le pronom correspondant
                 tmp.append(mot)
                 i += 1
-                #self.sujet = mot
-                #phrase.remove(mot)
-        if(len(tmp)==2):
+
+        if len(tmp)==2:
             if(tmp[0]==tmp[1]): 
                 self.sujet = tmp[0]
                 phrase.remove(tmp[0])
@@ -187,7 +186,7 @@ class StructurePhrase:
             else:
                 self.sujet = tmp[1]
                 self.complement = tmp[0]
-        else:
+        elif len(tmp)==1:
             self.sujet = tmp[0]
             phrase.remove(tmp[0])
 

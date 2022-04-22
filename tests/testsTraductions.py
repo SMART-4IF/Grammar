@@ -24,18 +24,18 @@ class TestsTraductions:
             "Hier, je suis allé au cinéma.",                    #testTrad14
             "Jeudi prochain, il ira au camping.",               #testTrad15
             "Il n'est pas encore arrivé.",                      #testTrad16
-            # "Ce n'est pas grave.",                              #testTrad17
-            # "C’est mon père.",                                  #testTrad18
+            "Ce n'est pas grave.",                              #testTrad17
+            "C’est mon père.",                                  #testTrad18
             "Je t'aime.",                                       #testTrad19
-            # "J'ai trois pantalons.",                          #testTrad20
-            # "Bonjour.",                                         #testTrad21
-            # "Ça va.",                                           #testTrad22
-            # "Et vous?",                                         #testTrad23
-            "Vous faites quoi?",                                #testTrad24
-            # "Hier j'ai travaillé dessus.",                      #testTrad25
-            # "Demain je travaillerai mon rapport.",              #testTrad26
-            # "Je travaille avec Bob.",                           #testTrad27
-            # "Non.",                                             #testTrad28
+            "J'ai trois pantalons.",                            #testTrad20
+            "Bonjour.",                                         #testTrad21
+            "Ça va.",                                           #testTrad22
+            "Et vous?",                                         #testTrad23
+            "Vous faites quoi?",                                 #testTrad24
+            "Hier, j'ai travaillé dessus.",                      #testTrad25
+            "Demain, je travaillerai mon rapport.",              #testTrad26
+            "Je travaille avec Bob.",                            #testTrad27
+            "Non.",                                             #testTrad28
         ]
 
     def __str__(self):
@@ -77,18 +77,18 @@ class TestsTraductions:
         self.testTraduction14()
         self.testTraduction15()
         self.testTraduction16()
-        # self.testTraduction17()
-        # self.testTraduction18()
+        self.testTraduction17()
+        self.testTraduction18()
         self.testTraduction19()
-        # self.testTraduction20()
-        # self.testTraduction21()
-        # self.testTraduction22()
-        # self.testTraduction23()
+        self.testTraduction20()
+        self.testTraduction21()
+        self.testTraduction22()
+        self.testTraduction23()
         self.testTraduction24()
-        # self.testTraduction25()
-        # self.testTraduction26()
-        # self.testTraduction27()
-        # self.testTraduction28()
+        self.testTraduction25()
+        self.testTraduction26()
+        self.testTraduction27()
+        self.testTraduction28()
 
 
     def testTraduction1(self):
