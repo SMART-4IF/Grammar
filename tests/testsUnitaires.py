@@ -73,7 +73,9 @@ class TestsUnitaires:
     def testVerbe1(self):
         phrase = ["hier","cinéma","moi","aller"]
         structurePhrase = scriptsTraitement.StructurePhrase()
-        structurePhrase.identifierVerbe(phrase)
+        phrase = structurePhrase.identifierSujet(phrase)
+        phrase = structurePhrase.identifierVerbe(phrase)
+        structurePhrase.identifierMotsParDefaut()
 
         if structurePhrase.verbe == self.resultatsAttendus[self.nbTests].verbe:
             self.nbTestsReussis = self.nbTestsReussis + 1
@@ -87,7 +89,9 @@ class TestsUnitaires:
     def testVerbe2(self):
         phrase = ["lui", "son", "ami"]
         structurePhrase = scriptsTraitement.StructurePhrase()
-        structurePhrase.identifierVerbe(phrase)
+        phrase = structurePhrase.identifierSujet(phrase)
+        phrase = structurePhrase.identifierVerbe(phrase)
+        structurePhrase.identifierMotsParDefaut()
 
         if structurePhrase.verbe == self.resultatsAttendus[self.nbTests].verbe:
             self.nbTestsReussis = self.nbTestsReussis + 1
@@ -226,6 +230,7 @@ class TestsUnitaires:
         phrase = structurePhrase.identifierAdverbe(phrase)
         phrase = structurePhrase.identifierSujet(phrase)
         phrase = structurePhrase.identifierAction(phrase)
+        structurePhrase.identifierMotsParDefaut()
 
         if structurePhrase == self.resultatsAttendus[self.nbTests]:
             self.nbTestsReussis = self.nbTestsReussis + 1
@@ -247,6 +252,7 @@ class TestsUnitaires:
         phrase = structurePhrase.identifierAdverbe(phrase)
         phrase = structurePhrase.identifierSujet(phrase)
         phrase = structurePhrase.identifierAction(phrase)
+        structurePhrase.identifierMotsParDefaut()
 
         if structurePhrase == self.resultatsAttendus[self.nbTests]:
             self.nbTestsReussis = self.nbTestsReussis + 1
@@ -268,6 +274,7 @@ class TestsUnitaires:
         phrase = structurePhrase.identifierAdverbe(phrase)
         phrase = structurePhrase.identifierSujet(phrase)
         phrase = structurePhrase.identifierAction(phrase)
+        structurePhrase.identifierMotsParDefaut()
 
         if structurePhrase == self.resultatsAttendus[self.nbTests]:
             self.nbTestsReussis = self.nbTestsReussis + 1
@@ -288,6 +295,7 @@ class TestsUnitaires:
         phrase = structurePhrase.identifierAdverbe(phrase)
         phrase = structurePhrase.identifierSujet(phrase)
         phrase = structurePhrase.identifierAction(phrase)
+        structurePhrase.identifierMotsParDefaut()
 
         if structurePhrase == self.resultatsAttendus[self.nbTests]:
             self.nbTestsReussis = self.nbTestsReussis + 1

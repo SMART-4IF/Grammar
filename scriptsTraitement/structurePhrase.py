@@ -7,7 +7,7 @@ from verbecc import Conjugator
 
 class StructurePhrase:
 
-    def __init__(self, sujet = "je", pronom_devant_verbe = "", verbe = "être", action = "", marqueurTemporel = "", adverbe = "", tempsConjug = "présent",
+    def __init__(self, sujet = "", pronom_devant_verbe = "", verbe = "", action = "", marqueurTemporel = "", adverbe = "", tempsConjug = "présent",
                  persConjug = 1, marqueurNegation1 = "", marqueurNegation2 = ""):
         self.sujet = sujet
         self.pronom_devant_verbe = pronom_devant_verbe
@@ -89,12 +89,14 @@ class StructurePhrase:
 
     # execute l'ensemble du process de traduction
     def traduire(self, phraseInitiale):
+
         phraseInitiale = self.identifierVerbe(phraseInitiale)
         phraseInitiale = self.identifierMarqueursNegation(phraseInitiale)
         phraseInitiale = self.identifierMarqueurTemporel(phraseInitiale)
         phraseInitiale = self.identifierAdverbe(phraseInitiale)
         phraseInitiale = self.identifierSujet(phraseInitiale)
         phraseInitiale = self.identifierAction(phraseInitiale)
+        self.identifierMotsParDefaut()
         self.identifierPersConjug()
         self.choisirDeterminantAction()
         self.conjuguerVerbe()
@@ -275,6 +277,16 @@ class StructurePhrase:
 
             return phrase
 
+    # identifie les mots par defauts (les mots non dit mais déduits automatiquement)
+    # cette méthode est à appeler quand on a déterminé toiute la strcuture de la phrase
+    def identifierMotsParDefaut(self):
+        # si pas de sujet mais verbe: sujet par defaut est "je"
+        if self.sujet == "" and self.verbe != "":
+            self.sujet = "je"
+
+        # si pas de verbe mais sujet, verbe par défaut est "être"
+        if self.verbe == "" and self.sujet != "":
+            self.verbe = "être"
 
     # identifie la personne à laquelle il faut conjuguer le verbe
     def identifierPersConjug(self):
@@ -323,17 +335,18 @@ class StructurePhrase:
 
     # conjugue le verbe selon le temps et la personne identifies
     def conjuguerVerbe(self):
-        cg = Conjugator(lang='fr')
-        conjugaisonsDuVerbe = cg.conjugate(self.verbe)
-        verbeConjugue = conjugaisonsDuVerbe['moods']['indicatif'][self.tempsConjug][self.persConjug - 1]
+        if self.verbe != "":
+            cg = Conjugator(lang='fr')
+            conjugaisonsDuVerbe = cg.conjugate(self.verbe)
+            verbeConjugue = conjugaisonsDuVerbe['moods']['indicatif'][self.tempsConjug][self.persConjug - 1]
 
-        # si pronom j', le split ne marche pas.
-        if "'" in verbeConjugue:
-            if self.pronom_devant_verbe == "":
-                if self.sujet == "je":
-                    self.sujet = "j'"
-            self.verbe = verbeConjugue[2:]
-        else:
-            verbeConjugue = verbeConjugue.split()
-            verbeConjugue = verbeConjugue[1:]
-            self.verbe = " ".join(verbeConjugue)
+            # si pronom j', le split ne marche pas.
+            if "'" in verbeConjugue:
+                if self.pronom_devant_verbe == "":
+                    if self.sujet == "je":
+                        self.sujet = "j'"
+                self.verbe = verbeConjugue[2:]
+            else:
+                verbeConjugue = verbeConjugue.split()
+                verbeConjugue = verbeConjugue[1:]
+                self.verbe = " ".join(verbeConjugue)
