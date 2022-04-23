@@ -309,8 +309,8 @@ class StructurePhrase:
         pronomsFR = dictionnaireUtilisable.PronomsFR()
         voyelles = ["a", "e", "i", "o", "u"]
 
-        # si on est dans une phrase avec pronom personnel + etre: pas de determinant
-        if (self.sujet in pronomsFR.personnels and self.verbe == "être") is False:
+        # si on est dans une phrase avec pronom personnel + etre ou phrase d'un seul mot: pas de determinant
+        if (self.sujet in pronomsFR.personnels and self.verbe == "être") is False and (self.sujet == "" and self.verbe == "") is False:
 
             for mot in self.action.split():
 
