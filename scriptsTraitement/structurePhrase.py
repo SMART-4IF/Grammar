@@ -269,11 +269,14 @@ class StructurePhrase:
                             else : 
                                 self.pronom_devant_verbe = pronomsFR.pronoms_devant_verbe_voyelle[index]
                         index+=1
-                else : 
-                    self.action = phrase[0]
-                phrase.remove(phrase[0])
+                else:
+                    for mot in phrase:
+                        if self.action == "":
+                            self.action = mot
+                        else:
+                            self.action += " "+mot
 
-            return phrase
+            return ""
 
     # identifie les mots par defauts (les mots non dit mais deduits automatiquement)
     # cette methode est a appeler quand on a determine toute la strcuture de la phrase
