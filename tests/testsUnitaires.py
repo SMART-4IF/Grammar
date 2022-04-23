@@ -30,6 +30,8 @@ class TestsUnitaires:
             scriptsTraitement.StructurePhrase("", "", "", "au cinéma"),                                 #testChoixDeterminant2
             scriptsTraitement.StructurePhrase("", "", "", "son ami"),                                   #testChoixDeterminant2
             scriptsTraitement.StructurePhrase("", "", "", "entendant"),                                 #testChoixDeterminant2
+            scriptsTraitement.StructurePhrase("je", "", "", ""),                                        #testMotsParDefaut1
+            scriptsTraitement.StructurePhrase("", "", "être", ""),                                      #testMotsParDefaut2
         ]
 
     def __str__(self):
@@ -67,6 +69,8 @@ class TestsUnitaires:
         self.testChoixDeterminant2()
         self.testChoixDeterminant3()
         self.testChoixDeterminant4()
+        self.testMotsPArDefauts1()
+        self.testMotsPArDefauts2()
 
 
     # verifie que l'on est bien capable d'identifier le verbe de la phrase
@@ -490,6 +494,42 @@ class TestsUnitaires:
             self.messagesEchecs.append(
                 "Test choix determinant 4 - Obtenu : '" + str(structurePhrase.action) + "' | attendu : '" +
                 str(self.resultatsAttendus[self.nbTests].action) + "'")
+
+        self.nbTests = self.nbTests + 1
+
+
+    # si pas de sujet ou de verbe dans certaines conditions, mettre je ou etre par defaut
+    def testMotsPArDefauts1(self):
+        phrase = ["avec", "Bob", "travailler"]
+        structurePhrase = scriptsTraitement.StructurePhrase()
+        phrase = structurePhrase.identifierSujet(phrase)
+        phrase = structurePhrase.identifierVerbe(phrase)
+        structurePhrase.identifierMotsParDefaut()
+
+        if structurePhrase.sujet == self.resultatsAttendus[self.nbTests].sujet:
+            self.nbTestsReussis = self.nbTestsReussis + 1
+        else:
+            self.messagesEchecs.append(
+                "Test choix mot defaut 1 - Obtenu : '" + str(structurePhrase.sujet) + "' | attendu : '" +
+                str(self.resultatsAttendus[self.nbTests].sujet) + "'")
+
+        self.nbTests = self.nbTests + 1
+
+
+    # si pas de sujet ou de verbe dans certaines conditions, mettre je ou etre par defaut
+    def testMotsPArDefauts2(self):
+        phrase = ["lui", "a-lui", "ami"]
+        structurePhrase = scriptsTraitement.StructurePhrase()
+        phrase = structurePhrase.identifierSujet(phrase)
+        phrase = structurePhrase.identifierVerbe(phrase)
+        structurePhrase.identifierMotsParDefaut()
+
+        if structurePhrase.verbe == self.resultatsAttendus[self.nbTests].verbe:
+            self.nbTestsReussis = self.nbTestsReussis + 1
+        else:
+            self.messagesEchecs.append(
+                "Test choix mot defaut 2 - Obtenu : '" + str(structurePhrase.verbe) + "' | attendu : '" +
+                str(self.resultatsAttendus[self.nbTests].verbe) + "'")
 
         self.nbTests = self.nbTests + 1
 

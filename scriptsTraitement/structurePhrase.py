@@ -228,6 +228,7 @@ class StructurePhrase:
                 dictionnaireNoms = json.load(json_data_noms)
             pronomsLSF = dictionnaireUtilisable.PronomsLSF()  # ensemble des pronoms de LSF
             pronomsFR = dictionnaireUtilisable.PronomsFR()
+
             # si pronom possessif, mettre pornon + nom suivant dans le action
             testPossessif = False
             listeMotsSupprimer = []
