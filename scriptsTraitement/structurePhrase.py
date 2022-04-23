@@ -87,12 +87,12 @@ class StructurePhrase:
     def traduire(self, phraseInitiale):
 
         phraseInitiale = self.identifierVerbe(phraseInitiale)
+        phraseInitiale = self.identifierSujet(phraseInitiale)
+        self.identifierMotsParDefaut()
         phraseInitiale = self.identifierMarqueursNegation(phraseInitiale)
         phraseInitiale = self.identifierMarqueurTemporel(phraseInitiale)
         phraseInitiale = self.identifierAdverbe(phraseInitiale)
-        phraseInitiale = self.identifierSujet(phraseInitiale)
         phraseInitiale = self.identifierAction(phraseInitiale)
-        self.identifierMotsParDefaut()
         self.identifierPersConjug()
         self.choisirDeterminantAction()
         self.conjuguerVerbe()
@@ -203,15 +203,16 @@ class StructurePhrase:
     def identifierMarqueursNegation(self, phrase):
         marqueursNegation = dictionnaireUtilisable.MarqueursNegation()
 
-        for mot in phrase:
-            if mot in marqueursNegation.simple:
-                self.marqueurNegation1 = "ne"
-                self.marqueurNegation2 = mot
-                phrase.remove(mot)
-            if mot in marqueursNegation.double:
-                self.marqueurNegation1 = "ne"
-                self.marqueurNegation2 = "pas"
-                phrase.remove(mot)
+        if self.verbe != "":
+            for mot in phrase:
+                if mot in marqueursNegation.simple:
+                    self.marqueurNegation1 = "ne"
+                    self.marqueurNegation2 = mot
+                    phrase.remove(mot)
+                if mot in marqueursNegation.double:
+                    self.marqueurNegation1 = "ne"
+                    self.marqueurNegation2 = "pas"
+                    phrase.remove(mot)
 
         return phrase
 

@@ -376,6 +376,7 @@ class TestsUnitaires:
     def testNegation1(self):
         phrase = ["lui", "faire", "rien"]
         structurePhrase = scriptsTraitement.StructurePhrase()
+        phrase = structurePhrase.identifierVerbe(phrase)
         structurePhrase.identifierMarqueursNegation(phrase)
 
         if structurePhrase.marqueurNegation1 == self.resultatsAttendus[self.nbTests].marqueurNegation1 and \
@@ -394,6 +395,9 @@ class TestsUnitaires:
     def testNegation2(self):
         phrase = ["moi", "d’accord", "non"]
         structurePhrase = scriptsTraitement.StructurePhrase()
+        phrase = structurePhrase.identifierSujet(phrase)
+        phrase = structurePhrase.identifierVerbe(phrase)
+        structurePhrase.identifierMotsParDefaut()
         structurePhrase.identifierMarqueursNegation(phrase)
 
         if structurePhrase.marqueurNegation1 == self.resultatsAttendus[self.nbTests].marqueurNegation1 and \
