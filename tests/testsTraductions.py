@@ -25,7 +25,7 @@ class TestsTraductions:
             "Jeudi prochain, il ira au camping.",               #testTrad15
             "Il n'est pas encore arrivé.",                      #testTrad16
             "Ce n'est pas grave.",                              #testTrad17
-            "C’est mon père.",                                  #testTrad18
+            "C'est mon père.",                                  #testTrad18
             "Je t'aime.",                                       #testTrad19
             "J'ai trois pantalons.",                            #testTrad20
             "Bonjour.",                                         #testTrad21

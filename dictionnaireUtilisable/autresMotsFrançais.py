@@ -7,6 +7,7 @@ class PronomsFR:
     self.pronoms_devant_verbe = ["me", "te", "le","nous", "vous","les" ]
     self.pronoms_devant_verbe_voyelle = ["m'", "t'", "l'","nous", "vous","les" ]
 
-#pronoms = PronomsFR()
-
-#print(pronoms.personnels)
+class Elision:
+  def __init__(self):
+    self.listeElisionsVoyelles = ["ne", "je", "le", "la", "me", "te"]
+    self.listeElisionSonS = ["ce"]

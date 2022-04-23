@@ -3,3 +3,4 @@ from dictionnaireUtilisable.autresMotsLSF import Ponctuations
 from dictionnaireUtilisable.autresMotsLSF import MarqueursTemporels
 from dictionnaireUtilisable.autresMotsLSF import MarqueursNegation
 from dictionnaireUtilisable.autresMotsFrançais import PronomsFR
+from dictionnaireUtilisable.autresMotsFrançais import Elision

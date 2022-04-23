@@ -21,45 +21,35 @@ class StructurePhrase:
         self.marqueurNegation2 = marqueurNegation2
 
     def __str__(self):
-        phrase = ""
 
-        if self.marqueurTemporel != "": phrase += self.marqueurTemporel
-        if self.marqueurTemporel != "" and self.sujet != "": phrase += ","
+        phraseSplitee = []
+
+        if self.marqueurTemporel != "":
+            phraseSplitee.append(self.marqueurTemporel+',')
 
         if self.sujet != "":
-            if len(phrase) > 1:
-                phrase += " "
-            phrase += self.sujet
+            phraseSplitee.append(self.sujet)
 
         if self.marqueurNegation1 != "":
-            if len(phrase) > 1:
-                phrase += " "
-            phrase += self.marqueurNegation1
+            phraseSplitee.append(self.marqueurNegation1)
 
         if self.pronom_devant_verbe != "":
-            if len(phrase) > 1:
-                phrase += " "
-            phrase += self.pronom_devant_verbe
+            phraseSplitee.append(self.pronom_devant_verbe)
 
         if self.verbe != "":
-            if len(phrase) > 1 and "'" != phrase [-1]:
-                phrase += " "
-            phrase += self.verbe
+            phraseSplitee.append(self.verbe)
 
         if self.marqueurNegation2 != "":
-            if len(phrase) > 1:
-                phrase += " "
-            phrase += self.marqueurNegation2
+            phraseSplitee.append(self.marqueurNegation2)
 
         if self.action != "":
-            if len(phrase) > 1:
-                phrase += " "
-            phrase += self.action
+            phraseSplitee.append(self.action)
 
         if self.adverbe != "":
-            if len(phrase) > 1:
-                phrase += " "
-            phrase += self.adverbe
+            phraseSplitee.append(self.adverbe)
+
+        # ajout des elisions
+        phrase = self.ajoutAppostrophes(phraseSplitee)
 
         # choix de la ponctuation adaptee
         phrase += self.determinerPonctuation(phrase)
@@ -69,6 +59,7 @@ class StructurePhrase:
 
         return phrase.capitalize()
 
+    # permet d'afficher le detail de toutes les infos
     def toStringDebug(self):
         return "marqueurTemporel : " + self.marqueurTemporel + " | sujet : " + self.sujet + \
                " | marqueur neg 1 : " + self.marqueurNegation1 + " | pronom devant verbe : " + self.pronom_devant_verbe + \
@@ -86,16 +77,22 @@ class StructurePhrase:
     # execute l'ensemble du process de traduction
     def traduire(self, phraseInitiale):
 
-        phraseInitiale = self.identifierVerbe(phraseInitiale)
-        phraseInitiale = self.identifierSujet(phraseInitiale)
-        self.identifierMotsParDefaut()
-        phraseInitiale = self.identifierMarqueursNegation(phraseInitiale)
-        phraseInitiale = self.identifierMarqueurTemporel(phraseInitiale)
-        phraseInitiale = self.identifierAdverbe(phraseInitiale)
+        longueurPhrase = len(phraseInitiale)
+
+        if(longueurPhrase > 1):
+            phraseInitiale = self.identifierVerbe(phraseInitiale)
+            phraseInitiale = self.identifierSujet(phraseInitiale)
+            phraseInitiale = self.identifierMarqueursNegation(phraseInitiale)
+            phraseInitiale = self.identifierMarqueurTemporel(phraseInitiale)
+            phraseInitiale = self.identifierAdverbe(phraseInitiale)
+
         phraseInitiale = self.identifierAction(phraseInitiale)
-        self.identifierPersConjug()
-        self.choisirDeterminantAction()
-        self.conjuguerVerbe()
+
+        if (longueurPhrase > 1):
+            self.identifierMotsParDefaut()
+            self.identifierPersConjug()
+            self.choisirDeterminantAction()
+            self.conjuguerVerbe()
         return self
 
     # Recherche verbe dans une sequence donnee de mots et init la val de self.verbe avec
@@ -203,16 +200,17 @@ class StructurePhrase:
     def identifierMarqueursNegation(self, phrase):
         marqueursNegation = dictionnaireUtilisable.MarqueursNegation()
 
-        if self.verbe != "":
-            for mot in phrase:
-                if mot in marqueursNegation.simple:
-                    self.marqueurNegation1 = "ne"
-                    self.marqueurNegation2 = mot
-                    phrase.remove(mot)
-                if mot in marqueursNegation.double:
-                    self.marqueurNegation1 = "ne"
-                    self.marqueurNegation2 = "pas"
-                    phrase.remove(mot)
+        for mot in phrase:
+
+            if mot in marqueursNegation.simple:
+                self.marqueurNegation2 = mot
+                phrase.remove(mot)
+            if mot in marqueursNegation.double:
+                self.marqueurNegation2 = "pas"
+                phrase.remove(mot)
+
+        if self.marqueurNegation2 != "":
+            self.marqueurNegation1 = "ne"
 
         return phrase
 
@@ -256,18 +254,10 @@ class StructurePhrase:
             if testPossessif == False:
                 # pour l'instant, ce qu'il reste dans la liste de mots devient l'action
                 if phrase[0] in pronomsLSF.personnels:
-                    #test verbe pour savoir si commence par une voyelle 
-                    voyelle = ["a","e","i","o","u"]
-                    verbe_voyelle = False
-                    if self.verbe[0] in voyelle : 
-                        verbe_voyelle = True
                     index = 0
                     for pronom in pronomsLSF.personnels:
                         if pronom == phrase[0]:
-                            if verbe_voyelle == False :
-                                self.pronom_devant_verbe = pronomsFR.pronoms_devant_verbe[index]
-                            else : 
-                                self.pronom_devant_verbe = pronomsFR.pronoms_devant_verbe_voyelle[index]
+                            self.pronom_devant_verbe = pronomsFR.pronoms_devant_verbe[index]
                         index+=1
                 else:
                     for mot in phrase:
@@ -289,6 +279,13 @@ class StructurePhrase:
         if self.verbe == "" and self.sujet != "":
             self.verbe = "être"
 
+        # si ni verbe ni sujet mais il y a une action: verbe être et sujet ce
+        if self.verbe == "" and self.sujet == "" and (self.action != "" or self.adverbe != ""):
+            self.sujet = "ce"
+            self.verbe = "être"
+            self.persConjug = 3
+
+
     # identifie la personne a laquelle il faut conjuguer le verbe
     def identifierPersConjug(self):
         pronomsLSF = dictionnaireUtilisable.PronomsLSF()
@@ -307,7 +304,7 @@ class StructurePhrase:
         with open('dictionnaireUtilisable/noms.json') as json_data_noms:
             dictionnaireNoms = json.load(json_data_noms)
         pronomsFR = dictionnaireUtilisable.PronomsFR()
-        voyelles = ["a", "e", "i", "o", "u"]
+        voyelles = ["a", "e", "i", "o", "u", "y"]
 
         # si on est dans une phrase avec pronom personnel + etre ou phrase d'un seul mot: pas de determinant
         if (self.sujet in pronomsFR.personnels and self.verbe == "être") is False and (self.sujet == "" and self.verbe == "") is False:
@@ -324,9 +321,7 @@ class StructurePhrase:
                             self.action = "à l'"+self.action
                         elif element[1] == "m" and self.verbe == "aller" and element[0] not in voyelles:
                             self.action = "au "+self.action
-                        elif element[1] == "f" and self.verbe == "aller" and element[0] in voyelles:
-                            self.action = "à l'"+self.action
-                        elif element[1] == "f" and self.verbe == "aller" and element[0] not in voyelles:
+                        elif element[1] == "f" and self.verbe == "aller":
                             self.action = "à la "+self.action
                         elif element[1] == "f":
                             self.action = "une " + self.action
@@ -352,6 +347,28 @@ class StructurePhrase:
                 verbeConjugue = verbeConjugue[1:]
                 self.verbe = " ".join(verbeConjugue)
 
+
+    # determiner si certains mots doivent subir une élision
+    def ajoutAppostrophes(self, phraseSplitee):
+        elision = dictionnaireUtilisable.Elision()
+        voyelles = ["a", "e", "i", "o", "u", "y"]
+        voyellesSonS = ["a", "e", "i"]
+
+        if len(phraseSplitee) > 1:
+            for i in range(len(phraseSplitee)-1):
+                if phraseSplitee[i] in elision.listeElisionsVoyelles and phraseSplitee[i+1][0] in voyelles:
+                    phraseSplitee[i] = phraseSplitee[i][:-1]+"'"
+                elif phraseSplitee[i] in elision.listeElisionSonS and phraseSplitee[i+1][0] in voyellesSonS:
+                    phraseSplitee[i] = phraseSplitee[i][:-1]+"'"
+
+        # reconstitution de la phrase
+        phraseTraitee = "";
+        for mot in phraseSplitee:
+            if phraseTraitee != "" and phraseTraitee[-1] != "'":
+                phraseTraitee += " "
+            phraseTraitee += mot
+
+        return phraseTraitee
 
     # determine la ponctuation da la phrase en fonction de certains indicateurs
     def determinerPonctuation(self, phrase):
