@@ -28,8 +28,8 @@ class TestsUnitaires:
             scriptsTraitement.StructurePhrase("", "t'", "appelle"),                                     #testPronomDevantVerbe
             scriptsTraitement.StructurePhrase("", "", "", "une voiture"),                               #testChoixDeterminant1
             scriptsTraitement.StructurePhrase("", "", "", "au cinéma"),                                 #testChoixDeterminant2
-            scriptsTraitement.StructurePhrase("", "", "", "son ami"),                                   #testChoixDeterminant2
-            scriptsTraitement.StructurePhrase("", "", "", "entendant"),                                 #testChoixDeterminant2
+            scriptsTraitement.StructurePhrase("", "", "", "son ami"),                                   #testChoixDeterminant3
+            scriptsTraitement.StructurePhrase("", "", "", "entendant"),                                 #testChoixDeterminant4
             scriptsTraitement.StructurePhrase("je", "", "", ""),                                        #testMotsParDefaut1
             scriptsTraitement.StructurePhrase("", "", "être", ""),                                      #testMotsParDefaut2
         ]
@@ -486,6 +486,7 @@ class TestsUnitaires:
         phrase = structurePhrase.identifierVerbe(phrase)
         phrase = structurePhrase.identifierAction(phrase)
         structurePhrase.identifierPersConjug()
+        structurePhrase.identifierMotsParDefaut()
         structurePhrase.choisirDeterminantAction()
 
         if structurePhrase.action == self.resultatsAttendus[self.nbTests].action:
