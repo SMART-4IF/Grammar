@@ -61,15 +61,11 @@ class StructurePhrase:
                 phrase += " "
             phrase += self.adverbe
 
-        # determiner ponctuation
-        motsPonctuations = dictionnaireUtilisable.Ponctuations()
-        ponctuation = ".";
-        for mot in phrase.split():
-            if mot in motsPonctuations.interrogatifs:
-                ponctuation = "?"
-                break
+        # choix de la ponctuation adaptee
+        phrase += self.determinerPonctuation(phrase)
 
-        phrase += ponctuation
+        # on retire les - des mots composes
+        phrase = self.nettoyerTirets(phrase)
 
         return phrase.capitalize()
 
@@ -278,18 +274,18 @@ class StructurePhrase:
 
             return phrase
 
-    # identifie les mots par defauts (les mots non dit mais déduits automatiquement)
-    # cette méthode est à appeler quand on a déterminé toiute la strcuture de la phrase
+    # identifie les mots par defauts (les mots non dit mais deduits automatiquement)
+    # cette methode est a appeler quand on a determine toute la strcuture de la phrase
     def identifierMotsParDefaut(self):
         # si pas de sujet mais verbe: sujet par defaut est "je"
         if self.sujet == "" and self.verbe != "":
             self.sujet = "je"
 
-        # si pas de verbe mais sujet, verbe par défaut est "être"
+        # si pas de verbe mais sujet, verbe par defaut est "être"
         if self.verbe == "" and self.sujet != "":
             self.verbe = "être"
 
-    # identifie la personne à laquelle il faut conjuguer le verbe
+    # identifie la personne a laquelle il faut conjuguer le verbe
     def identifierPersConjug(self):
         pronomsLSF = dictionnaireUtilisable.PronomsLSF()
         pronomsFR = dictionnaireUtilisable.PronomsFR()
@@ -302,7 +298,7 @@ class StructurePhrase:
 
 
     # choisir le determinent du complement
-    # si le complement possede un nom commun, il faut placer un déterminant adapté
+    # si le complement possede un nom commun, il faut placer un determinant adapte
     def choisirDeterminantAction(self):
         with open('dictionnaireUtilisable/noms.json') as json_data_noms:
             dictionnaireNoms = json.load(json_data_noms)
@@ -351,3 +347,41 @@ class StructurePhrase:
                 verbeConjugue = verbeConjugue.split()
                 verbeConjugue = verbeConjugue[1:]
                 self.verbe = " ".join(verbeConjugue)
+
+
+    # determine la ponctuation da la phrase en fonction de certains indicateurs
+    def determinerPonctuation(self, phrase):
+        motsPonctuations = dictionnaireUtilisable.Ponctuations()
+        ponctuation = ".";
+        for mot in phrase.split():
+            if mot in motsPonctuations.interrogatifs:
+                ponctuation = "?"
+                break
+
+        return  ponctuation
+
+
+    # retire les tirets des mots composés de la lsf, mais pas des mots avec des tirets de la langue française
+    def nettoyerTirets(self, phrase):
+
+        with open('dictionnaireUtilisable/noms.json') as json_data_noms:
+            dictionnaireNoms = json.load(json_data_noms)
+        phraseNettoyee = ""
+
+        for mot in phrase.split():
+            isMotFrançais = False
+            if '-' in mot:
+                for element in dictionnaireNoms:
+                    if element[0] == mot:
+                        isMotFrançais = True
+                        break
+
+                if isMotFrançais is False:
+                    mot = mot.replace("-", " ")
+
+            if phraseNettoyee == "":
+                phraseNettoyee = mot
+            else:
+                phraseNettoyee += " "+mot
+
+        return phraseNettoyee

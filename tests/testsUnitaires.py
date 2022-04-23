@@ -32,6 +32,10 @@ class TestsUnitaires:
             scriptsTraitement.StructurePhrase("", "", "", "entendant"),                                 #testChoixDeterminant4
             scriptsTraitement.StructurePhrase("je", "", "", ""),                                        #testMotsParDefaut1
             scriptsTraitement.StructurePhrase("", "", "être", ""),                                      #testMotsParDefaut2
+            "?",                                                                                        #testChoixPonctuation1
+            ".",                                                                                        #testChoixPonctuation2
+            "ça va",                                                                                    #testNettoyageTirets1
+            "arc-en-ciel",                                                                              #testNettoyageTirets2
         ]
 
     def __str__(self):
@@ -69,8 +73,11 @@ class TestsUnitaires:
         self.testChoixDeterminant2()
         self.testChoixDeterminant3()
         self.testChoixDeterminant4()
-        self.testMotsPArDefauts1()
-        self.testMotsPArDefauts2()
+        self.testMotsParDefauts1()
+        self.testMotsParDefauts2()
+        self.testChoixPonctuation1()
+        self.testChoixPonctuation2()
+        self.testNettoyageTirets1()
 
 
     # verifie que l'on est bien capable d'identifier le verbe de la phrase
@@ -500,7 +507,7 @@ class TestsUnitaires:
 
 
     # si pas de sujet ou de verbe dans certaines conditions, mettre je ou etre par defaut
-    def testMotsPArDefauts1(self):
+    def testMotsParDefauts1(self):
         phrase = ["avec", "Bob", "travailler"]
         structurePhrase = scriptsTraitement.StructurePhrase()
         phrase = structurePhrase.identifierSujet(phrase)
@@ -518,7 +525,7 @@ class TestsUnitaires:
 
 
     # si pas de sujet ou de verbe dans certaines conditions, mettre je ou etre par defaut
-    def testMotsPArDefauts2(self):
+    def testMotsParDefauts2(self):
         phrase = ["lui", "a-lui", "ami"]
         structurePhrase = scriptsTraitement.StructurePhrase()
         phrase = structurePhrase.identifierSujet(phrase)
@@ -531,6 +538,68 @@ class TestsUnitaires:
             self.messagesEchecs.append(
                 "Test choix mot defaut 2 - Obtenu : '" + str(structurePhrase.verbe) + "' | attendu : '" +
                 str(self.resultatsAttendus[self.nbTests].verbe) + "'")
+
+        self.nbTests = self.nbTests + 1
+
+    # test si reconnait mot interrogatif, on met ? en ponctuation
+    def testChoixPonctuation1(self):
+        phrase = ["faire", "quoi", "vous"]
+        structurePhrase = scriptsTraitement.StructurePhrase()
+        ponctuation = structurePhrase.determinerPonctuation(" ".join(phrase))
+
+        if ponctuation == self.resultatsAttendus[self.nbTests]:
+            self.nbTestsReussis = self.nbTestsReussis + 1
+        else:
+            self.messagesEchecs.append(
+                "Test choix ponctuation 1 - Obtenu : '" + ponctuation + "' | attendu : '" +
+                self.resultatsAttendus[self.nbTests] + "'")
+
+        self.nbTests = self.nbTests + 1
+
+
+    # test si pas de mot necessitant une ponctuation particulière, on met un "."
+    def testChoixPonctuation2(self):
+        phrase = ["lui", "a-lui", "ami"]
+        structurePhrase = scriptsTraitement.StructurePhrase()
+        ponctuation = structurePhrase.determinerPonctuation(" ".join(phrase))
+
+        if ponctuation == self.resultatsAttendus[self.nbTests]:
+            self.nbTestsReussis = self.nbTestsReussis + 1
+        else:
+            self.messagesEchecs.append(
+                "Test choix ponctuation 2 - Obtenu : '" + ponctuation + "' | attendu : '" +
+                self.resultatsAttendus[self.nbTests] + "'")
+
+        self.nbTests = self.nbTests + 1
+
+    # test nettoyage tirets: la phrase comporte un mot composé de la lsf qui n'a pas de tiret en francais.
+    # Il faut le retirer.
+    def testNettoyageTirets1(self):
+        phrase = "ça-va"
+        structurePhrase = scriptsTraitement.StructurePhrase()
+        phraseTraduite = structurePhrase.nettoyerTirets(phrase)
+
+        if phraseTraduite == self.resultatsAttendus[self.nbTests]:
+            self.nbTestsReussis = self.nbTestsReussis + 1
+        else:
+            self.messagesEchecs.append(
+                "Test nettoyage tirets 1 - Obtenu : '" + phraseTraduite + "' | attendu : '" +
+                self.resultatsAttendus[self.nbTests] + "'")
+
+        self.nbTests = self.nbTests + 1
+
+    # test nettoyage tirets: la phrase comporte un mot qui a des tirets en français
+    def testNettoyageTirets2(self):
+        phrase = "arc-en-ciel"
+        structurePhrase = scriptsTraitement.StructurePhrase()
+        phraseTraduite = structurePhrase.nettoyerTirets(phrase)
+
+        if phraseTraduite == self.resultatsAttendus[self.nbTests]:
+            self.nbTestsReussis = self.nbTestsReussis + 1
+        else:
+            self.messagesEchecs.append(
+                "Test nettoyage tirets 2 - Obtenu : '" + phraseTraduite + "' | attendu : '" +
+                self.resultatsAttendus[self.nbTests] + "'")
 
         self.nbTests = self.nbTests + 1
 
