@@ -23,18 +23,18 @@ class TestsTraductions:
             "J'ai acheté une voiture.",                         #testTrad13
             "Hier, je suis allé au cinéma.",                    #testTrad14
             "Jeudi prochain, il ira au camping.",               #testTrad15
-            "Il n'est pas encore arrivé.",                      #testTrad16
+            "Je travaille dehors.",                             #testTrad16
             "Ce n'est pas grave.",                              #testTrad17
             "C'est mon père.",                                  #testTrad18
-            "Je t'aime.",                                       #testTrad19
+            "Demain, j'irai à l'exposition.",                    #testTrad19
             "J'ai trois pantalons.",                            #testTrad20
             "Bonjour.",                                         #testTrad21
             "Ça va.",                                           #testTrad22
             "Et vous?",                                         #testTrad23
-            "Vous faites quoi?",                                 #testTrad24
-            "Hier, j'ai travaillé dessus.",                      #testTrad25
-            "Demain, je travaillerai mon rapport.",              #testTrad26
-            "Je travaille avec Bob.",                            #testTrad27
+            "Vous faites quoi?",                                #testTrad24
+            "Hier, j'ai travaillé dessus.",                     #testTrad25
+            "Demain, je travaillerai mon rapport.",             #testTrad26
+            "Je travaille avec Bob.",                           #testTrad27
             "Non.",                                             #testTrad28
         ]
 
@@ -331,12 +331,12 @@ class TestsTraductions:
 
 
     def testTraduction16(self):
-        phrase = ["lui", "arriver", "pas-encore", "lui"]
+        phrase = ["dehors", "moi", "travailler"]
         structurePhrase = scriptsTraitement.StructurePhrase()
         structurePhrase.traduire(phrase)
 
         if str(structurePhrase) == self.resultatsAttendus[self.nbTests]:
-            self.messagesSucces.append("Lui arriver pas-encore lui. = " + str(structurePhrase))
+            self.messagesSucces.append("Dehors moi travailler. = " + str(structurePhrase))
             self.nbTestsReussis = self.nbTestsReussis + 1
         else:
             self.messagesEchecs.append(
@@ -379,12 +379,12 @@ class TestsTraductions:
 
 
     def testTraduction19(self):
-        phrase = ["aimer", "toi"]
+        phrase = ["demain", "exposition", "moi", "aller"]
         structurePhrase = scriptsTraitement.StructurePhrase()
         structurePhrase.traduire(phrase)
 
         if str(structurePhrase) == self.resultatsAttendus[self.nbTests]:
-            self.messagesSucces.append("Aimer toi. = " + str(structurePhrase))
+            self.messagesSucces.append("Demain exposition moi aller. = " + str(structurePhrase))
             self.nbTestsReussis = self.nbTestsReussis + 1
         else:
             self.messagesEchecs.append(

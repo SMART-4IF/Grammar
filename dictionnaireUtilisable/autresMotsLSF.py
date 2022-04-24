@@ -9,7 +9,7 @@ class Ponctuations:
 
 class MarqueursNegation:
   def __init__(self):
-    self.simple = ["rien", "plus", "pas-encore"]      # nécessite seulement un "ne" devant le verbe
+    self.simple = ["rien", "plus"]      # nécessite seulement un "ne" devant le verbe
     self.double = ["non"]               # nécessite ne devant le verbe et pas après et est supprimé
 
 class MarqueurTemporel:

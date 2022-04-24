@@ -28,7 +28,8 @@ class StructurePhrase:
             phraseSplitee.append(self.marqueurTemporel+',')
 
         if self.sujet != "":
-            phraseSplitee.append(self.sujet)
+            for mot in self.sujet.split():
+                phraseSplitee.append(mot)
 
         if self.marqueurNegation1 != "":
             phraseSplitee.append(self.marqueurNegation1)
@@ -37,13 +38,15 @@ class StructurePhrase:
             phraseSplitee.append(self.pronom_devant_verbe)
 
         if self.verbe != "":
-            phraseSplitee.append(self.verbe)
+            for mot in self.verbe.split():
+                phraseSplitee.append(mot)
 
         if self.marqueurNegation2 != "":
             phraseSplitee.append(self.marqueurNegation2)
 
         if self.action != "":
-            phraseSplitee.append(self.action)
+            for mot in self.action.split():
+                phraseSplitee.append(mot)
 
         if self.adverbe != "":
             phraseSplitee.append(self.adverbe)
