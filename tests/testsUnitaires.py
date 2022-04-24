@@ -13,6 +13,7 @@ class TestsUnitaires:
             scriptsTraitement.StructurePhrase("moi", ""),                                               #testSujet1
             scriptsTraitement.StructurePhrase("moi", ""),                                               #testSujet2
             scriptsTraitement.StructurePhrase("", "",  "", "son ami"),                                  #testAction1
+            scriptsTraitement.StructurePhrase("", "",  "", "avec Bob"),                                  #testAction1
             scriptsTraitement.StructurePhrase("", "", "", "", "récemment", "", "passé-composé"),        # testTemps1
             scriptsTraitement.StructurePhrase("", "",  "", "", "", "", "passé-composé"),                # testTemps2
             scriptsTraitement.StructurePhrase("", "",  "", "", "jeudi dernier", "", "passé-composé"),   # testTemps3
@@ -56,6 +57,7 @@ class TestsUnitaires:
         self.testSujet1()
         self.testSujet2()
         self.testAction1()
+        self.testAction2()
         self.testTemps1()
         self.testTemps2()
         self.testTemps3()
@@ -171,6 +173,21 @@ class TestsUnitaires:
         else:
             self.messagesEchecs.append(
                 "Test action 1 - Obtenu : '" + structurePhrase.action + "' | attendu : '" + self.resultatsAttendus[
+                    self.nbTests].action + "'")
+
+        self.nbTests = self.nbTests + 1
+
+    # verifie que l'on est bien capable d'identifier la preposition de la phrase
+    def testAction2(self):
+        phrase = ["avec", "Bob", "travailler"]
+        structurePhrase = scriptsTraitement.StructurePhrase()
+        structurePhrase.identifierAction(phrase)
+
+        if structurePhrase.action == self.resultatsAttendus[self.nbTests].action:
+            self.nbTestsReussis = self.nbTestsReussis + 1
+        else:
+            self.messagesEchecs.append(
+                "Test action 2 - Obtenu : '" + structurePhrase.action + "' | attendu : '" + self.resultatsAttendus[
                     self.nbTests].action + "'")
 
         self.nbTests = self.nbTests + 1

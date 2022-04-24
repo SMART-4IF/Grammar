@@ -57,7 +57,7 @@ class StructurePhrase:
         # on retire les - des mots composes
         phrase = self.nettoyerTirets(phrase)
 
-        return phrase.capitalize()
+        return phrase[0].upper() + phrase[1:]
 
     # permet d'afficher le detail de toutes les infos
     def toStringDebug(self):
@@ -116,12 +116,11 @@ class StructurePhrase:
         # ouverture du dictionnaire des adverbes francais
         with open('dictionnaireUtilisable/adverbes.json') as json_data_adverbe:
             dictionnaireAdverbes = json.load(json_data_adverbe)
-        marqueursTemporelsLSF = dictionnaireUtilisable.MarqueursTemporels()
+        prepositionsFR = dictionnaireUtilisable.Prepositions()
 
         # si mot est dans dictionnaire des adverbes : c'est un adverbes
-        testMarqueurTemporel = False
         for mot in phrase:
-            if testMarqueurTemporel is False and mot in dictionnaireAdverbes:
+            if mot in dictionnaireAdverbes and mot not in prepositionsFR.liste:
                 self.adverbe = mot
                 phrase.remove(mot)
                 break
@@ -223,35 +222,53 @@ class StructurePhrase:
                 dictionnaireNoms = json.load(json_data_noms)
             pronomsLSF = dictionnaireUtilisable.PronomsLSF()  # ensemble des pronoms de LSF
             pronomsFR = dictionnaireUtilisable.PronomsFR()
+            prepositionsFR = dictionnaireUtilisable.Prepositions()
 
             # si pronom possessif, mettre pornon + nom suivant dans le action
             testPossessif = False
+            testPreposition = False
             listeMotsSupprimer = []
 
             for mot in phrase:
-                if mot in pronomsLSF.possessifs:
-                    # trouver le pronom correspondant
-                    index = 0
-                    #a-lui devient son !!! toujours au masculin
-                    for pronom in pronomsLSF.possessifs:
-                        if pronom == mot:
-                            mot = pronomsFR.possessifsMasculin[index]
-                        index+=1
-                    self.action = mot
-                    listeMotsSupprimer.append(mot)
-                    testPossessif = True
-                elif testPossessif:
-                    for element in dictionnaireNoms:
-                        if mot == element[0]:
-                            self.action += " "+mot
-                            listeMotsSupprimer.append(mot)
-                            break
 
+                # trouver une structure pronom possessif + nom
+                for i in range(len(pronomsLSF.possessifs)):
+                    if pronomsLSF.possessifs[i] == mot:
+                        mot = pronomsFR.possessifsMasculin[i]
+                        self.action = mot
+                        listeMotsSupprimer.append(mot)
+                        testPossessif = True
+
+                # trouver une structure du type preposition + nom
+                for preposition in prepositionsFR.liste:
+
+                    if preposition == mot:
+                        self.action = mot
+                        listeMotsSupprimer.append(mot)
+                        testPreposition = True
+
+                #elif mot in prepositionsFR.liste:
+
+                if testPossessif or testPreposition:
+
+                    # si on trouve un nom propre
+                    if mot[0].isupper():
+                        self.action += " " + mot
+                        listeMotsSupprimer.append(mot)
+                    else:
+                        # si on trouve un nom commun
+                        for element in dictionnaireNoms:
+                            if mot == element[0] and mot not in listeMotsSupprimer:
+                                self.action += " "+mot
+                                listeMotsSupprimer.append(mot)
+                                break
+
+            # on supprime les mots mis dans action
             for mot in listeMotsSupprimer:
                 if mot in phrase:
                     phrase.remove(mot)
 
-            if testPossessif == False:
+            if testPossessif is False and testPreposition is False:
                 # pour l'instant, ce qu'il reste dans la liste de mots devient l'action
                 if phrase[0] in pronomsLSF.personnels:
                     index = 0

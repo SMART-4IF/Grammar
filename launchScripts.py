@@ -1,7 +1,7 @@
 from scriptsTraitement import StructurePhrase
 
 # phrase sortie par l'IA de reconnaissance des signes
-phraseInitiale = ["a-moi", "père"]
+phraseInitiale = ["avec", "Bob", "travailler"]
 structurePhrase = structurePhrase = StructurePhrase()
 structurePhrase = structurePhrase.traduire(phraseInitiale)
 
