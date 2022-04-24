@@ -78,6 +78,7 @@ class TestsUnitaires:
         self.testChoixPonctuation1()
         self.testChoixPonctuation2()
         self.testNettoyageTirets1()
+        self.testNettoyageTirets2()
 
 
     # verifie que l'on est bien capable d'identifier le verbe de la phrase
