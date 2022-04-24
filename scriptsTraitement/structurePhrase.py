@@ -92,6 +92,7 @@ class StructurePhrase:
             self.identifierMotsParDefaut()
             self.identifierPersConjug()
             self.choisirDeterminantAction()
+            self.accorderAction()
             self.conjuguerVerbe()
         return self
 
@@ -321,10 +322,21 @@ class StructurePhrase:
         with open('dictionnaireUtilisable/noms.json') as json_data_noms:
             dictionnaireNoms = json.load(json_data_noms)
         pronomsFR = dictionnaireUtilisable.PronomsFR()
+        quantificateurs = dictionnaireUtilisable.Pluriel().quantificateurs
+        nombres = dictionnaireUtilisable.Pluriel().nombres
         voyelles = ["a", "e", "i", "o", "u", "y"]
 
-        # si on est dans une phrase avec pronom personnel + etre ou phrase d'un seul mot: pas de determinant
-        if (self.sujet in pronomsFR.personnels and self.verbe == "être") is False and (self.sujet == "" and self.verbe == "") is False:
+        # test si mot dans quantificateur
+        testQuantifacteur = False
+        if self.action != "":
+            for mot in self.action.split():
+                if mot in quantificateurs or mot in nombres:
+                    testQuantifacteur = True
+                    break
+
+        # si on est dans une phrase avec pronom personnel + etre ou phrase d'un seul mot ou phrase avec quantificateur: pas de determinant
+        if (self.sujet in pronomsFR.personnels and self.verbe == "être") is False and (self.sujet == "" and self.verbe == "") is False \
+                and testQuantifacteur is False:
 
             for mot in self.action.split():
 
@@ -345,6 +357,27 @@ class StructurePhrase:
                         else:
                             self.action = "un " + self.action
 
+
+    # accorder l'action en nombre
+    def accorderAction(self):
+
+        with open('dictionnaireUtilisable/noms.json') as json_data_noms:
+            dictionnaireNoms = json.load(json_data_noms)
+        pluriel = dictionnaireUtilisable.Pluriel()
+
+        plurielNecessaire = False
+        for mot in self.action.split():
+            # on accorder le nom suivant
+            if mot in pluriel.quantificateurs or mot in pluriel.nombres:
+                plurielNecessaire = True
+
+            if plurielNecessaire:
+
+                for element in dictionnaireNoms:
+                    if element[0] == mot and mot not in pluriel.irreguliersPluriels:
+                        self.action = self.action.replace(mot, mot+"s")
+                    elif element[0] == mot and mot in pluriel.irreguliersPluriels:
+                        self.action = self.action.replace(mot, mot+"x")
 
     # conjugue le verbe selon le temps et la personne identifies
     def conjuguerVerbe(self):

@@ -4,4 +4,5 @@ from dictionnaireUtilisable.autresMotsLSF import MarqueursTemporels
 from dictionnaireUtilisable.autresMotsLSF import MarqueursNegation
 from dictionnaireUtilisable.autresMotsFrançais import PronomsFR
 from dictionnaireUtilisable.autresMotsFrançais import Prepositions
+from dictionnaireUtilisable.autresMotsFrançais import Pluriel
 from dictionnaireUtilisable.autresMotsFrançais import Elision

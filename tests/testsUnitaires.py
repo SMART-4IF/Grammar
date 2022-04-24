@@ -31,6 +31,8 @@ class TestsUnitaires:
             scriptsTraitement.StructurePhrase("", "", "", "au cinéma"),                                 #testChoixDeterminant2
             scriptsTraitement.StructurePhrase("", "", "", "son ami"),                                   #testChoixDeterminant3
             scriptsTraitement.StructurePhrase("", "", "", "entendant"),                                 #testChoixDeterminant4
+            scriptsTraitement.StructurePhrase("", "", "", "sept voitures"),                             #testAccordAction1
+            scriptsTraitement.StructurePhrase("", "", "", "plusieurs hiboux"),                          #testAccordAction2
             scriptsTraitement.StructurePhrase("je", "", "", ""),                                        #testMotsParDefaut1
             scriptsTraitement.StructurePhrase("", "", "être", ""),                                      #testMotsParDefaut2
             "?",                                                                                        #testChoixPonctuation1
@@ -75,6 +77,8 @@ class TestsUnitaires:
         self.testChoixDeterminant2()
         self.testChoixDeterminant3()
         self.testChoixDeterminant4()
+        self.testAccordAction1()
+        self.testAccordAction2()
         self.testMotsParDefauts1()
         self.testMotsParDefauts2()
         self.testChoixPonctuation1()
@@ -523,6 +527,36 @@ class TestsUnitaires:
         else:
             self.messagesEchecs.append(
                 "Test choix determinant 4 - Obtenu : '" + str(structurePhrase.action) + "' | attendu : '" +
+                str(self.resultatsAttendus[self.nbTests].action) + "'")
+
+        self.nbTests = self.nbTests + 1
+
+
+    # test si on est capable d'accorder l'action en nombre (identifier nombre + mettre s)
+    def testAccordAction1(self):
+        structurePhrase = scriptsTraitement.StructurePhrase("", "", "", "sept voiture")
+        structurePhrase.accorderAction()
+
+        if structurePhrase.action == self.resultatsAttendus[self.nbTests].action:
+            self.nbTestsReussis = self.nbTestsReussis + 1
+        else:
+            self.messagesEchecs.append(
+                "Test accord action 1 - Obtenu : '" + str(structurePhrase.action) + "' | attendu : '" +
+                str(self.resultatsAttendus[self.nbTests].action) + "'")
+
+        self.nbTests = self.nbTests + 1
+
+
+    # test si on est capable d'accorder l'action en nombre (identifier quantificateur + mettre x)
+    def testAccordAction2(self):
+        structurePhrase = scriptsTraitement.StructurePhrase("", "", "", "plusieurs hibou")
+        structurePhrase.accorderAction()
+
+        if structurePhrase.action == self.resultatsAttendus[self.nbTests].action:
+            self.nbTestsReussis = self.nbTestsReussis + 1
+        else:
+            self.messagesEchecs.append(
+                "Test accord action 2 - Obtenu : '" + str(structurePhrase.action) + "' | attendu : '" +
                 str(self.resultatsAttendus[self.nbTests].action) + "'")
 
         self.nbTests = self.nbTests + 1

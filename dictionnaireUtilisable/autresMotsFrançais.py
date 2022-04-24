@@ -11,6 +11,13 @@ class Prepositions:
   def __init__(self):
     self.liste = ["avec", "pour", "sur", "dans"]
 
+
+class Pluriel:
+  def __init__(self):
+    self.nombres = ["deux", "trois", "quatre", "cinq", "six", "sept", "huit", "neuf"]
+    self.quantificateurs = ["plusieurs"]
+    self.irreguliersPluriels = ["hibou", "caillou", "chou", "bijou", "genou", "joujou", "pou"]
+
 class Elision:
   def __init__(self):
     self.listeElisionsVoyelles = ["ne", "je", "le", "la", "me", "te"]
