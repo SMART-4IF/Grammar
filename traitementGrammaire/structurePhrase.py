@@ -1,20 +1,19 @@
-# hier cinéma aller moi 
-# hier je suis allé au cinéma 
-from contextlib import nullcontext
+
 import json
 from . import Sujet
+from . import Adverbe
 import dictionnaireUtilisable
 from verbecc import Conjugator
 
 class StructurePhrase:
 
-    def __init__(self, sujet = Sujet.Sujet(), pronom_devant_verbe = "", verbe = "", action = "", marqueurTemporel = "", adverbe = "", tempsConjug = "présent", marqueurNegation1 = "", marqueurNegation2 = ""):
-        self.sujet = sujet
+    def __init__(self, sujet = "", pronom_devant_verbe = "", verbe = "", action = "", marqueurTemporel = "", adverbe = "", persConj = 1, tempsConjug = "présent", marqueurNegation1 = "", marqueurNegation2 = ""):
+        self.sujet = Sujet.Sujet(sujet, persConj)
         self.pronom_devant_verbe = pronom_devant_verbe
         self.verbe = verbe
         self.action = action
         self.marqueurTemporel = marqueurTemporel
-        self.adverbe = adverbe
+        self.adverbe = Adverbe.Adverbe(adverbe)
         self.tempsConjug = tempsConjug
         self.marqueurNegation1 = marqueurNegation1
         self.marqueurNegation2 = marqueurNegation2
@@ -47,8 +46,8 @@ class StructurePhrase:
             for mot in self.action.split():
                 phraseSplitee.append(mot)
 
-        if self.adverbe != "":
-            phraseSplitee.append(self.adverbe)
+        if self.adverbe.texte != "":
+            phraseSplitee.append(self.adverbe.texte)
 
         # ajout des elisions
         phrase = self.ajoutAppostrophes(phraseSplitee)
@@ -66,7 +65,7 @@ class StructurePhrase:
         return "marqueurTemporel : " + self.marqueurTemporel + " | sujet : " + self.sujet.texte + \
                " | marqueur neg 1 : " + self.marqueurNegation1 + " | pronom devant verbe : " + self.pronom_devant_verbe + \
                " | verbe : " + self.verbe + " | marqueur neg 2 : " + self.marqueurNegation2 + \
-               " | action : " + self.action + " | adverbe : " + self.adverbe + " | temps : " + self.tempsConjug + \
+               " | action : " + self.action + " | adverbe : " + self.adverbe.texte + " | temps : " + self.tempsConjug + \
                " | pers conjug: " + str(self.sujet.persConjug)
 
     def __eq__(self, other):
@@ -85,7 +84,7 @@ class StructurePhrase:
             phraseInitiale = self.sujet.identifierSujet(phraseInitiale)
             phraseInitiale = self.identifierMarqueursNegation(phraseInitiale)
             phraseInitiale = self.identifierMarqueurTemporel(phraseInitiale)
-            phraseInitiale = self.identifierAdverbe(phraseInitiale)
+            phraseInitiale = self.adverbe.identifierAdverbe(phraseInitiale)
 
         phraseInitiale = self.identifierAction(phraseInitiale)
 
@@ -111,23 +110,6 @@ class StructurePhrase:
                 break
         return phrase
 
-    # Recherche adverbe dans une sequence donnee de mots et init la val de self.adverbe avec
-    # IMPORATNT ! Doit etre appele après identifierMarqueurTemporel
-    # phrase : liste de mots dans laquelle il faut trouver l'adverbe
-    def identifierAdverbe(self, phrase):
-        # ouverture du dictionnaire des adverbes francais
-        with open('dictionnaireUtilisable/adverbes.json') as json_data_adverbe:
-            dictionnaireAdverbes = json.load(json_data_adverbe)
-        prepositionsFR = dictionnaireUtilisable.Prepositions()
-
-        # si mot est dans dictionnaire des adverbes : c'est un adverbes
-        for mot in phrase:
-            if mot in dictionnaireAdverbes and mot not in prepositionsFR.liste:
-                self.adverbe = mot
-                phrase.remove(mot)
-                break
-
-        return phrase
 
     # Recherche marqueur temporel dans une sequence donnee de mots et init la val de self.marqueurTemporel avec
     # Si marqueur trouve, determine le temps de la phrase
@@ -272,7 +254,7 @@ class StructurePhrase:
             self.verbe = "être"
 
         # si ni verbe ni sujet mais il y a une action: verbe être et sujet ce
-        if self.verbe == "" and self.sujet.texte == "" and (self.action != "" or self.adverbe != ""):
+        if self.verbe == "" and self.sujet.texte == "" and (self.action != "" or self.adverbe.texte != ""):
             self.sujet.texte = "ce"
             self.verbe = "être"
             self.sujet.persConjug = 3

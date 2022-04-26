@@ -3,7 +3,7 @@ import dictionnaireUtilisable
 
 class Sujet:
 
-    def __init__(self, texte = "", persConjug = 1):
+    def __init__(self, texte, persConjug):
         self.texte = texte                      # texte du sujet
         self.persConjug = persConjug            # le sujet determine la personne à laquelle on conjugue le verbe
 

@@ -1,7 +1,7 @@
 from traitementGrammaire import StructurePhrase
 
 # phrase sortie par l'IA de reconnaissance des signes
-phraseInitiale = ["bonbon", "lui", "vouloir"]
+phraseInitiale = ["lui", "partir", "lentement","lui"]
 structurePhrase = structurePhrase = StructurePhrase()
 structurePhrase = structurePhrase.traduire(phraseInitiale)
 
