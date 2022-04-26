@@ -97,12 +97,12 @@ class TestsUnitaires:
 
         phrase = ["hier","cinéma","moi","aller"]
         structurePhrase = StructurePhrase()
-        phrase = structurePhrase.identifierVerbe(phrase)
+        phrase = structurePhrase.verbe.identifierVerbe(phrase)
 
         if structurePhrase.verbe == self.resultatsAttendus[self.nbTests].verbe:
             self.nbTestsReussis = self.nbTestsReussis + 1
         else:
-            self.messagesEchecs.append("Test verbe 1 - Obtenu : '" + structurePhrase.verbe +"' | attendu : '" + self.resultatsAttendus[self.nbTests].verbe +"'")
+            self.messagesEchecs.append("Test verbe 1 - Obtenu : '" + structurePhrase.verbe.texte +"' | attendu : '" + self.resultatsAttendus[self.nbTests].verbe.texte +"'")
 
         self.nbTests = self.nbTests + 1
 
@@ -112,14 +112,14 @@ class TestsUnitaires:
 
         phrase = ["lui", "son", "ami"]
         structurePhrase = StructurePhrase()
-        phrase = structurePhrase.identifierVerbe(phrase)
+        phrase = structurePhrase.verbe.identifierVerbe(phrase)
 
         if structurePhrase.verbe == self.resultatsAttendus[self.nbTests].verbe:
             self.nbTestsReussis = self.nbTestsReussis + 1
         else:
             self.messagesEchecs.append(
-                "Test verbe 2 - Obtenu : '" + structurePhrase.verbe + "' | attendu : '" +
-                self.resultatsAttendus[self.nbTests].verbe + "'")
+                "Test verbe 2 - Obtenu : '" + structurePhrase.verbe.texte + "' | attendu : '" +
+                self.resultatsAttendus[self.nbTests].verbe.texte + "'")
 
         self.nbTests = self.nbTests + 1
 
@@ -271,7 +271,7 @@ class TestsUnitaires:
     def testStructPhrase1(self):
         phrase = ["hier", "cinéma", "moi", "aller"]
         structurePhrase = StructurePhrase()
-        phrase = structurePhrase.identifierVerbe(phrase)
+        phrase = structurePhrase.verbe.identifierVerbe(phrase)
         phrase = structurePhrase.identifierMarqueurTemporel(phrase)
         phrase = structurePhrase.adverbe.identifierAdverbe(phrase)
         phrase = structurePhrase.sujet.identifierSujet(phrase)
@@ -293,7 +293,7 @@ class TestsUnitaires:
     def testStructPhrase2(self):
         phrase = ["lui", "a-lui", "ami"]
         structurePhrase = StructurePhrase()
-        phrase = structurePhrase.identifierVerbe(phrase)
+        phrase = structurePhrase.verbe.identifierVerbe(phrase)
         phrase = structurePhrase.identifierMarqueurTemporel(phrase)
         phrase = structurePhrase.adverbe.identifierAdverbe(phrase)
         phrase = structurePhrase.sujet.identifierSujet(phrase)
@@ -315,7 +315,7 @@ class TestsUnitaires:
     def testStructPhrase3(self):
         phrase = ["lui", "connaitre", "moi"]
         structurePhrase = StructurePhrase()
-        phrase = structurePhrase.identifierVerbe(phrase)
+        phrase = structurePhrase.verbe.identifierVerbe(phrase)
         phrase = structurePhrase.identifierMarqueurTemporel(phrase)
         phrase = structurePhrase.adverbe.identifierAdverbe(phrase)
         phrase = structurePhrase.sujet.identifierSujet(phrase)
@@ -336,7 +336,7 @@ class TestsUnitaires:
     def testStructPhrase4(self):
         phrase = ["lui", "partir", "récemment","lui"]
         structurePhrase = StructurePhrase()
-        phrase = structurePhrase.identifierVerbe(phrase)
+        phrase = structurePhrase.verbe.identifierVerbe(phrase)
         phrase = structurePhrase.identifierMarqueurTemporel(phrase)
         phrase = structurePhrase.adverbe.identifierAdverbe(phrase)
         phrase = structurePhrase.sujet.identifierSujet(phrase)
@@ -373,14 +373,14 @@ class TestsUnitaires:
     def testConj1(self):
 
         structurePhrase = StructurePhrase("je", "", "aller", "cinéma")
-        structurePhrase.conjuguerVerbe()
+        structurePhrase.verbe.conjuguerVerbe(structurePhrase.tempsConjug, structurePhrase.sujet, structurePhrase.pronom_devant_verbe)
 
         if structurePhrase.verbe == self.resultatsAttendus[self.nbTests].verbe:
             self.nbTestsReussis = self.nbTestsReussis + 1
         else:
             self.messagesEchecs.append(
-                "Test conj 1 - Obtenu : '" + structurePhrase.verbe + "' | attendu : '" +
-                self.resultatsAttendus[self.nbTests].verbe + "'")
+                "Test conj 1 - Obtenu : '" + structurePhrase.verbe.texte + "' | attendu : '" +
+                self.resultatsAttendus[self.nbTests].verbe.texte + "'")
 
         self.nbTests = self.nbTests + 1
 
@@ -389,14 +389,14 @@ class TestsUnitaires:
     def testConj2(self):
 
         structurePhrase = StructurePhrase("je", "", "aller", "cinéma", "hier", "", 1, "passé-composé")
-        structurePhrase.conjuguerVerbe()
+        structurePhrase.verbe.conjuguerVerbe(structurePhrase.tempsConjug, structurePhrase.sujet, structurePhrase.pronom_devant_verbe)
 
         if structurePhrase.verbe == self.resultatsAttendus[self.nbTests].verbe:
             self.nbTestsReussis = self.nbTestsReussis + 1
         else:
             self.messagesEchecs.append(
-                "Test conj 2 - Obtenu : '" + str(structurePhrase.verbe) + "' | attendu : '" +
-                str(self.resultatsAttendus[self.nbTests].verbe) + "'")
+                "Test conj 2 - Obtenu : '" + structurePhrase.verbe.texte + "' | attendu : '" +
+                self.resultatsAttendus[self.nbTests].verbe.texte + "'")
 
         self.nbTests = self.nbTests + 1
 
@@ -576,8 +576,8 @@ class TestsUnitaires:
             self.nbTestsReussis = self.nbTestsReussis + 1
         else:
             self.messagesEchecs.append(
-                "Test choix mot defaut 2 - Obtenu : '" + str(structurePhrase.verbe) + "' | attendu : '" +
-                str(self.resultatsAttendus[self.nbTests].verbe) + "'")
+                "Test choix mot defaut 2 - Obtenu : '" + structurePhrase.verbe.texte + "' | attendu : '" +
+                self.resultatsAttendus[self.nbTests].verbe.texte + "'")
 
         self.nbTests = self.nbTests + 1
 

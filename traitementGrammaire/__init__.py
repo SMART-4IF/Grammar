@@ -1,3 +1,4 @@
 from traitementGrammaire.structurePhrase import StructurePhrase
 from traitementGrammaire.Sujet import Sujet
 from traitementGrammaire.Adverbe import Adverbe
+from traitementGrammaire.Verbe import Verbe

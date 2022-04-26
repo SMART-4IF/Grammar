@@ -1,16 +1,16 @@
 
 import json
 from . import Sujet
+from . import Verbe
 from . import Adverbe
 import dictionnaireUtilisable
-from verbecc import Conjugator
 
 class StructurePhrase:
 
     def __init__(self, sujet = "", pronom_devant_verbe = "", verbe = "", action = "", marqueurTemporel = "", adverbe = "", persConj = 1, tempsConjug = "présent", marqueurNegation1 = "", marqueurNegation2 = ""):
         self.sujet = Sujet.Sujet(sujet, persConj)
         self.pronom_devant_verbe = pronom_devant_verbe
-        self.verbe = verbe
+        self.verbe = Verbe.Verbe(verbe)
         self.action = action
         self.marqueurTemporel = marqueurTemporel
         self.adverbe = Adverbe.Adverbe(adverbe)
@@ -35,8 +35,8 @@ class StructurePhrase:
         if self.pronom_devant_verbe != "":
             phraseSplitee.append(self.pronom_devant_verbe)
 
-        if self.verbe != "":
-            for mot in self.verbe.split():
+        if self.verbe.texte != "":
+            for mot in self.verbe.texte.split():
                 phraseSplitee.append(mot)
 
         if self.marqueurNegation2 != "":
@@ -64,7 +64,7 @@ class StructurePhrase:
     def toStringDebug(self):
         return "marqueurTemporel : " + self.marqueurTemporel + " | sujet : " + self.sujet.texte + \
                " | marqueur neg 1 : " + self.marqueurNegation1 + " | pronom devant verbe : " + self.pronom_devant_verbe + \
-               " | verbe : " + self.verbe + " | marqueur neg 2 : " + self.marqueurNegation2 + \
+               " | verbe : " + self.verbe.texte + " | marqueur neg 2 : " + self.marqueurNegation2 + \
                " | action : " + self.action + " | adverbe : " + self.adverbe.texte + " | temps : " + self.tempsConjug + \
                " | pers conjug: " + str(self.sujet.persConjug)
 
@@ -93,22 +93,8 @@ class StructurePhrase:
             self.sujet.identifierPersConjug()
             self.choisirDeterminantAction()
             self.accorderAction()
-            self.conjuguerVerbe()
+            self.conjuguerVerbe(self.tempsConjug, self.sujet, self.pronom_devant_verbe)
         return self
-
-    # Recherche verbe dans une sequence donnee de mots et init la val de self.verbe avec
-    # phrase : la phrase dans laquelle il faut trouver le verbe
-    def identifierVerbe(self, phrase):
-        # ouverture du dictionnaire des verbes francais
-        with open('dictionnaireUtilisable/verbes.json') as json_data_verbe:
-            dictionnaireVerbes = json.load(json_data_verbe)
-        # si mot est dans dictionnaire des verbes : c'est un verbe
-        for mot in phrase:
-            if mot in dictionnaireVerbes:
-                self.verbe = mot
-                phrase.remove(mot)
-                break
-        return phrase
 
 
     # Recherche marqueur temporel dans une sequence donnee de mots et init la val de self.marqueurTemporel avec
@@ -246,17 +232,17 @@ class StructurePhrase:
     # cette methode est a appeler quand on a determine toute la strcuture de la phrase
     def identifierMotsParDefaut(self):
         # si pas de sujet mais verbe: sujet par defaut est "je"
-        if self.sujet.texte == "" and self.verbe != "":
+        if self.sujet.texte == "" and self.verbe.texte != "":
             self.sujet.texte = "je"
 
         # si pas de verbe mais sujet, verbe par defaut est "être"
-        if self.verbe == "" and self.sujet.texte != "":
-            self.verbe = "être"
+        if self.verbe.texte == "" and self.sujet.texte != "":
+            self.verbe.texte = "être"
 
         # si ni verbe ni sujet mais il y a une action: verbe être et sujet ce
-        if self.verbe == "" and self.sujet.texte == "" and (self.action != "" or self.adverbe.texte != ""):
+        if self.verbe.texte == "" and self.sujet.texte == "" and (self.action != "" or self.adverbe.texte != ""):
             self.sujet.texte = "ce"
-            self.verbe = "être"
+            self.verbe.texte = "être"
             self.sujet.persConjug = 3
 
 
@@ -279,7 +265,7 @@ class StructurePhrase:
                     break
 
         # si on est dans une phrase avec pronom personnel + etre ou phrase d'un seul mot ou phrase avec quantificateur: pas de determinant
-        if (self.sujet.texte in pronomsFR.personnels and self.verbe == "être") is False and (self.sujet.texte == "" and self.verbe == "") is False \
+        if (self.sujet.texte in pronomsFR.personnels and self.verbe.texte == "être") is False and (self.sujet.texte == "" and self.verbe == "") is False \
                 and testQuantifacteur is False:
 
             for mot in self.action.split():
@@ -290,11 +276,11 @@ class StructurePhrase:
 
                 for element in dictionnaireNoms:
                     if mot == element[0]:
-                        if element[1] == "m" and self.verbe == "aller" and element[0] in voyelles:
+                        if element[1] == "m" and self.verbe.texte == "aller" and element[0] in voyelles:
                             self.action = "à l'"+self.action
-                        elif element[1] == "m" and self.verbe == "aller" and element[0] not in voyelles:
+                        elif element[1] == "m" and self.verbe.texte == "aller" and element[0] not in voyelles:
                             self.action = "au "+self.action
-                        elif element[1] == "f" and self.verbe == "aller":
+                        elif element[1] == "f" and self.verbe.texte == "aller":
                             self.action = "à la "+self.action
                         elif element[1] == "f":
                             self.action = "une " + self.action
@@ -322,24 +308,6 @@ class StructurePhrase:
                         self.action = self.action.replace(mot, mot+"s")
                     elif element[0] == mot and mot in pluriel.irreguliersPluriels:
                         self.action = self.action.replace(mot, mot+"x")
-
-    # conjugue le verbe selon le temps et la personne identifies
-    def conjuguerVerbe(self):
-        if self.verbe != "":
-            cg = Conjugator(lang='fr')
-            conjugaisonsDuVerbe = cg.conjugate(self.verbe)
-            verbeConjugue = conjugaisonsDuVerbe['moods']['indicatif'][self.tempsConjug][self.sujet.persConjug - 1]
-
-            # si pronom j', le split ne marche pas.
-            if "'" in verbeConjugue:
-                if self.pronom_devant_verbe == "":
-                    if self.sujet.texte == "je":
-                        self.sujet.texte = "j'"
-                self.verbe = verbeConjugue[2:]
-            else:
-                verbeConjugue = verbeConjugue.split()
-                verbeConjugue = verbeConjugue[1:]
-                self.verbe = " ".join(verbeConjugue)
 
 
     # determiner si certains mots doivent subir une élision
