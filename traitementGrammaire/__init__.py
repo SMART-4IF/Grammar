@@ -3,3 +3,4 @@ from traitementGrammaire.Sujet import Sujet
 from traitementGrammaire.Adverbe import Adverbe
 from traitementGrammaire.Verbe import Verbe
 from traitementGrammaire.MarqueurTemporel import MarqueurTemporel
+from traitementGrammaire.MarqueursNegation import MarqueursNegation

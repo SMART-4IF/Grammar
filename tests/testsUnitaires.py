@@ -403,16 +403,15 @@ class TestsUnitaires:
 
         phrase = ["rien"]
         structurePhrase = StructurePhrase("il", "", "faire")
-        structurePhrase.identifierMarqueursNegation(phrase)
+        structurePhrase.marqueursNegation.identifierMarqueursNegation(phrase)
 
-        if structurePhrase.marqueurNegation1 == self.resultatsAttendus[self.nbTests].marqueurNegation1 and \
-                structurePhrase.marqueurNegation2 == self.resultatsAttendus[self.nbTests].marqueurNegation2:
+        if structurePhrase.marqueursNegation == self.resultatsAttendus[self.nbTests].marqueursNegation:
             self.nbTestsReussis = self.nbTestsReussis + 1
         else:
             self.messagesEchecs.append(
-                "Test negation 1 - Obtenu : '" + structurePhrase.marqueurNegation1 + " " + structurePhrase.marqueurNegation2
-                + "' | attendu : '" + self.resultatsAttendus[self.nbTests].marqueurNegation1 + " "
-                + self.resultatsAttendus[self.nbTests].marqueurNegation2 + "'")
+                "Test negation 1 - Obtenu : '" + structurePhrase.marqueursNegation.marqueur1 + " " + structurePhrase.marqueursNegation.marqueur2
+                + "' | attendu : '" + self.resultatsAttendus[self.nbTests].marqueursNegation.marqueur1 + " "
+                + self.resultatsAttendus[self.nbTests].marqueursNegation.marqueur2 + "'")
 
         self.nbTests = self.nbTests + 1
 
@@ -422,16 +421,15 @@ class TestsUnitaires:
 
         phrase = ["non"]
         structurePhrase = StructurePhrase("je", "", "être", "d'accord")
-        structurePhrase.identifierMarqueursNegation(phrase)
+        structurePhrase.marqueursNegation.identifierMarqueursNegation(phrase)
 
-        if structurePhrase.marqueurNegation1 == self.resultatsAttendus[self.nbTests].marqueurNegation1 and \
-                structurePhrase.marqueurNegation2 == self.resultatsAttendus[self.nbTests].marqueurNegation2:
+        if structurePhrase.marqueursNegation == self.resultatsAttendus[self.nbTests].marqueursNegation:
             self.nbTestsReussis = self.nbTestsReussis + 1
         else:
             self.messagesEchecs.append(
-                "Test negation 2 - Obtenu : '" + structurePhrase.marqueurNegation1 + " " + structurePhrase.marqueurNegation2
-                + "' | attendu : '" + self.resultatsAttendus[self.nbTests].marqueurNegation1 + " "
-                + self.resultatsAttendus[self.nbTests].marqueurNegation2 + "'")
+                "Test negation 2 - Obtenu : '" + structurePhrase.marqueursNegation.marqueur1 + " " + structurePhrase.marqueursNegation.marqueur2
+                + "' | attendu : '" + self.resultatsAttendus[self.nbTests].marqueursNegation.marqueur1 + " "
+                + self.resultatsAttendus[self.nbTests].marqueursNegation.marqueur2 + "'")
 
         self.nbTests = self.nbTests + 1
 

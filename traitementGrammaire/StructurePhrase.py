@@ -4,6 +4,7 @@ from . import Sujet
 from . import Verbe
 from . import Adverbe
 from . import MarqueurTemporel
+from . import MarqueursNegation
 import dictionnaireUtilisable
 
 class StructurePhrase:
@@ -15,8 +16,7 @@ class StructurePhrase:
         self.action = action
         self.marqueurTemporel = MarqueurTemporel.MarqueurTemporel(marqueurTemporel, tempsConjug)
         self.adverbe = Adverbe.Adverbe(adverbe)
-        self.marqueurNegation1 = marqueurNegation1
-        self.marqueurNegation2 = marqueurNegation2
+        self.marqueursNegation = MarqueursNegation.MarqueursNegation(marqueurNegation1, marqueurNegation2)
 
 
     def __str__(self):
@@ -30,8 +30,8 @@ class StructurePhrase:
             for mot in self.sujet.texte.split():
                 phraseSplitee.append(mot)
 
-        if self.marqueurNegation1 != "":
-            phraseSplitee.append(self.marqueurNegation1)
+        if self.marqueursNegation.marqueur1 != "":
+            phraseSplitee.append(self.marqueursNegation.marqueur1)
 
         if self.pronom_devant_verbe != "":
             phraseSplitee.append(self.pronom_devant_verbe)
@@ -40,8 +40,8 @@ class StructurePhrase:
             for mot in self.verbe.texte.split():
                 phraseSplitee.append(mot)
 
-        if self.marqueurNegation2 != "":
-            phraseSplitee.append(self.marqueurNegation2)
+        if self.marqueursNegation.marqueur2 != "":
+            phraseSplitee.append(self.marqueursNegation.marqueur2)
 
         if self.action != "":
             for mot in self.action.split():
@@ -64,16 +64,15 @@ class StructurePhrase:
     # permet d'afficher le detail de toutes les infos
     def toStringDebug(self):
         return "marqueurTemporel : " + self.marqueurTemporel.texte + " | sujet : " + self.sujet.texte + \
-               " | marqueur neg 1 : " + self.marqueurNegation1 + " | pronom devant verbe : " + self.pronom_devant_verbe + \
-               " | verbe : " + self.verbe.texte + " | marqueur neg 2 : " + self.marqueurNegation2 + \
+               " | marqueur neg 1 : " + self.marqueursNegation.marqueur1 + " | pronom devant verbe : " + self.pronom_devant_verbe + \
+               " | verbe : " + self.verbe.texte + " | marqueur neg 2 : " + self.marqueursNegation.marqueur2 + \
                " | action : " + self.action + " | adverbe : " + self.adverbe.texte + " | temps : " + self.marqueurTemporel.tempsConjug + \
                " | pers conjug: " + str(self.sujet.persConjug)
 
     def __eq__(self, other):
         return self.marqueurTemporel == other.marqueurTemporel and self.sujet == other.sujet and \
-               self.marqueurNegation1 == other.marqueurNegation1 and self.pronom_devant_verbe == other.pronom_devant_verbe and \
-               self.verbe == other.verbe and self.marqueurNegation2 == other.marqueurNegation2 \
-               and self.action == other.action and self.adverbe == other.adverbe
+               self.marqueursNegation == other.marqueursNegation and self.pronom_devant_verbe == other.pronom_devant_verbe and \
+               self.verbe == other.verbe and self.action == other.action and self.adverbe == other.adverbe
 
     # execute l'ensemble du process de traduction
     def traduire(self, phraseInitiale):
@@ -83,7 +82,7 @@ class StructurePhrase:
         if(longueurPhrase > 1):
             phraseInitiale = self.identifierVerbe(phraseInitiale)
             phraseInitiale = self.sujet.identifierSujet(phraseInitiale)
-            phraseInitiale = self.identifierMarqueursNegation(phraseInitiale)
+            phraseInitiale = self.marqueursNegation.identifierMarqueursNegation(phraseInitiale)
             phraseInitiale = self.identifierMarqueurTemporel(phraseInitiale)
             phraseInitiale = self.adverbe.identifierAdverbe(phraseInitiale)
 
@@ -96,25 +95,6 @@ class StructurePhrase:
             self.accorderAction()
             self.conjuguerVerbe(self.marqueurTemporel.tempsConjug, self.sujet, self.pronom_devant_verbe)
         return self
-
-
-    # identifie les marqueurs de negation
-    def identifierMarqueursNegation(self, phrase):
-        marqueursNegation = dictionnaireUtilisable.MarqueursNegation()
-
-        for mot in phrase:
-
-            if mot in marqueursNegation.simple:
-                self.marqueurNegation2 = mot
-                phrase.remove(mot)
-            if mot in marqueursNegation.double:
-                self.marqueurNegation2 = "pas"
-                phrase.remove(mot)
-
-        if self.marqueurNegation2 != "":
-            self.marqueurNegation1 = "ne"
-
-        return phrase
 
 
     # Recherche action dans une sequence donnee de mots et init la val de self.action avec
