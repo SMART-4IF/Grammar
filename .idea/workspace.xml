@@ -2,7 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="82a20799-784e-4972-afdf-d928919d917b" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/traitementGrammaire/structurePhrase.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/launchScripts.py" beforeDir="false" afterPath="$PROJECT_DIR$/launchScripts.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/launchTests.py" beforeDir="false" afterPath="$PROJECT_DIR$/launchTests.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scriptsTraitement/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/traitementGrammaire/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scriptsTraitement/structurePhrase.py" beforeDir="false" afterPath="$PROJECT_DIR$/traitementGrammaire/Sujet.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/testsTraductions.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/testsTraductions.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tests/testsUnitaires.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/testsUnitaires.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -37,10 +44,11 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/tests" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/traitementGrammaire" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/traitementGrammaire" />
       <recent name="$PROJECT_DIR$/tests" />
       <recent name="$PROJECT_DIR$" />
     </key>
@@ -65,7 +73,7 @@
       <workItem from="1650609590799" duration="4827000" />
       <workItem from="1650698115528" duration="11444000" />
       <workItem from="1650782698082" duration="7567000" />
-      <workItem from="1650871975899" duration="2221000" />
+      <workItem from="1650871975899" duration="5517000" />
     </task>
     <servers />
   </component>

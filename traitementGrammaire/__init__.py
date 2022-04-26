@@ -1,0 +1,2 @@
+from traitementGrammaire.structurePhrase import StructurePhrase
+from traitementGrammaire.Sujet import Sujet

@@ -1,2 +1,2 @@
 from . import dictionnaireUtilisable
-from . import scriptsTraitement
+from . import traitementGrammaire

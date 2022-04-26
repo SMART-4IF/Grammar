@@ -1,4 +1,7 @@
-import scriptsTraitement
+import traitementGrammaire
+
+StructurePhrase = traitementGrammaire.StructurePhrase
+Sujet = traitementGrammaire.Sujet
 
 class TestsUnitaires:
 
@@ -7,34 +10,34 @@ class TestsUnitaires:
         self.nbTestsReussis = 0
         self.messagesEchecs = []
         self.resultatsAttendus = [
-            scriptsTraitement.StructurePhrase("", "", "aller"),                                         #testVerbe1
-            scriptsTraitement.StructurePhrase("", "", ""),                                              #testVerbe2
-            scriptsTraitement.StructurePhrase("", "", "", "", "", "lentement"),                         #testAdverbe1
-            scriptsTraitement.StructurePhrase("moi", ""),                                               #testSujet1
-            scriptsTraitement.StructurePhrase("moi", ""),                                               #testSujet2
-            scriptsTraitement.StructurePhrase("", "",  "", "son ami"),                                  #testAction1
-            scriptsTraitement.StructurePhrase("", "",  "", "avec Bob"),                                  #testAction1
-            scriptsTraitement.StructurePhrase("", "", "", "", "récemment", "", "passé-composé"),        # testTemps1
-            scriptsTraitement.StructurePhrase("", "",  "", "", "", "", "passé-composé"),                # testTemps2
-            scriptsTraitement.StructurePhrase("", "",  "", "", "jeudi dernier", "", "passé-composé"),   # testTemps3
-            scriptsTraitement.StructurePhrase("moi","",  "aller", "cinéma", "hier", "", "passé-composé"),   #testStructPhrase1
-            scriptsTraitement.StructurePhrase("lui","",  "être", "son ami"),                            #testStructPhrase2
-            scriptsTraitement.StructurePhrase("moi", "le",  "connaitre", ""),                           #testStructPhrase3
-            scriptsTraitement.StructurePhrase("lui","",  "partir", "", "récemment", "", "passé-composé"),   #testStructPhrase4
-            scriptsTraitement.StructurePhrase("", "",  "", "", "", "", "", 3),                          #testIdentificationPersConj1
-            scriptsTraitement.StructurePhrase("", "", "vais"),                                          #testConj1
-            scriptsTraitement.StructurePhrase("", "", "suis allé"),                                     #testConj2
-            scriptsTraitement.StructurePhrase("", "",  "", "", "", "", "", 1, "ne", "rien"),            #testNegation1
-            scriptsTraitement.StructurePhrase("", "",  "", "", "", "", "", 1, "ne", "pas"),             #testNegation2
-            scriptsTraitement.StructurePhrase("", "te"),                                                #testPronomDevantVerbe
-            scriptsTraitement.StructurePhrase("", "", "", "une voiture"),                               #testChoixDeterminant1
-            scriptsTraitement.StructurePhrase("", "", "", "au cinéma"),                                 #testChoixDeterminant2
-            scriptsTraitement.StructurePhrase("", "", "", "son ami"),                                   #testChoixDeterminant3
-            scriptsTraitement.StructurePhrase("", "", "", "entendant"),                                 #testChoixDeterminant4
-            scriptsTraitement.StructurePhrase("", "", "", "sept voitures"),                             #testAccordAction1
-            scriptsTraitement.StructurePhrase("", "", "", "plusieurs hiboux"),                          #testAccordAction2
-            scriptsTraitement.StructurePhrase("je", "", "", ""),                                        #testMotsParDefaut1
-            scriptsTraitement.StructurePhrase("", "", "être", ""),                                      #testMotsParDefaut2
+            StructurePhrase(Sujet(), "", "aller"),                                                                  #testVerbe1
+            StructurePhrase(Sujet(), "", ""),                                                                       #testVerbe2
+            StructurePhrase(Sujet(), "", "", "", "", "lentement"),                                                  #testAdverbe1
+            StructurePhrase(Sujet("moi"), ""),                                                                      #testSujet1
+            StructurePhrase(Sujet("moi"), ""),                                                                      #testSujet2
+            StructurePhrase(Sujet(), "", "", "son ami"),                                                            #testAction1
+            StructurePhrase(Sujet(), "", "", "avec Bob"),                                                           #testAction1
+            StructurePhrase(Sujet(), "", "", "", "récemment", "", "passé-composé"),                                 #testTemps1
+            StructurePhrase(Sujet(), "", "", "", "", "", "passé-composé"),                                          #testTemps2
+            StructurePhrase(Sujet(), "", "", "", "jeudi dernier", "", "passé-composé"),                             #testTemps3
+            StructurePhrase(Sujet("moi"), "", "aller", "cinéma", "hier", "", "passé-composé"),   #testStructPhrase1
+            StructurePhrase(Sujet("lui"), "", "être", "son ami"),                            #testStructPhrase2
+            StructurePhrase(Sujet("moi"), "le", "connaitre", ""),                           #testStructPhrase3
+            StructurePhrase(Sujet("lui"), "", "partir", "", "récemment", "", "passé-composé"),   #testStructPhrase4
+            StructurePhrase(Sujet("", 3), "", "", "", "", "", ""),                          #testIdentificationPersConj1
+            StructurePhrase(Sujet(), "", "vais"),                                          #testConj1
+            StructurePhrase(Sujet(), "", "suis allé"),                                     #testConj2
+            StructurePhrase(Sujet(), "", "", "", "", "", "", "ne", "rien"),            #testNegation1
+            StructurePhrase(Sujet(), "", "", "", "", "", "", "ne", "pas"),             #testNegation2
+            StructurePhrase(Sujet(), "te"),                                                #testPronomDevantVerbe
+            StructurePhrase(Sujet(), "", "", "une voiture"),                               #testChoixDeterminant1
+            StructurePhrase(Sujet(), "", "", "au cinéma"),                                 #testChoixDeterminant2
+            StructurePhrase(Sujet(), "", "", "son ami"),                                   #testChoixDeterminant3
+            StructurePhrase(Sujet(), "", "", "entendant"),                                 #testChoixDeterminant4
+            StructurePhrase(Sujet(), "", "", "sept voitures"),                             #testAccordAction1
+            StructurePhrase(Sujet(), "", "", "plusieurs hiboux"),                          #testAccordAction2
+            StructurePhrase(Sujet("je"), "", "", ""),                                        #testMotsParDefaut1
+            StructurePhrase(Sujet(), "", "être", ""),                                      #testMotsParDefaut2
             "?",                                                                                        #testChoixPonctuation1
             ".",                                                                                        #testChoixPonctuation2
             "ça va",                                                                                    #testNettoyageTirets1
@@ -91,7 +94,7 @@ class TestsUnitaires:
     def testVerbe1(self):
 
         phrase = ["hier","cinéma","moi","aller"]
-        structurePhrase = scriptsTraitement.StructurePhrase()
+        structurePhrase = StructurePhrase()
         phrase = structurePhrase.identifierVerbe(phrase)
 
         if structurePhrase.verbe == self.resultatsAttendus[self.nbTests].verbe:
@@ -106,7 +109,7 @@ class TestsUnitaires:
     def testVerbe2(self):
 
         phrase = ["lui", "son", "ami"]
-        structurePhrase = scriptsTraitement.StructurePhrase()
+        structurePhrase = StructurePhrase()
         phrase = structurePhrase.identifierVerbe(phrase)
 
         if structurePhrase.verbe == self.resultatsAttendus[self.nbTests].verbe:
@@ -123,7 +126,7 @@ class TestsUnitaires:
     def testAdverbe1(self):
 
         phrase = ["toi", "signer", "lentement"]
-        structurePhrase = scriptsTraitement.StructurePhrase()
+        structurePhrase = StructurePhrase()
         structurePhrase.identifierAdverbe(phrase)
 
         if structurePhrase.adverbe == self.resultatsAttendus[self.nbTests].adverbe :
@@ -138,15 +141,15 @@ class TestsUnitaires:
     def testSujet1(self):
 
         phrase = ["hier", "cinéma", "moi", "aller"]
-        structurePhrase = scriptsTraitement.StructurePhrase()
-        structurePhrase.identifierSujet(phrase)
+        structurePhrase = StructurePhrase()
+        structurePhrase.sujet.identifierSujet(phrase)
 
         if structurePhrase.sujet == self.resultatsAttendus[self.nbTests].sujet:
             self.nbTestsReussis = self.nbTestsReussis + 1
         else:
             self.messagesEchecs.append(
-                "Test sujet 1 - Obtenu : '" + structurePhrase.sujet + "' | attendu : '" + self.resultatsAttendus[
-                    self.nbTests].sujet + "'")
+                "Test sujet 1 - Obtenu : '" + structurePhrase.sujet.texte + "' | attendu : '" + self.resultatsAttendus[
+                    self.nbTests].sujet.texte + "'")
 
         self.nbTests = self.nbTests + 1
 
@@ -154,15 +157,15 @@ class TestsUnitaires:
     def testSujet2(self):
 
         phrase = ["lui", "connaitre", "moi"]
-        structurePhrase = scriptsTraitement.StructurePhrase()
-        structurePhrase.identifierSujet(phrase)
+        structurePhrase = StructurePhrase()
+        structurePhrase.sujet.identifierSujet(phrase)
 
         if structurePhrase.sujet == self.resultatsAttendus[self.nbTests].sujet:
             self.nbTestsReussis = self.nbTestsReussis + 1
         else:
             self.messagesEchecs.append(
-                "Test sujet 2 - Obtenu : '" + structurePhrase.sujet + "' | attendu : '" + self.resultatsAttendus[
-                    self.nbTests].sujet + "'")
+                "Test sujet 2 - Obtenu : '" + structurePhrase.sujet.texte + "' | attendu : '" + self.resultatsAttendus[
+                    self.nbTests].sujet.texte + "'")
 
         self.nbTests = self.nbTests + 1
 
@@ -171,7 +174,7 @@ class TestsUnitaires:
     def testAction1(self):
 
         phrase = ["lui", "a-lui", "ami"]
-        structurePhrase = scriptsTraitement.StructurePhrase()
+        structurePhrase = StructurePhrase()
         structurePhrase.identifierAction(phrase)
 
         if structurePhrase.action == self.resultatsAttendus[self.nbTests].action:
@@ -187,7 +190,7 @@ class TestsUnitaires:
     def testAction2(self):
 
         phrase = ["avec", "Bob", "travailler"]
-        structurePhrase = scriptsTraitement.StructurePhrase()
+        structurePhrase = StructurePhrase()
         structurePhrase.identifierAction(phrase)
 
         if structurePhrase.action == self.resultatsAttendus[self.nbTests].action:
@@ -204,7 +207,7 @@ class TestsUnitaires:
     def testTemps1(self):
 
         phrase = ["lui", "partir", "récemment", "lui"]
-        structurePhrase = scriptsTraitement.StructurePhrase()
+        structurePhrase = StructurePhrase()
         phrase = structurePhrase.identifierMarqueurTemporel(phrase)
 
         if structurePhrase.marqueurTemporel == self.resultatsAttendus[self.nbTests].marqueurTemporel \
@@ -224,7 +227,7 @@ class TestsUnitaires:
     def testTemps2(self):
 
         phrase = ["moi", "voiture", "acheter", "fini"]
-        structurePhrase = scriptsTraitement.StructurePhrase()
+        structurePhrase = StructurePhrase()
         phrase = structurePhrase.identifierMarqueurTemporel(phrase)
 
         if structurePhrase.marqueurTemporel == self.resultatsAttendus[self.nbTests].marqueurTemporel \
@@ -244,7 +247,7 @@ class TestsUnitaires:
     def testTemps3(self):
 
         phrase = ["moi", "voiture", "acheter", "jeudi", "dernier"]
-        structurePhrase = scriptsTraitement.StructurePhrase()
+        structurePhrase = StructurePhrase()
         phrase = structurePhrase.identifierMarqueurTemporel(phrase)
 
         if structurePhrase.marqueurTemporel == self.resultatsAttendus[self.nbTests].marqueurTemporel \
@@ -263,11 +266,11 @@ class TestsUnitaires:
     # verifie que tous les termes et le temps sont bien reconnus dans une phrase simple
     def testStructPhrase1(self):
         phrase = ["hier", "cinéma", "moi", "aller"]
-        structurePhrase = scriptsTraitement.StructurePhrase()
+        structurePhrase = StructurePhrase()
         phrase = structurePhrase.identifierVerbe(phrase)
         phrase = structurePhrase.identifierMarqueurTemporel(phrase)
         phrase = structurePhrase.identifierAdverbe(phrase)
-        phrase = structurePhrase.identifierSujet(phrase)
+        phrase = structurePhrase.sujet.identifierSujet(phrase)
         phrase = structurePhrase.identifierAction(phrase)
         structurePhrase.identifierMotsParDefaut()
 
@@ -285,11 +288,11 @@ class TestsUnitaires:
     # compose d'un possessif et d'un nom
     def testStructPhrase2(self):
         phrase = ["lui", "a-lui", "ami"]
-        structurePhrase = scriptsTraitement.StructurePhrase()
+        structurePhrase = StructurePhrase()
         phrase = structurePhrase.identifierVerbe(phrase)
         phrase = structurePhrase.identifierMarqueurTemporel(phrase)
         phrase = structurePhrase.identifierAdverbe(phrase)
-        phrase = structurePhrase.identifierSujet(phrase)
+        phrase = structurePhrase.sujet.identifierSujet(phrase)
         phrase = structurePhrase.identifierAction(phrase)
         structurePhrase.identifierMotsParDefaut()
 
@@ -307,11 +310,11 @@ class TestsUnitaires:
     # compose d'un possessif et d'un nom
     def testStructPhrase3(self):
         phrase = ["lui", "connaitre", "moi"]
-        structurePhrase = scriptsTraitement.StructurePhrase()
+        structurePhrase = StructurePhrase()
         phrase = structurePhrase.identifierVerbe(phrase)
         phrase = structurePhrase.identifierMarqueurTemporel(phrase)
         phrase = structurePhrase.identifierAdverbe(phrase)
-        phrase = structurePhrase.identifierSujet(phrase)
+        phrase = structurePhrase.sujet.identifierSujet(phrase)
         phrase = structurePhrase.identifierAction(phrase)
         structurePhrase.identifierMotsParDefaut()
 
@@ -328,11 +331,11 @@ class TestsUnitaires:
     # verifie que l'on supprime les double pronom
     def testStructPhrase4(self):
         phrase = ["lui", "partir", "récemment","lui"]
-        structurePhrase = scriptsTraitement.StructurePhrase()
+        structurePhrase = StructurePhrase()
         phrase = structurePhrase.identifierVerbe(phrase)
         phrase = structurePhrase.identifierMarqueurTemporel(phrase)
         phrase = structurePhrase.identifierAdverbe(phrase)
-        phrase = structurePhrase.identifierSujet(phrase)
+        phrase = structurePhrase.sujet.identifierSujet(phrase)
         phrase = structurePhrase.identifierAction(phrase)
         structurePhrase.identifierMotsParDefaut()
 
@@ -349,15 +352,15 @@ class TestsUnitaires:
     # verifie que l'on identifie lq premiere personne pour la conj
     def testIdentificationPersConj1(self):
 
-        structurePhrase = scriptsTraitement.StructurePhrase("lui", "", "aller", "cinéma")
-        structurePhrase.identifierPersConjug()
+        structurePhrase = StructurePhrase(Sujet("lui"), "", "aller", "cinéma")
+        structurePhrase.sujet.identifierPersConjug()
 
-        if structurePhrase.persConjug == self.resultatsAttendus[self.nbTests].persConjug:
+        if structurePhrase.sujet.persConjug == self.resultatsAttendus[self.nbTests].sujet.persConjug:
             self.nbTestsReussis = self.nbTestsReussis + 1
         else:
             self.messagesEchecs.append(
-                "Test identif pers conj 1 - Obtenu : '" + str(structurePhrase.persConjug) + "' | attendu : '" +
-                str(self.resultatsAttendus[self.nbTests].persConjug) + "'")
+                "Test identif pers conj 1 - Obtenu : '" + str(structurePhrase.sujet.persConjug) + "' | attendu : '" +
+                str(self.resultatsAttendus[self.nbTests].sujet.persConjug) + "'")
 
         self.nbTests = self.nbTests + 1
 
@@ -365,7 +368,7 @@ class TestsUnitaires:
     # verifie si l'on est capable de conjuguer verbe au present 1p sg
     def testConj1(self):
 
-        structurePhrase = scriptsTraitement.StructurePhrase("je", "", "aller", "cinéma")
+        structurePhrase = StructurePhrase(Sujet("je"), "", "aller", "cinéma")
         structurePhrase.conjuguerVerbe()
 
         if structurePhrase.verbe == self.resultatsAttendus[self.nbTests].verbe:
@@ -381,7 +384,7 @@ class TestsUnitaires:
     # verifie si l'on est capable de conjuguer verbe au passé composé 1p sg
     def testConj2(self):
 
-        structurePhrase = scriptsTraitement.StructurePhrase("je", "", "aller", "cinéma", "hier", "", "passé-composé")
+        structurePhrase = StructurePhrase(Sujet("je"), "", "aller", "cinéma", "hier", "", "passé-composé")
         structurePhrase.conjuguerVerbe()
 
         if structurePhrase.verbe == self.resultatsAttendus[self.nbTests].verbe:
@@ -398,7 +401,7 @@ class TestsUnitaires:
     def testNegation1(self):
 
         phrase = ["rien"]
-        structurePhrase = scriptsTraitement.StructurePhrase("il", "", "faire")
+        structurePhrase = StructurePhrase(Sujet("il"), "", "faire")
         structurePhrase.identifierMarqueursNegation(phrase)
 
         if structurePhrase.marqueurNegation1 == self.resultatsAttendus[self.nbTests].marqueurNegation1 and \
@@ -417,7 +420,7 @@ class TestsUnitaires:
     def testNegation2(self):
 
         phrase = ["non"]
-        structurePhrase = scriptsTraitement.StructurePhrase("je", "", "être", "d'accord")
+        structurePhrase = StructurePhrase(Sujet("je"), "", "être", "d'accord")
         structurePhrase.identifierMarqueursNegation(phrase)
 
         if structurePhrase.marqueurNegation1 == self.resultatsAttendus[self.nbTests].marqueurNegation1 and \
@@ -435,7 +438,7 @@ class TestsUnitaires:
     def testPronomDevantVerbe(self):
 
         phrase = ["toi"]
-        structurePhrase = scriptsTraitement.StructurePhrase("je", "", "appeller")
+        structurePhrase = StructurePhrase(Sujet("je"), "", "appeller")
         phrase = structurePhrase.identifierAction(phrase)
 
         if structurePhrase.pronom_devant_verbe == self.resultatsAttendus[self.nbTests].pronom_devant_verbe:
@@ -451,7 +454,7 @@ class TestsUnitaires:
     # test choix determinant simple (mettre une dvant voiture)
     def testChoixDeterminant1(self):
 
-        structurePhrase = scriptsTraitement.StructurePhrase("j'", "", "acheter", "voiture")
+        structurePhrase = StructurePhrase(Sujet("j'"), "", "acheter", "voiture")
         structurePhrase.choisirDeterminantAction()
 
         if structurePhrase.action == self.resultatsAttendus[self.nbTests].action:
@@ -467,7 +470,7 @@ class TestsUnitaires:
     # test choix determinant "à un = au"
     def testChoixDeterminant2(self):
 
-        structurePhrase = scriptsTraitement.StructurePhrase("je", "", "aller", "cinéma", "hier")
+        structurePhrase = StructurePhrase(Sujet("je"), "", "aller", "cinéma", "hier")
         structurePhrase.choisirDeterminantAction()
 
         if structurePhrase.action == self.resultatsAttendus[self.nbTests].action:
@@ -482,7 +485,7 @@ class TestsUnitaires:
     # test choix determinant: si pronom possessif  pas de determinant a ajouter
     def testChoixDeterminant3(self):
 
-        structurePhrase = scriptsTraitement.StructurePhrase("il", "", "être", "son ami")
+        structurePhrase = StructurePhrase(Sujet("il"), "", "être", "son ami")
         structurePhrase.choisirDeterminantAction()
 
         if structurePhrase.action == self.resultatsAttendus[self.nbTests].action:
@@ -498,7 +501,7 @@ class TestsUnitaires:
     # test choix determinant si "il est entendant" (pas d'ajout de determinant meme si entendant peut etre un nom)
     def testChoixDeterminant4(self):
 
-        structurePhrase = scriptsTraitement.StructurePhrase("il", "", "être", "entendant")
+        structurePhrase = StructurePhrase(Sujet("il"), "", "être", "entendant")
         structurePhrase.choisirDeterminantAction()
 
         if structurePhrase.action == self.resultatsAttendus[self.nbTests].action:
@@ -514,7 +517,7 @@ class TestsUnitaires:
     # test si on est capable d'accorder l'action en nombre (identifier nombre + mettre s)
     def testAccordAction1(self):
 
-        structurePhrase = scriptsTraitement.StructurePhrase("", "", "", "sept voiture")
+        structurePhrase = StructurePhrase(Sujet(""), "", "", "sept voiture")
         structurePhrase.accorderAction()
 
         if structurePhrase.action == self.resultatsAttendus[self.nbTests].action:
@@ -530,7 +533,7 @@ class TestsUnitaires:
     # test si on est capable d'accorder l'action en nombre (identifier quantificateur + mettre x)
     def testAccordAction2(self):
 
-        structurePhrase = scriptsTraitement.StructurePhrase("", "", "", "plusieurs hibou")
+        structurePhrase = StructurePhrase(Sujet(""), "", "", "plusieurs hibou")
         structurePhrase.accorderAction()
 
         if structurePhrase.action == self.resultatsAttendus[self.nbTests].action:
@@ -546,7 +549,7 @@ class TestsUnitaires:
     # test si pas de sujet mais présence d'un verbe, sujet = "je"
     def testMotsParDefauts1(self):
 
-        structurePhrase = scriptsTraitement.StructurePhrase("", "", "travailler", "avec Bob")
+        structurePhrase = StructurePhrase(Sujet(""), "", "travailler", "avec Bob")
         structurePhrase.identifierMotsParDefaut()
 
         if structurePhrase.sujet == self.resultatsAttendus[self.nbTests].sujet:
@@ -562,7 +565,7 @@ class TestsUnitaires:
     # test si pas de verbe mais présence d'un sujet, verbe = "être"
     def testMotsParDefauts2(self):
 
-        structurePhrase = scriptsTraitement.StructurePhrase("il", "", "", "son ami")
+        structurePhrase = StructurePhrase(Sujet("il"), "", "", "son ami")
         structurePhrase.identifierMotsParDefaut()
 
         if structurePhrase.verbe == self.resultatsAttendus[self.nbTests].verbe:
@@ -579,7 +582,7 @@ class TestsUnitaires:
     def testChoixPonctuation1(self):
 
         phrase = ["faire", "quoi", "vous"]
-        structurePhrase = scriptsTraitement.StructurePhrase()
+        structurePhrase = StructurePhrase()
         ponctuation = structurePhrase.determinerPonctuation(" ".join(phrase))
 
         if ponctuation == self.resultatsAttendus[self.nbTests]:
@@ -596,7 +599,7 @@ class TestsUnitaires:
     def testChoixPonctuation2(self):
 
         phrase = ["lui", "a-lui", "ami"]
-        structurePhrase = scriptsTraitement.StructurePhrase()
+        structurePhrase = StructurePhrase()
         ponctuation = structurePhrase.determinerPonctuation(" ".join(phrase))
 
         if ponctuation == self.resultatsAttendus[self.nbTests]:
@@ -613,7 +616,7 @@ class TestsUnitaires:
     def testNettoyageTirets1(self):
 
         phrase = "ça-va"
-        structurePhrase = scriptsTraitement.StructurePhrase()
+        structurePhrase = StructurePhrase()
         phraseTraduite = structurePhrase.nettoyerTirets(phrase)
 
         if phraseTraduite == self.resultatsAttendus[self.nbTests]:
@@ -629,7 +632,7 @@ class TestsUnitaires:
     def testNettoyageTirets2(self):
 
         phrase = "arc-en-ciel"
-        structurePhrase = scriptsTraitement.StructurePhrase()
+        structurePhrase = StructurePhrase()
         phraseTraduite = structurePhrase.nettoyerTirets(phrase)
 
         if phraseTraduite == self.resultatsAttendus[self.nbTests]:

@@ -6,7 +6,7 @@ testsUnitaires.run()
 print(testsUnitaires)
 
 print("Lancement des tests de traduction: ")
-testsTraductions = tests.TestsTraductions()
-testsTraductions.run()
-print(testsTraductions)
+#testsTraductions = tests.TestsTraductions()
+#testsTraductions.run()
+#print(testsTraductions)
 

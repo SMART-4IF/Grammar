@@ -2,13 +2,13 @@
 # hier je suis allé au cinéma 
 from contextlib import nullcontext
 import json
+from . import Sujet
 import dictionnaireUtilisable
 from verbecc import Conjugator
 
 class StructurePhrase:
 
-    def __init__(self, sujet = "", pronom_devant_verbe = "", verbe = "", action = "", marqueurTemporel = "", adverbe = "", tempsConjug = "présent",
-                 persConjug = 1, marqueurNegation1 = "", marqueurNegation2 = ""):
+    def __init__(self, sujet = Sujet.Sujet(), pronom_devant_verbe = "", verbe = "", action = "", marqueurTemporel = "", adverbe = "", tempsConjug = "présent", marqueurNegation1 = "", marqueurNegation2 = ""):
         self.sujet = sujet
         self.pronom_devant_verbe = pronom_devant_verbe
         self.verbe = verbe
@@ -16,7 +16,6 @@ class StructurePhrase:
         self.marqueurTemporel = marqueurTemporel
         self.adverbe = adverbe
         self.tempsConjug = tempsConjug
-        self.persConjug = persConjug
         self.marqueurNegation1 = marqueurNegation1
         self.marqueurNegation2 = marqueurNegation2
 
@@ -27,8 +26,8 @@ class StructurePhrase:
         if self.marqueurTemporel != "":
             phraseSplitee.append(self.marqueurTemporel+',')
 
-        if self.sujet != "":
-            for mot in self.sujet.split():
+        if self.sujet.texte != "":
+            for mot in self.sujet.texte.split():
                 phraseSplitee.append(mot)
 
         if self.marqueurNegation1 != "":
@@ -64,18 +63,17 @@ class StructurePhrase:
 
     # permet d'afficher le detail de toutes les infos
     def toStringDebug(self):
-        return "marqueurTemporel : " + self.marqueurTemporel + " | sujet : " + self.sujet + \
+        return "marqueurTemporel : " + self.marqueurTemporel + " | sujet : " + self.sujet.texte + \
                " | marqueur neg 1 : " + self.marqueurNegation1 + " | pronom devant verbe : " + self.pronom_devant_verbe + \
                " | verbe : " + self.verbe + " | marqueur neg 2 : " + self.marqueurNegation2 + \
                " | action : " + self.action + " | adverbe : " + self.adverbe + " | temps : " + self.tempsConjug + \
-               " | pers conjug: " + str(self.persConjug)
+               " | pers conjug: " + str(self.sujet.persConjug)
 
     def __eq__(self, other):
         return self.marqueurTemporel == other.marqueurTemporel and self.sujet == other.sujet and \
                self.marqueurNegation1 == other.marqueurNegation1 and self.pronom_devant_verbe == other.pronom_devant_verbe and \
                self.verbe == other.verbe and self.marqueurNegation2 == other.marqueurNegation2 \
-               and self.action == other.action and self.adverbe == other.adverbe and self.tempsConjug == other.tempsConjug and \
-               self.persConjug == other.persConjug
+               and self.action == other.action and self.adverbe == other.adverbe and self.tempsConjug == other.tempsConjug
 
     # execute l'ensemble du process de traduction
     def traduire(self, phraseInitiale):
@@ -84,7 +82,7 @@ class StructurePhrase:
 
         if(longueurPhrase > 1):
             phraseInitiale = self.identifierVerbe(phraseInitiale)
-            phraseInitiale = self.identifierSujet(phraseInitiale)
+            phraseInitiale = self.sujet.identifierSujet(phraseInitiale)
             phraseInitiale = self.identifierMarqueursNegation(phraseInitiale)
             phraseInitiale = self.identifierMarqueurTemporel(phraseInitiale)
             phraseInitiale = self.identifierAdverbe(phraseInitiale)
@@ -93,7 +91,7 @@ class StructurePhrase:
 
         if (longueurPhrase > 1):
             self.identifierMotsParDefaut()
-            self.identifierPersConjug()
+            self.sujet.identifierPersConjug()
             self.choisirDeterminantAction()
             self.accorderAction()
             self.conjuguerVerbe()
@@ -168,33 +166,6 @@ class StructurePhrase:
                 break
 
             motPrecedent = mot
-
-        return phrase
-
-    # Recherche sujet dans une sequence donnee de mots et init la val de self.sujet avec
-    # phrase : liste de mots dans laquelle il faut trouver le sujet
-    def identifierSujet(self, phrase):
-        pronomsLSF = dictionnaireUtilisable.PronomsLSF()    # ensemble des pronoms de LSF
-        # s'il y a un pronom dans la phrase, il devient le sujet
-        i = 0
-        tmp = []
-        for mot in phrase:
-            if mot in pronomsLSF.personnels:
-                # trouver le pronom correspondant
-                tmp.append(mot)
-                i += 1
-
-        if len(tmp)==2:
-            if(tmp[0]==tmp[1]): 
-                self.sujet = tmp[0]
-                phrase.remove(tmp[0])
-                phrase.remove(tmp[1])
-            else:
-                self.sujet = tmp[1]
-                self.complement = tmp[0]
-        elif len(tmp)==1:
-            self.sujet = tmp[0]
-            phrase.remove(tmp[0])
 
         return phrase
 
@@ -293,30 +264,18 @@ class StructurePhrase:
     # cette methode est a appeler quand on a determine toute la strcuture de la phrase
     def identifierMotsParDefaut(self):
         # si pas de sujet mais verbe: sujet par defaut est "je"
-        if self.sujet == "" and self.verbe != "":
-            self.sujet = "je"
+        if self.sujet.texte == "" and self.verbe != "":
+            self.sujet.texte = "je"
 
         # si pas de verbe mais sujet, verbe par defaut est "être"
-        if self.verbe == "" and self.sujet != "":
+        if self.verbe == "" and self.sujet.texte != "":
             self.verbe = "être"
 
         # si ni verbe ni sujet mais il y a une action: verbe être et sujet ce
-        if self.verbe == "" and self.sujet == "" and (self.action != "" or self.adverbe != ""):
-            self.sujet = "ce"
+        if self.verbe == "" and self.sujet.texte == "" and (self.action != "" or self.adverbe != ""):
+            self.sujet.texte = "ce"
             self.verbe = "être"
-            self.persConjug = 3
-
-
-    # identifie la personne a laquelle il faut conjuguer le verbe
-    def identifierPersConjug(self):
-        pronomsLSF = dictionnaireUtilisable.PronomsLSF()
-        pronomsFR = dictionnaireUtilisable.PronomsFR()
-        index = 0
-        for pronom in pronomsLSF.personnels:
-            if pronom == self.sujet:
-                self.sujet = pronomsFR.personnels[index]
-                self.persConjug = index +1
-            index+=1
+            self.sujet.persConjug = 3
 
 
     # choisir le determinent du complement
@@ -338,7 +297,7 @@ class StructurePhrase:
                     break
 
         # si on est dans une phrase avec pronom personnel + etre ou phrase d'un seul mot ou phrase avec quantificateur: pas de determinant
-        if (self.sujet in pronomsFR.personnels and self.verbe == "être") is False and (self.sujet == "" and self.verbe == "") is False \
+        if (self.sujet.texte in pronomsFR.personnels and self.verbe == "être") is False and (self.sujet.texte == "" and self.verbe == "") is False \
                 and testQuantifacteur is False:
 
             for mot in self.action.split():
@@ -387,13 +346,13 @@ class StructurePhrase:
         if self.verbe != "":
             cg = Conjugator(lang='fr')
             conjugaisonsDuVerbe = cg.conjugate(self.verbe)
-            verbeConjugue = conjugaisonsDuVerbe['moods']['indicatif'][self.tempsConjug][self.persConjug - 1]
+            verbeConjugue = conjugaisonsDuVerbe['moods']['indicatif'][self.tempsConjug][self.sujet.persConjug - 1]
 
             # si pronom j', le split ne marche pas.
             if "'" in verbeConjugue:
                 if self.pronom_devant_verbe == "":
-                    if self.sujet == "je":
-                        self.sujet = "j'"
+                    if self.sujet.texte == "je":
+                        self.sujet.texte = "j'"
                 self.verbe = verbeConjugue[2:]
             else:
                 verbeConjugue = verbeConjugue.split()
@@ -443,14 +402,14 @@ class StructurePhrase:
         phraseNettoyee = ""
 
         for mot in phrase.split():
-            isMotFrançais = False
+            isMotFrancais = False
             if '-' in mot:
                 for element in dictionnaireNoms:
                     if element[0] == mot:
-                        isMotFrançais = True
+                        isMotFrancais = True
                         break
 
-                if isMotFrançais is False:
+                if isMotFrancais is False:
                     mot = mot.replace("-", " ")
 
             if phraseNettoyee == "":

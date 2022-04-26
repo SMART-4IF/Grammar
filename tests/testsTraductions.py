@@ -1,4 +1,4 @@
-import scriptsTraitement
+import traitementGrammaire
 
 class TestsTraductions:
 
@@ -97,7 +97,7 @@ class TestsTraductions:
 
     def testTraduction1(self):
         phrase = ["moi", "savoir", "moi"]
-        structurePhrase = scriptsTraitement.StructurePhrase()
+        structurePhrase = StructurePhrase()
         structurePhrase.traduire(phrase)
 
         if str(structurePhrase) == self.resultatsAttendus[self.nbTests]:
@@ -113,7 +113,7 @@ class TestsTraductions:
 
     def testTraduction2(self):
         phrase = ["lui", "entendant", "lui"]
-        structurePhrase = scriptsTraitement.StructurePhrase()
+        structurePhrase = StructurePhrase()
         structurePhrase.traduire(phrase)
 
         if str(structurePhrase) == self.resultatsAttendus[self.nbTests]:
@@ -129,7 +129,7 @@ class TestsTraductions:
 
     def testTraduction3(self):
         phrase = ["lui", "partir", "récemment", "lui"]
-        structurePhrase = scriptsTraitement.StructurePhrase()
+        structurePhrase = StructurePhrase()
         structurePhrase.traduire(phrase)
 
         if str(structurePhrase) == self.resultatsAttendus[self.nbTests]:
@@ -145,7 +145,7 @@ class TestsTraductions:
 
     def testTraduction4(self):
         phrase = ["lui", "connaitre", "moi"]
-        structurePhrase = scriptsTraitement.StructurePhrase()
+        structurePhrase = StructurePhrase()
         structurePhrase.traduire(phrase)
 
         if str(structurePhrase) == self.resultatsAttendus[self.nbTests]:
@@ -161,7 +161,7 @@ class TestsTraductions:
 
     def testTraduction5(self):
         phrase = ["toi", "signer", "lentement"]
-        structurePhrase = scriptsTraitement.StructurePhrase()
+        structurePhrase = StructurePhrase()
         structurePhrase.traduire(phrase)
 
         if str(structurePhrase) == self.resultatsAttendus[self.nbTests]:
@@ -177,7 +177,7 @@ class TestsTraductions:
 
     def testTraduction6(self):
         phrase = ["moi", "d’accord", "non"]
-        structurePhrase = scriptsTraitement.StructurePhrase()
+        structurePhrase = StructurePhrase()
         structurePhrase.traduire(phrase)
 
         if str(structurePhrase) == self.resultatsAttendus[self.nbTests]:
@@ -193,7 +193,7 @@ class TestsTraductions:
 
     def testTraduction7(self):
         phrase = ["lui", "faire", "rien"]
-        structurePhrase = scriptsTraitement.StructurePhrase()
+        structurePhrase = StructurePhrase()
         structurePhrase.traduire(phrase)
 
         if str(structurePhrase) == self.resultatsAttendus[self.nbTests]:
@@ -209,7 +209,7 @@ class TestsTraductions:
 
     def testTraduction8(self):
         phrase = ["demain", "aller", "moi"]
-        structurePhrase = scriptsTraitement.StructurePhrase()
+        structurePhrase = StructurePhrase()
         structurePhrase.traduire(phrase)
 
         if str(structurePhrase) == self.resultatsAttendus[self.nbTests]:
@@ -224,7 +224,7 @@ class TestsTraductions:
 
     def testTraduction9(self):
         phrase = ["lui", "appeler", "moi"]
-        structurePhrase = scriptsTraitement.StructurePhrase()
+        structurePhrase = StructurePhrase()
         structurePhrase.traduire(phrase)
 
         if str(structurePhrase) == self.resultatsAttendus[self.nbTests]:
@@ -240,7 +240,7 @@ class TestsTraductions:
 
     def testTraduction10(self):
         phrase = ["hier", "moi", "travailler", "moi"]
-        structurePhrase = scriptsTraitement.StructurePhrase()
+        structurePhrase = StructurePhrase()
         structurePhrase.traduire(phrase)
 
         if str(structurePhrase) == self.resultatsAttendus[self.nbTests]:
@@ -256,7 +256,7 @@ class TestsTraductions:
 
     def testTraduction11(self):
         phrase = ["demain", "moi", "travailler", "moi"]
-        structurePhrase = scriptsTraitement.StructurePhrase()
+        structurePhrase = StructurePhrase()
         structurePhrase.traduire(phrase)
 
         if str(structurePhrase) == self.resultatsAttendus[self.nbTests]:
@@ -272,7 +272,7 @@ class TestsTraductions:
 
     def testTraduction12(self):
         phrase = ["lui", "a-lui", "ami"]
-        structurePhrase = scriptsTraitement.StructurePhrase()
+        structurePhrase = StructurePhrase()
         structurePhrase.traduire(phrase)
 
         if str(structurePhrase) == self.resultatsAttendus[self.nbTests]:
@@ -288,7 +288,7 @@ class TestsTraductions:
 
     def testTraduction13(self):
         phrase = ["moi", "voiture", "acheter", "fini"]
-        structurePhrase = scriptsTraitement.StructurePhrase()
+        structurePhrase = StructurePhrase()
         structurePhrase.traduire(phrase)
 
         if str(structurePhrase) == self.resultatsAttendus[self.nbTests]:
@@ -304,7 +304,7 @@ class TestsTraductions:
 
     def testTraduction14(self):
         phrase = ["hier", "cinéma", "aller", "moi"]
-        structurePhrase = scriptsTraitement.StructurePhrase()
+        structurePhrase = StructurePhrase()
         structurePhrase.traduire(phrase)
 
         if str(structurePhrase) == self.resultatsAttendus[self.nbTests]:
@@ -320,7 +320,7 @@ class TestsTraductions:
 
     def testTraduction15(self):
         phrase = ["jeudi", "prochain", "lui", "aller", "camping"]
-        structurePhrase = scriptsTraitement.StructurePhrase()
+        structurePhrase = StructurePhrase()
         structurePhrase.traduire(phrase)
 
         if str(structurePhrase) == self.resultatsAttendus[self.nbTests]:
@@ -336,7 +336,7 @@ class TestsTraductions:
 
     def testTraduction16(self):
         phrase = ["dehors", "moi", "travailler"]
-        structurePhrase = scriptsTraitement.StructurePhrase()
+        structurePhrase = StructurePhrase()
         structurePhrase.traduire(phrase)
 
         if str(structurePhrase) == self.resultatsAttendus[self.nbTests]:
@@ -352,7 +352,7 @@ class TestsTraductions:
 
     def testTraduction17(self):
         phrase = ["grave", "non"]
-        structurePhrase = scriptsTraitement.StructurePhrase()
+        structurePhrase = StructurePhrase()
         structurePhrase.traduire(phrase)
 
         if str(structurePhrase) == self.resultatsAttendus[self.nbTests]:
@@ -368,7 +368,7 @@ class TestsTraductions:
 
     def testTraduction18(self):
         phrase = ["a-moi", "père"]
-        structurePhrase = scriptsTraitement.StructurePhrase()
+        structurePhrase = StructurePhrase()
         structurePhrase.traduire(phrase)
 
         if str(structurePhrase) == self.resultatsAttendus[self.nbTests]:
@@ -384,7 +384,7 @@ class TestsTraductions:
 
     def testTraduction19(self):
         phrase = ["demain", "exposition", "moi", "aller"]
-        structurePhrase = scriptsTraitement.StructurePhrase()
+        structurePhrase = StructurePhrase()
         structurePhrase.traduire(phrase)
 
         if str(structurePhrase) == self.resultatsAttendus[self.nbTests]:
@@ -400,7 +400,7 @@ class TestsTraductions:
 
     def testTraduction20(self):
         phrase = ["avoir", "trois", "pantalon"]
-        structurePhrase = scriptsTraitement.StructurePhrase()
+        structurePhrase = StructurePhrase()
         structurePhrase.traduire(phrase)
 
         if str(structurePhrase) == self.resultatsAttendus[self.nbTests]:
@@ -416,7 +416,7 @@ class TestsTraductions:
 
     def testTraduction21(self):
         phrase = ["bonjour"]
-        structurePhrase = scriptsTraitement.StructurePhrase()
+        structurePhrase = StructurePhrase()
         structurePhrase.traduire(phrase)
 
         if str(structurePhrase) == self.resultatsAttendus[self.nbTests]:
@@ -432,7 +432,7 @@ class TestsTraductions:
 
     def testTraduction22(self):
         phrase = ["ça-va"]
-        structurePhrase = scriptsTraitement.StructurePhrase()
+        structurePhrase = StructurePhrase()
         structurePhrase.traduire(phrase)
 
         if str(structurePhrase) == self.resultatsAttendus[self.nbTests]:
@@ -448,7 +448,7 @@ class TestsTraductions:
 
     def testTraduction23(self):
         phrase = ["et-vous"]
-        structurePhrase = scriptsTraitement.StructurePhrase()
+        structurePhrase = StructurePhrase()
         structurePhrase.traduire(phrase)
 
         if str(structurePhrase) == self.resultatsAttendus[self.nbTests]:
@@ -464,7 +464,7 @@ class TestsTraductions:
 
     def testTraduction24(self):
         phrase = ["faire", "quoi", "vous"]
-        structurePhrase = scriptsTraitement.StructurePhrase()
+        structurePhrase = StructurePhrase()
         structurePhrase.traduire(phrase)
 
         if str(structurePhrase) == self.resultatsAttendus[self.nbTests]:
@@ -480,7 +480,7 @@ class TestsTraductions:
 
     def testTraduction25(self):
         phrase = ["hier", "dessus", "travailler"]
-        structurePhrase = scriptsTraitement.StructurePhrase()
+        structurePhrase = StructurePhrase()
         structurePhrase.traduire(phrase)
 
         if str(structurePhrase) == self.resultatsAttendus[self.nbTests]:
@@ -496,7 +496,7 @@ class TestsTraductions:
 
     def testTraduction26(self):
         phrase = ["demain", "mon", "rapport", "travailler"]
-        structurePhrase = scriptsTraitement.StructurePhrase()
+        structurePhrase = StructurePhrase()
         structurePhrase.traduire(phrase)
 
         if str(structurePhrase) == self.resultatsAttendus[self.nbTests]:
@@ -512,7 +512,7 @@ class TestsTraductions:
 
     def testTraduction27(self):
         phrase = ["avec", "Bob", "travailler"]
-        structurePhrase = scriptsTraitement.StructurePhrase()
+        structurePhrase = StructurePhrase()
         structurePhrase.traduire(phrase)
 
         if str(structurePhrase) == self.resultatsAttendus[self.nbTests]:
@@ -528,7 +528,7 @@ class TestsTraductions:
 
     def testTraduction28(self):
         phrase = ["non"]
-        structurePhrase = scriptsTraitement.StructurePhrase()
+        structurePhrase = StructurePhrase()
         structurePhrase.traduire(phrase)
 
         if str(structurePhrase) == self.resultatsAttendus[self.nbTests]:
@@ -544,7 +544,7 @@ class TestsTraductions:
 
     def testTraduction29(self):
         phrase = ["a-moi", "téléphone", "perdre", "fini"]
-        structurePhrase = scriptsTraitement.StructurePhrase()
+        structurePhrase = StructurePhrase()
         structurePhrase.traduire(phrase)
 
         if str(structurePhrase) == self.resultatsAttendus[self.nbTests]:
@@ -560,7 +560,7 @@ class TestsTraductions:
 
     def testTraduction30(self):
         phrase = ["bonbon", "moi", "vouloir"]
-        structurePhrase = scriptsTraitement.StructurePhrase()
+        structurePhrase = StructurePhrase()
         structurePhrase.traduire(phrase)
 
         if str(structurePhrase) == self.resultatsAttendus[self.nbTests]:
