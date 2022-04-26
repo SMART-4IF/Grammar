@@ -80,20 +80,20 @@ class StructurePhrase:
         longueurPhrase = len(phraseInitiale)
 
         if(longueurPhrase > 1):
-            phraseInitiale = self.identifierVerbe(phraseInitiale)
+            phraseInitiale = self.verbe.identifierVerbe(phraseInitiale)
             phraseInitiale = self.sujet.identifierSujet(phraseInitiale)
             phraseInitiale = self.marqueursNegation.identifierMarqueursNegation(phraseInitiale)
-            phraseInitiale = self.identifierMarqueurTemporel(phraseInitiale)
+            phraseInitiale = self.marqueurTemporel.identifierMarqueurTemporel(phraseInitiale)
             phraseInitiale = self.adverbe.identifierAdverbe(phraseInitiale)
 
-        phraseInitiale = self.identifierAction(phraseInitiale)
+        phraseInitiale = self.action.identifierAction(phraseInitiale)
 
         if (longueurPhrase > 1):
             self.identifierMotsParDefaut()
             self.sujet.identifierPersConjug()
-            self.choisirDeterminantAction(self.sujet, self.verbe)
-            self.accorderAction()
-            self.conjuguerVerbe(self.marqueurTemporel.tempsConjug, self.sujet, self.action.pronom_devant_verbe)
+            self.action.choisirDeterminantAction(self.sujet, self.verbe)
+            self.action.accorderAction()
+            self.verbe.conjuguerVerbe(self.marqueurTemporel.tempsConjug, self.sujet, self.action.pronom_devant_verbe)
         return self
 
 

@@ -1,5 +1,7 @@
 import traitementGrammaire
 
+StructurePhrase = traitementGrammaire.StructurePhrase
+
 class TestsTraductions:
 
     def __init__(self):
