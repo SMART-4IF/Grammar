@@ -3,6 +3,7 @@ import json
 from . import Sujet
 from . import Verbe
 from . import Adverbe
+from . import MarqueurTemporel
 import dictionnaireUtilisable
 
 class StructurePhrase:
@@ -12,18 +13,18 @@ class StructurePhrase:
         self.pronom_devant_verbe = pronom_devant_verbe
         self.verbe = Verbe.Verbe(verbe)
         self.action = action
-        self.marqueurTemporel = marqueurTemporel
+        self.marqueurTemporel = MarqueurTemporel.MarqueurTemporel(marqueurTemporel, tempsConjug)
         self.adverbe = Adverbe.Adverbe(adverbe)
-        self.tempsConjug = tempsConjug
         self.marqueurNegation1 = marqueurNegation1
         self.marqueurNegation2 = marqueurNegation2
+
 
     def __str__(self):
 
         phraseSplitee = []
 
-        if self.marqueurTemporel != "":
-            phraseSplitee.append(self.marqueurTemporel+',')
+        if self.marqueurTemporel.texte != "":
+            phraseSplitee.append(self.marqueurTemporel.texte+',')
 
         if self.sujet.texte != "":
             for mot in self.sujet.texte.split():
@@ -62,17 +63,17 @@ class StructurePhrase:
 
     # permet d'afficher le detail de toutes les infos
     def toStringDebug(self):
-        return "marqueurTemporel : " + self.marqueurTemporel + " | sujet : " + self.sujet.texte + \
+        return "marqueurTemporel : " + self.marqueurTemporel.texte + " | sujet : " + self.sujet.texte + \
                " | marqueur neg 1 : " + self.marqueurNegation1 + " | pronom devant verbe : " + self.pronom_devant_verbe + \
                " | verbe : " + self.verbe.texte + " | marqueur neg 2 : " + self.marqueurNegation2 + \
-               " | action : " + self.action + " | adverbe : " + self.adverbe.texte + " | temps : " + self.tempsConjug + \
+               " | action : " + self.action + " | adverbe : " + self.adverbe.texte + " | temps : " + self.marqueurTemporel.tempsConjug + \
                " | pers conjug: " + str(self.sujet.persConjug)
 
     def __eq__(self, other):
         return self.marqueurTemporel == other.marqueurTemporel and self.sujet == other.sujet and \
                self.marqueurNegation1 == other.marqueurNegation1 and self.pronom_devant_verbe == other.pronom_devant_verbe and \
                self.verbe == other.verbe and self.marqueurNegation2 == other.marqueurNegation2 \
-               and self.action == other.action and self.adverbe == other.adverbe and self.tempsConjug == other.tempsConjug
+               and self.action == other.action and self.adverbe == other.adverbe
 
     # execute l'ensemble du process de traduction
     def traduire(self, phraseInitiale):
@@ -93,49 +94,8 @@ class StructurePhrase:
             self.sujet.identifierPersConjug()
             self.choisirDeterminantAction()
             self.accorderAction()
-            self.conjuguerVerbe(self.tempsConjug, self.sujet, self.pronom_devant_verbe)
+            self.conjuguerVerbe(self.marqueurTemporel.tempsConjug, self.sujet, self.pronom_devant_verbe)
         return self
-
-
-    # Recherche marqueur temporel dans une sequence donnee de mots et init la val de self.marqueurTemporel avec
-    # Si marqueur trouve, determine le temps de la phrase
-    # phrase : liste de mots dans laquelle il faut trouver le marqueur temporel
-    def identifierMarqueurTemporel(self, phrase):
-        # recuperation de la liste des marqueurs temporels de la LSF
-        marqueursTemporelsLSF = dictionnaireUtilisable.MarqueursTemporels()
-
-        marqueurTrouve = False
-        motPrecedent = ""
-        for mot in phrase:
-            # si mot est dans dictionnaire des marqueurs temporels simbles : c'est un marqueur temporel
-            for marqueur in marqueursTemporelsLSF.marqueursSimples:
-                if mot == marqueur.mot:
-                    self.tempsConjug = marqueur.tempsAssocie
-                    if marqueur.isIndispanesable:
-                        self.marqueurTemporel = mot
-                    phrase.remove(mot)
-                    marqueurTrouve = True
-                    break
-
-            if marqueurTrouve:
-                break
-
-            # si mot precedent + mot est dans dictionnaire des marqueurs temporels doubles : c'est un marqueur temporel
-            for marqueur in marqueursTemporelsLSF.marqueursDoubles:
-                if motPrecedent != "" and (motPrecedent + " " + mot) == marqueur.mot:
-                    self.tempsConjug = marqueur.tempsAssocie
-                    self.marqueurTemporel = motPrecedent + " " + mot
-                    phrase.remove(motPrecedent)
-                    phrase.remove(mot)
-                    marqueurTrouve = True
-                    break
-
-            if marqueurTrouve:
-                break
-
-            motPrecedent = mot
-
-        return phrase
 
 
     # identifie les marqueurs de negation

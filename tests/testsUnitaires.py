@@ -212,17 +212,16 @@ class TestsUnitaires:
 
         phrase = ["lui", "partir", "récemment", "lui"]
         structurePhrase = StructurePhrase()
-        phrase = structurePhrase.identifierMarqueurTemporel(phrase)
+        phrase = structurePhrase.marqueurTemporel.identifierMarqueurTemporel(phrase)
 
-        if structurePhrase.marqueurTemporel == self.resultatsAttendus[self.nbTests].marqueurTemporel \
-                and structurePhrase.tempsConjug == self.resultatsAttendus[self.nbTests].tempsConjug:
+        if structurePhrase.marqueurTemporel == self.resultatsAttendus[self.nbTests].marqueurTemporel:
             self.nbTestsReussis = self.nbTestsReussis + 1
         else:
             self.messagesEchecs.append(
-                "Test temps 1 - Obtenu : '" + structurePhrase.marqueurTemporel + " "
-                + structurePhrase.tempsConjug + "' | attendu : '" + self.resultatsAttendus[
-                    self.nbTests].marqueurTemporel + " "
-                + self.resultatsAttendus[self.nbTests].tempsConjug + "'")
+                "Test temps 1 - Obtenu : '" + structurePhrase.marqueurTemporel.texte + " "
+                + structurePhrase.marqueurTemporel.tempsConjug + "' | attendu : '" + self.resultatsAttendus[
+                    self.nbTests].marqueurTemporel.texte + " "
+                + self.resultatsAttendus[self.nbTests].marqueurTemporel.tempsConjug + "'")
 
         self.nbTests = self.nbTests + 1  # verifie que l'on identifie bien le temps de cette phrase (et on laisse le marqueur car indispensable)
 
@@ -232,17 +231,16 @@ class TestsUnitaires:
 
         phrase = ["moi", "voiture", "acheter", "fini"]
         structurePhrase = StructurePhrase()
-        phrase = structurePhrase.identifierMarqueurTemporel(phrase)
+        phrase = structurePhrase.marqueurTemporel.identifierMarqueurTemporel(phrase)
 
-        if structurePhrase.marqueurTemporel == self.resultatsAttendus[self.nbTests].marqueurTemporel \
-                and structurePhrase.tempsConjug == self.resultatsAttendus[self.nbTests].tempsConjug:
+        if structurePhrase.marqueurTemporel == self.resultatsAttendus[self.nbTests].marqueurTemporel:
             self.nbTestsReussis = self.nbTestsReussis + 1
         else:
             self.messagesEchecs.append(
-                "Test temps 2 - Obtenu : '" + structurePhrase.marqueurTemporel + " "
-                + structurePhrase.tempsConjug + "' | attendu : '" + self.resultatsAttendus[
-                    self.nbTests].marqueurTemporel + " "
-                + self.resultatsAttendus[self.nbTests].tempsConjug + "'")
+                "Test temps 2 - Obtenu : '" + structurePhrase.marqueurTemporel.texte + " "
+                + structurePhrase.marqueurTemporel.tempsConjug + "' | attendu : '" + self.resultatsAttendus[
+                    self.nbTests].marqueurTemporel.texte + " "
+                + self.resultatsAttendus[self.nbTests].marqueurTemporel.tempsConjug + "'")
 
         self.nbTests = self.nbTests + 1
 
@@ -252,17 +250,16 @@ class TestsUnitaires:
 
         phrase = ["moi", "voiture", "acheter", "jeudi", "dernier"]
         structurePhrase = StructurePhrase()
-        phrase = structurePhrase.identifierMarqueurTemporel(phrase)
+        phrase = structurePhrase.marqueurTemporel.identifierMarqueurTemporel(phrase)
 
-        if structurePhrase.marqueurTemporel == self.resultatsAttendus[self.nbTests].marqueurTemporel \
-                and structurePhrase.tempsConjug == self.resultatsAttendus[self.nbTests].tempsConjug:
+        if structurePhrase.marqueurTemporel == self.resultatsAttendus[self.nbTests].marqueurTemporel:
             self.nbTestsReussis = self.nbTestsReussis + 1
         else:
             self.messagesEchecs.append(
-                "Test temps 3 - Obtenu : '" + structurePhrase.marqueurTemporel + " "
-                + structurePhrase.tempsConjug + "' | attendu : '" + self.resultatsAttendus[
-                    self.nbTests].marqueurTemporel + " "
-                + self.resultatsAttendus[self.nbTests].tempsConjug + "'")
+                "Test temps 3 - Obtenu : '" + structurePhrase.marqueurTemporel.texte + " "
+                + structurePhrase.marqueurTemporel.tempsConjug + "' | attendu : '" + self.resultatsAttendus[
+                    self.nbTests].marqueurTemporel.texte + " "
+                + self.resultatsAttendus[self.nbTests].marqueurTemporel.tempsConjug + "'")
 
         self.nbTests = self.nbTests + 1
 
@@ -272,7 +269,7 @@ class TestsUnitaires:
         phrase = ["hier", "cinéma", "moi", "aller"]
         structurePhrase = StructurePhrase()
         phrase = structurePhrase.verbe.identifierVerbe(phrase)
-        phrase = structurePhrase.identifierMarqueurTemporel(phrase)
+        phrase = structurePhrase.marqueurTemporel.identifierMarqueurTemporel(phrase)
         phrase = structurePhrase.adverbe.identifierAdverbe(phrase)
         phrase = structurePhrase.sujet.identifierSujet(phrase)
         phrase = structurePhrase.identifierAction(phrase)
@@ -294,7 +291,7 @@ class TestsUnitaires:
         phrase = ["lui", "a-lui", "ami"]
         structurePhrase = StructurePhrase()
         phrase = structurePhrase.verbe.identifierVerbe(phrase)
-        phrase = structurePhrase.identifierMarqueurTemporel(phrase)
+        phrase = structurePhrase.marqueurTemporel.identifierMarqueurTemporel(phrase)
         phrase = structurePhrase.adverbe.identifierAdverbe(phrase)
         phrase = structurePhrase.sujet.identifierSujet(phrase)
         phrase = structurePhrase.identifierAction(phrase)
@@ -316,7 +313,7 @@ class TestsUnitaires:
         phrase = ["lui", "connaitre", "moi"]
         structurePhrase = StructurePhrase()
         phrase = structurePhrase.verbe.identifierVerbe(phrase)
-        phrase = structurePhrase.identifierMarqueurTemporel(phrase)
+        phrase = structurePhrase.marqueurTemporel.identifierMarqueurTemporel(phrase)
         phrase = structurePhrase.adverbe.identifierAdverbe(phrase)
         phrase = structurePhrase.sujet.identifierSujet(phrase)
         phrase = structurePhrase.identifierAction(phrase)
@@ -337,7 +334,7 @@ class TestsUnitaires:
         phrase = ["lui", "partir", "récemment","lui"]
         structurePhrase = StructurePhrase()
         phrase = structurePhrase.verbe.identifierVerbe(phrase)
-        phrase = structurePhrase.identifierMarqueurTemporel(phrase)
+        phrase = structurePhrase.marqueurTemporel.identifierMarqueurTemporel(phrase)
         phrase = structurePhrase.adverbe.identifierAdverbe(phrase)
         phrase = structurePhrase.sujet.identifierSujet(phrase)
         phrase = structurePhrase.identifierAction(phrase)
@@ -373,7 +370,7 @@ class TestsUnitaires:
     def testConj1(self):
 
         structurePhrase = StructurePhrase("je", "", "aller", "cinéma")
-        structurePhrase.verbe.conjuguerVerbe(structurePhrase.tempsConjug, structurePhrase.sujet, structurePhrase.pronom_devant_verbe)
+        structurePhrase.verbe.conjuguerVerbe(structurePhrase.marqueurTemporel.tempsConjug, structurePhrase.sujet, structurePhrase.pronom_devant_verbe)
 
         if structurePhrase.verbe == self.resultatsAttendus[self.nbTests].verbe:
             self.nbTestsReussis = self.nbTestsReussis + 1
@@ -389,7 +386,7 @@ class TestsUnitaires:
     def testConj2(self):
 
         structurePhrase = StructurePhrase("je", "", "aller", "cinéma", "hier", "", 1, "passé-composé")
-        structurePhrase.verbe.conjuguerVerbe(structurePhrase.tempsConjug, structurePhrase.sujet, structurePhrase.pronom_devant_verbe)
+        structurePhrase.verbe.conjuguerVerbe(structurePhrase.marqueurTemporel.tempsConjug, structurePhrase.sujet, structurePhrase.pronom_devant_verbe)
 
         if structurePhrase.verbe == self.resultatsAttendus[self.nbTests].verbe:
             self.nbTestsReussis = self.nbTestsReussis + 1

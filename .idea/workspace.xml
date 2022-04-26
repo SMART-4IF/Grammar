@@ -2,11 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="82a20799-784e-4972-afdf-d928919d917b" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/traitementGrammaire/Verbe.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/traitementGrammaire/MarqueurTemporel.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tests/testsUnitaires.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/testsUnitaires.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/traitementGrammaire/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/traitementGrammaire/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/traitementGrammaire/structurePhrase.py" beforeDir="false" afterPath="$PROJECT_DIR$/traitementGrammaire/structurePhrase.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/traitementGrammaire/structurePhrase.py" beforeDir="false" afterPath="$PROJECT_DIR$/traitementGrammaire/StructurePhrase.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -70,7 +70,7 @@
       <workItem from="1650698115528" duration="11444000" />
       <workItem from="1650782698082" duration="7567000" />
       <workItem from="1650871975899" duration="8097000" />
-      <workItem from="1650958777882" duration="3709000" />
+      <workItem from="1650958777882" duration="5827000" />
     </task>
     <servers />
   </component>

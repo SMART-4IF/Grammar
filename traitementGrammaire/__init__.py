@@ -1,4 +1,5 @@
-from traitementGrammaire.structurePhrase import StructurePhrase
+from traitementGrammaire.StructurePhrase import StructurePhrase
 from traitementGrammaire.Sujet import Sujet
 from traitementGrammaire.Adverbe import Adverbe
 from traitementGrammaire.Verbe import Verbe
+from traitementGrammaire.MarqueurTemporel import MarqueurTemporel
