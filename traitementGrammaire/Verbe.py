@@ -1,5 +1,7 @@
 
 import json
+from json import JSONDecodeError
+
 from verbecc import Conjugator
 
 class Verbe:
@@ -26,10 +28,32 @@ class Verbe:
 
     # conjugue le verbe selon le temps et la personne identifies
     def conjuguerVerbe(self, tempsConjug, sujet, pronom_devant_verbe):
+
         if self.texte != "":
-            cg = Conjugator(lang='fr')
-            conjugaisonsDuVerbe = cg.conjugate(self.texte)
-            verbeConjugue = conjugaisonsDuVerbe['moods']['indicatif'][tempsConjug][sujet.persConjug - 1]
+            # on ouvre le dictionnaire des verbes conjugues. Si verbe present, on recupere la conjugaison
+            with open("dictionnaireUtilisable/conjugaisonVerbes.json") as jsonFile:
+                jsonObject = json.load(jsonFile)
+                jsonFile.close()
+
+            listeVerbesConjugues = []
+            verbeConjugue = ""
+            for row in jsonObject:
+                listeVerbesConjugues.append(row)
+                if row['infinitif']['infinitif-présent'][0] == self.texte:
+                    verbeConjugue = row['indicatif'][tempsConjug][sujet.persConjug - 1]
+                    break
+
+            # sinon, on demande a l'IA de le conjuguer et on enregistre la conjugaison pour la fois d'apres
+            if verbeConjugue == "":
+                cg = Conjugator(lang='fr')
+                conjugaisonsDuVerbe = cg.conjugate(self.texte)
+                verbeConjugue = conjugaisonsDuVerbe['moods']['indicatif'][tempsConjug][sujet.persConjug - 1]
+                listeVerbesConjugues.append(conjugaisonsDuVerbe['moods'])
+
+                jsonString = json.dumps(listeVerbesConjugues)
+                jsonFile = open("dictionnaireUtilisable/conjugaisonVerbes.json", "w")
+                jsonFile.write(jsonString)
+                jsonFile.close()
 
             # si pronom j', le split ne marche pas.
             if "'" in verbeConjugue:
