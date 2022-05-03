@@ -1,5 +1,6 @@
 
 import json
+import os
 from json import JSONDecodeError
 
 from verbecc import Conjugator
@@ -16,7 +17,7 @@ class Verbe:
     # phrase : la phrase dans laquelle il faut trouver le verbe
     def identifierVerbe(self, phrase):
         # ouverture du dictionnaire des verbes francais
-        with open('dictionnaireUtilisable/verbes.json') as json_data_verbe:
+        with open('./streamApp/Grammar/dictionnaireUtilisable/verbes.json') as json_data_verbe:
             dictionnaireVerbes = json.load(json_data_verbe)
         # si mot est dans dictionnaire des verbes : c'est un verbe
         for mot in phrase:
@@ -31,7 +32,7 @@ class Verbe:
 
         if self.texte != "":
             # on ouvre le dictionnaire des verbes conjugues. Si verbe present, on recupere la conjugaison
-            with open("dictionnaireUtilisable/conjugaisonVerbes.json") as jsonFile:
+            with open("./streamApp/Grammar/dictionnaireUtilisable/conjugaisonVerbes.json") as jsonFile:
                 jsonObject = json.load(jsonFile)
                 jsonFile.close()
 
@@ -51,7 +52,7 @@ class Verbe:
                 listeVerbesConjugues.append(conjugaisonsDuVerbe['moods'])
 
                 jsonString = json.dumps(listeVerbesConjugues)
-                jsonFile = open("dictionnaireUtilisable/conjugaisonVerbes.json", "w")
+                jsonFile = open("./streamApp/Grammar/dictionnaireUtilisable/conjugaisonVerbes.json", "w")
                 jsonFile.write(jsonString)
                 jsonFile.close()
 

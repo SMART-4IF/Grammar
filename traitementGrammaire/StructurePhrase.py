@@ -1,4 +1,3 @@
-
 import json
 from . import Sujet
 from . import Verbe
@@ -6,11 +5,13 @@ from . import Adverbe
 from . import MarqueurTemporel
 from . import MarqueursNegation
 from . import Action
-import dictionnaireUtilisable
+import streamApp.Grammar.dictionnaireUtilisable as dictionnaireUtilisable
+
 
 class StructurePhrase:
 
-    def __init__(self, sujet = "", pronom_devant_verbe = "", verbe = "", action = "", marqueurTemporel = "", adverbe = "", persConj = 1, tempsConjug = "présent", marqueurNegation1 = "", marqueurNegation2 = ""):
+    def __init__(self, sujet="", pronom_devant_verbe="", verbe="", action="", marqueurTemporel="", adverbe="",
+                 persConj=1, tempsConjug="présent", marqueurNegation1="", marqueurNegation2=""):
         self.sujet = Sujet.Sujet(sujet, persConj)
         self.verbe = Verbe.Verbe(verbe)
         self.action = Action.Action(action, pronom_devant_verbe)
@@ -18,13 +19,12 @@ class StructurePhrase:
         self.adverbe = Adverbe.Adverbe(adverbe)
         self.marqueursNegation = MarqueursNegation.MarqueursNegation(marqueurNegation1, marqueurNegation2)
 
-
     def __str__(self):
 
         phraseSplitee = []
 
         if self.marqueurTemporel.texte != "":
-            phraseSplitee.append(self.marqueurTemporel.texte+',')
+            phraseSplitee.append(self.marqueurTemporel.texte + ',')
 
         if self.sujet.texte != "":
             for mot in self.sujet.texte.split():
@@ -76,16 +76,14 @@ class StructurePhrase:
 
     # execute l'ensemble du process de traduction
     def traduire(self, phraseInitiale):
-
         longueurPhrase = len(phraseInitiale)
 
-        if(longueurPhrase > 1):
+        if (longueurPhrase > 1):
             phraseInitiale = self.verbe.identifierVerbe(phraseInitiale)
             phraseInitiale = self.sujet.identifierSujet(phraseInitiale)
             phraseInitiale = self.marqueursNegation.identifierMarqueursNegation(phraseInitiale)
             phraseInitiale = self.marqueurTemporel.identifierMarqueurTemporel(phraseInitiale)
             phraseInitiale = self.adverbe.identifierAdverbe(phraseInitiale)
-
         phraseInitiale = self.action.identifierAction(phraseInitiale)
 
         if (longueurPhrase > 1):
@@ -95,7 +93,6 @@ class StructurePhrase:
             self.action.accorderAction()
             self.verbe.conjuguerVerbe(self.marqueurTemporel.tempsConjug, self.sujet, self.action.pronom_devant_verbe)
         return self
-
 
     # identifie les mots par defauts (les mots non dit mais deduits automatiquement)
     # cette methode est a appeler quand on a determine toute la strcuture de la phrase
@@ -114,8 +111,6 @@ class StructurePhrase:
             self.verbe.texte = "être"
             self.sujet.persConjug = 3
 
-
-
     # determiner si certains mots doivent subir une élision
     def ajoutAppostrophes(self, phraseSplitee):
         elision = dictionnaireUtilisable.Elision()
@@ -123,11 +118,11 @@ class StructurePhrase:
         voyellesSonS = ["a", "e", "i"]
 
         if len(phraseSplitee) > 1:
-            for i in range(len(phraseSplitee)-1):
-                if phraseSplitee[i] in elision.listeElisionsVoyelles and phraseSplitee[i+1][0] in voyelles:
-                    phraseSplitee[i] = phraseSplitee[i][:-1]+"'"
-                elif phraseSplitee[i] in elision.listeElisionSonS and phraseSplitee[i+1][0] in voyellesSonS:
-                    phraseSplitee[i] = phraseSplitee[i][:-1]+"'"
+            for i in range(len(phraseSplitee) - 1):
+                if phraseSplitee[i] in elision.listeElisionsVoyelles and phraseSplitee[i + 1][0] in voyelles:
+                    phraseSplitee[i] = phraseSplitee[i][:-1] + "'"
+                elif phraseSplitee[i] in elision.listeElisionSonS and phraseSplitee[i + 1][0] in voyellesSonS:
+                    phraseSplitee[i] = phraseSplitee[i][:-1] + "'"
 
         # reconstitution de la phrase
         phraseTraitee = "";
@@ -138,7 +133,6 @@ class StructurePhrase:
 
         return phraseTraitee
 
-
     # determine la ponctuation da la phrase en fonction de certains indicateurs
     def determinerPonctuation(self, phrase):
         motsPonctuations = dictionnaireUtilisable.Ponctuations()
@@ -148,13 +142,12 @@ class StructurePhrase:
                 ponctuation = "?"
                 break
 
-        return  ponctuation
-
+        return ponctuation
 
     # retire les tirets des mots composés de la lsf, mais pas des mots avec des tirets de la langue française
     def nettoyerTirets(self, phrase):
 
-        with open('dictionnaireUtilisable/noms.json') as json_data_noms:
+        with open('./streamApp/Grammar/dictionnaireUtilisable/noms.json') as json_data_noms:
             dictionnaireNoms = json.load(json_data_noms)
         phraseNettoyee = ""
 
@@ -172,6 +165,6 @@ class StructurePhrase:
             if phraseNettoyee == "":
                 phraseNettoyee = mot
             else:
-                phraseNettoyee += " "+mot
+                phraseNettoyee += " " + mot
 
         return phraseNettoyee

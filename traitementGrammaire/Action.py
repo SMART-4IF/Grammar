@@ -1,6 +1,6 @@
 
 import json
-import dictionnaireUtilisable
+import streamApp.Grammar.dictionnaireUtilisable as dictionnaireUtilisable
 
 class Action:
 
@@ -16,7 +16,7 @@ class Action:
     # phrase : liste de mots dans laquelle il faut trouver l'action
     def identifierAction(self, phrase):
         if len(phrase) !=0 :
-            with open('dictionnaireUtilisable/noms.json') as json_data_noms:
+            with open('./streamApp/Grammar/dictionnaireUtilisable/noms.json') as json_data_noms:
                 dictionnaireNoms = json.load(json_data_noms)
             pronomsLSF = dictionnaireUtilisable.PronomsLSF()  # ensemble des pronoms de LSF
             pronomsFR = dictionnaireUtilisable.PronomsFR()
@@ -87,7 +87,7 @@ class Action:
     # choisir le determinent du complement
     # si le complement possede un nom commun, il faut placer un determinant adapte
     def choisirDeterminantAction(self, sujet, verbe):
-        with open('dictionnaireUtilisable/noms.json') as json_data_noms:
+        with open('./streamApp/Grammar/dictionnaireUtilisable/noms.json') as json_data_noms:
             dictionnaireNoms = json.load(json_data_noms)
         pronomsFR = dictionnaireUtilisable.PronomsFR()
         quantificateurs = dictionnaireUtilisable.Pluriel().quantificateurs
@@ -130,7 +130,7 @@ class Action:
     # accorder l'action en nombre
     def accorderAction(self):
 
-        with open('dictionnaireUtilisable/noms.json') as json_data_noms:
+        with open('./streamApp/Grammar/dictionnaireUtilisable/noms.json') as json_data_noms:
             dictionnaireNoms = json.load(json_data_noms)
         pluriel = dictionnaireUtilisable.Pluriel()
 

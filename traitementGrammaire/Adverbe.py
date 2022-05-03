@@ -1,6 +1,6 @@
 
 import json
-import dictionnaireUtilisable
+import streamApp.Grammar.dictionnaireUtilisable as dictionnaireUtilisable
 
 class Adverbe:
 
@@ -15,7 +15,7 @@ class Adverbe:
     # phrase : liste de mots dans laquelle il faut trouver l'adverbe
     def identifierAdverbe(self, phrase):
         # ouverture du dictionnaire des adverbes francais
-        with open('dictionnaireUtilisable/adverbes.json') as json_data_adverbe:
+        with open('./streamApp/Grammar/dictionnaireUtilisable/adverbes.json') as json_data_adverbe:
             dictionnaireAdverbes = json.load(json_data_adverbe)
         prepositionsFR = dictionnaireUtilisable.Prepositions()
 

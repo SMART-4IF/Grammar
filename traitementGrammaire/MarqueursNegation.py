@@ -1,5 +1,5 @@
 
-import dictionnaireUtilisable
+import streamApp.Grammar.dictionnaireUtilisable as dictionnaireUtilisable
 
 class MarqueursNegation:
 
